@@ -8,5 +8,26 @@
     <artifactId>coding-examples</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <developers>
+        <developer>
+            <id>lei</id>
+            <name>lei</name>
+            <email>feyfree@163.com</email>
+            <roles>
+                <role>
+                    author
+                </role>
+                <role>
+                    developer
+                </role>
+            </roles>
+            <timezone>UTC/GMT +8:00 hours</timezone>
+        </developer>
+    </developers>
+
+    <dependencies>
+
+    </dependencies>
+
 
 </project>
