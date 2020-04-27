@@ -519,9 +519,7 @@ public final class StdIn {
 
         // don't include first token if it is leading whitespace
         String[] decapitokens = new String[tokens.length - 1];
-        for (int i = 0; i < tokens.length - 1; i++) {
-            decapitokens[i] = tokens[i + 1];
-        }
+        System.arraycopy(tokens, 1, decapitokens, 0, tokens.length - 1);
         return decapitokens;
     }
 
