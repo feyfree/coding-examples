@@ -2,7 +2,9 @@ package com.feyfree.others;
 
 /**
  * hello world
- *
+ * <p>
+ * 一条Hello world 可能产生的线程情况
+ * <p>
  * 线程number：0 = Reference Handler  计算对象是否可达
  * 线程number：1 = Finalizer 回收对象时触发的finalize 方法
  * 线程number：2 = Signal Dispatcher 线程调度员

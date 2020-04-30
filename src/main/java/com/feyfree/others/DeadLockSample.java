@@ -1,5 +1,10 @@
 package com.feyfree.others;
 
+/**
+ * 死锁示例
+ *
+ * @author leilei
+ */
 public class DeadLockSample extends Thread {
     private final String first;
 
