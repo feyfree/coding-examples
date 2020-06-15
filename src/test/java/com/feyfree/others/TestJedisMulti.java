@@ -31,7 +31,7 @@ public class TestJedisMulti {
         Thread threadC = new Thread() {
             @Override
             public void run() {
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 10; i++) {
                     op(cPool.getResource(), "test", "c");
                 }
             }
@@ -71,7 +71,7 @@ public class TestJedisMulti {
         Thread threadH = new Thread() {
             @Override
             public void run() {
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 10; i++) {
                     try (Jedis resource = cPool.getResource()) {
                         op(resource, "test", "h");
                     }
