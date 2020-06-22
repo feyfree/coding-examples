@@ -19,6 +19,7 @@ public class Solution {
             if (n != 0) {
                 return (double) (nums2[n / 2] + nums2[(n - 1) / 2]) / 2;
             }
+            return 0;
         }
         if (n == 0) {
             return (double) (nums1[m / 2] + nums1[(m - 1) / 2]) / 2;
@@ -33,16 +34,26 @@ public class Solution {
         int visitedPlaceB = -1;
         for (int i = 0; i < nums1.length; i++) {
             int scanValue = nums1[i];
-            if (scanValue < nums2[visitedPlaceB + 1]) {
-                step += 1;
+            boolean visited = false;
+            if (visitedPlaceB + 1 < n && scanValue <= nums2[visitedPlaceB + 1]) {
                 visitedPlaceA = i;
+                visited = true;
+                step += 1;
                 if (step == targetStep) {
                     return getMedianTargetOrNextValue(nums2, nums1, oddFlag, visitedPlaceB, visitedPlaceA);
                 }
-                continue;
             }
             for (int j = visitedPlaceB + 1; j < n; j++) {
-                if (nums2[j] <= scanValue) {
+                boolean needVisit = nums2[j] <= scanValue || (i + 1) == m;
+                if (needVisit) {
+                    if (nums2[j] >= scanValue) {
+                        visited = true;
+                        step += 1;
+                        visitedPlaceA = i;
+                        if (step == targetStep) {
+                            return getMedianTargetOrNextValue(nums2, nums1, oddFlag, visitedPlaceB, visitedPlaceA);
+                        }
+                    }
                     step += 1;
                     visitedPlaceB = j;
                     if (step == targetStep) {
@@ -50,10 +61,12 @@ public class Solution {
                     }
                 }
             }
-            step += 1;
-            visitedPlaceA = i;
-            if (step == targetStep) {
-                return getMedianTargetOrNextValue(nums2, nums1, oddFlag, visitedPlaceB, visitedPlaceA);
+            if (!visited) {
+                step += 1;
+                visitedPlaceA = i;
+                if (step == targetStep) {
+                    return getMedianTargetOrNextValue(nums2, nums1, oddFlag, visitedPlaceB, visitedPlaceA);
+                }
             }
         }
         return 0;
@@ -103,21 +116,26 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        // case 1
+//
         int[] a = {3, 4, 5, 6};
         int[] b = {1, 2, 4, 9};
         System.out.println(findMedianSortedArrays(a, b));
-        // case 2
+
         int[] c = {1, 2};
         int[] d = {3, 4};
         System.out.println(findMedianSortedArrays(c, d));
-        // case 3
+
         int[] e = {1, 2};
         int[] f = {1};
         System.out.println(findMedianSortedArrays(e, f));
-        // case 4
-        int[] g = {1, 1};
-        int[] h = {1};
+
+        int[] g = {1};
+        int[] h = {2, 3, 4};
         System.out.println(findMedianSortedArrays(g, h));
+//
+
+        int[] caseB = {0, 0};
+        int[] caseA = {0, 0};
+        System.out.println(findMedianSortedArrays(caseA, caseB));
     }
 }
