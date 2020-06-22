@@ -14,8 +14,15 @@ public class Solution {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
-        assert m > 0;
-        assert n > 0;
+        if (m == 0) {
+            // find nums2
+            if (n != 0) {
+                return (double) (nums2[n / 2] + nums2[(n - 1) / 2]) / 2;
+            }
+        }
+        if (n == 0) {
+            return (double) (nums1[m / 2] + nums1[(m - 1) / 2]) / 2;
+        }
         // 记录的步长
         int step = 0;
         //  目标步长
