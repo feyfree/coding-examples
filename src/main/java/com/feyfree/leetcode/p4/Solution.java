@@ -16,64 +16,101 @@ public class Solution {
         int n = nums2.length;
         assert m > 0;
         assert n > 0;
-        // b 数组循环 下标开始
-        int scanStart = 0;
         // 记录的步长
         int step = 0;
         //  目标步长
         int targetStep = (m + n) / 2;
         // 奇偶标志 true 表示为奇数  false 表示偶数  奇数需要再访问一步
         boolean oddFlag = (m + n) % 2 == 1;
+        int visitedPlaceA = -1;
+        int visitedPlaceB = -1;
         for (int i = 0; i < nums1.length; i++) {
-            if (step == targetStep) {
-                return getMedianTargetOrNextValue(nums1, nums2, oddFlag, i, scanStart);
-            }
-            // 线性扫描   扫描出 需要定位的value
             int scanValue = nums1[i];
-            // 如果达到步长
-            // odd:   target.next.value
-            // even:  target.next.value  + target.value
-            if (scanValue <= nums2[scanStart]) {
+            if (scanValue < nums2[visitedPlaceB + 1]) {
                 step += 1;
-            }
-            for (int j = scanStart; j < n; j++) {
-                step += 1;
+                visitedPlaceA = i;
                 if (step == targetStep) {
-                    return getMedianTargetOrNextValue(nums2, nums1, oddFlag, j, i);
+                    return getMedianTargetOrNextValue(nums2, nums1, oddFlag, visitedPlaceB, visitedPlaceA);
                 }
-                if (nums2[j] >= scanValue) {
-                    scanStart = j;
-                    break;
+                continue;
+            }
+            for (int j = visitedPlaceB + 1; j < n; j++) {
+                if (nums2[j] <= scanValue) {
+                    step += 1;
+                    visitedPlaceB = j;
+                    if (step == targetStep) {
+                        return getMedianTargetOrNextValue(nums1, nums2, oddFlag, visitedPlaceA, visitedPlaceB);
+                    }
                 }
+            }
+            step += 1;
+            visitedPlaceA = i;
+            if (step == targetStep) {
+                return getMedianTargetOrNextValue(nums2, nums1, oddFlag, visitedPlaceB, visitedPlaceA);
             }
         }
         return 0;
     }
 
-    private static double getMedianTargetOrNextValue(int[] preNums, int[] otherNums, boolean oddFlag, int preIndex, int otherIndex) {
+    /**
+     * 构建中间值
+     * <p>
+     * 默认last step 在 otherNums 数组
+     * <p>
+     * 也就是otherIndex 是 target step 的位置
+     * <p>
+     * 如果达到步长
+     * odd:   target.next.value
+     * even:  target.next.value  + target.value
+     *
+     * @param preNums      前一个数组
+     * @param otherNums    后一个数组
+     * @param oddFlag      奇偶标志
+     * @param preVisited   上一个visited 的 index
+     * @param otherVisited 下一个visited 的 index
+     * @return 中位数
+     */
+    private static double getMedianTargetOrNextValue(int[] preNums,
+                                                     int[] otherNums,
+                                                     boolean oddFlag,
+                                                     int preVisited,
+                                                     int otherVisited) {
         if (oddFlag) {
-            if (preIndex + 1 == preNums.length) {
-                return otherNums[otherIndex + 1];
+            if (preVisited + 1 == preNums.length) {
+                return otherNums[otherVisited + 1];
             }
-            if (otherIndex + 1 == otherNums.length) {
-                return preNums[preIndex + 1];
+            if (otherVisited + 1 == otherNums.length) {
+                return preNums[preVisited + 1];
             }
-            return Math.min(preNums[preIndex + 1], otherNums[otherIndex + 1]);
+            return Math.min(preNums[preVisited + 1], otherNums[otherVisited + 1]);
         } else {
-            if (preIndex + 1 == preNums.length) {
-                return (double) (preNums[preIndex] + otherNums[otherIndex]) / 2;
+            if (preVisited + 1 == preNums.length) {
+                return (double) (otherNums[otherVisited + 1] + otherNums[otherVisited]) / 2;
             }
-            if (otherIndex + 1 == otherNums.length) {
-                return (double) (preNums[preIndex] + preNums[preIndex + 1]) / 2;
+            if (otherVisited + 1 == otherNums.length) {
+                return (double) (otherNums[otherVisited] + preNums[preVisited + 1]) / 2;
             }
-            return (double) (preNums[preIndex] + preNums[preIndex + 1]) / 2;
+            return (double) (Math.min(otherNums[otherVisited + 1], preNums[preVisited + 1]) + otherNums[otherVisited]) / 2;
         }
     }
 
 
     public static void main(String[] args) {
+        // case 1
         int[] a = {3, 4, 5, 6};
         int[] b = {1, 2, 4, 9};
         System.out.println(findMedianSortedArrays(a, b));
+        // case 2
+        int[] c = {1, 2};
+        int[] d = {3, 4};
+        System.out.println(findMedianSortedArrays(c, d));
+        // case 3
+        int[] e = {1, 2};
+        int[] f = {1};
+        System.out.println(findMedianSortedArrays(e, f));
+        // case 4
+        int[] g = {1, 1};
+        int[] h = {1};
+        System.out.println(findMedianSortedArrays(g, h));
     }
 }
