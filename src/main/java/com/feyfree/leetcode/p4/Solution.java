@@ -46,7 +46,7 @@ public class Solution {
             for (int j = visitedPlaceB + 1; j < n; j++) {
                 boolean needVisit = nums2[j] <= scanValue || (i + 1) == m;
                 if (needVisit) {
-                    if (nums2[j] >= scanValue) {
+                    if (nums2[j] >= scanValue && !visited) {
                         visited = true;
                         step += 1;
                         visitedPlaceA = i;
@@ -131,7 +131,7 @@ public class Solution {
 
         int[] g = {1};
         int[] h = {2, 3, 4};
-        System.out.println(findMedianSortedArrays(g, h));
+        System.out.println(findMedianSortedArrays(h, g));
 //
 
         int[] caseB = {0, 0};
