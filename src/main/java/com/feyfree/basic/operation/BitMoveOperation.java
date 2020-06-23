@@ -23,5 +23,9 @@ public class BitMoveOperation {
         System.out.println(Integer.toBinaryString(y));
         System.out.println(Integer.toBinaryString(algRightMoveOperation(y, 2)));
         System.out.println(Integer.toBinaryString(logicRightMoveOperation(y, 2)));
+        System.out.println("-------------max-value-----------------");
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+        System.out.println("-------------min-value------------------");
+        System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
     }
 }
