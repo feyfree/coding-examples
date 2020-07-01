@@ -25,12 +25,11 @@ public class Solution {
             i--;
         }
         StringBuilder result = new StringBuilder();
-        for (int j = 0; j < numArray.length; j++) {
-            while (numArray[j] != 0) {
-
+        for (int value : numArray) {
+            while (value != 0) {
+                result.append(valArray[9 * value - 3]);
             }
         }
-
-        return "";
+        return result.toString();
     }
 }
