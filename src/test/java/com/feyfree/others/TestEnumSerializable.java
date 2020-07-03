@@ -17,9 +17,13 @@ public class TestEnumSerializable {
 
     @Test
     public void testForEachEnums() {
-        List<String> all = new ArrayList<>();
-        for(StatisticsComponentEnum componentEnum: StatisticsComponentEnum.values()) {
+        for (StatisticsComponentEnum componentEnum : StatisticsComponentEnum.values()) {
             System.out.println(componentEnum);
         }
+    }
+
+    @Test
+    public void testSwitchEnums() {
+        System.out.println(LiveApplyRejectReasonEnum.getMsg(1012));
     }
 }
