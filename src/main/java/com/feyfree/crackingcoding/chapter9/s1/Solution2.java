@@ -14,7 +14,7 @@ package com.feyfree.crackingcoding.chapter9.s1;
  */
 public class Solution2 {
     public boolean permutationMatch(String s1, String s2) {
-        // 根据ascII 码的长度分配定长数组
+        // 根据ASCII 码的长度分配定长数组
         int[] charArray = new int[128];
         for (int i = 0; i < s1.length(); i++) {
             charArray[s1.charAt(i)]++;
