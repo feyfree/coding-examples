@@ -95,7 +95,9 @@ public class UF {
      * @throws IllegalArgumentException if {@code n < 0}
      */
     public UF(int n) {
-        if (n < 0) throw new IllegalArgumentException();
+        if (n < 0) {
+            throw new IllegalArgumentException();
+        }
         count = n;
         parent = new int[n];
         rank = new byte[n];
@@ -158,12 +160,16 @@ public class UF {
     public void union(int p, int q) {
         int rootP = find(p);
         int rootQ = find(q);
-        if (rootP == rootQ) return;
+        if (rootP == rootQ) {
+            return;
+        }
 
         // make root of smaller rank point to root of larger rank
-        if      (rank[rootP] < rank[rootQ]) parent[rootP] = rootQ;
-        else if (rank[rootP] > rank[rootQ]) parent[rootQ] = rootP;
-        else {
+        if      (rank[rootP] < rank[rootQ]) {
+            parent[rootP] = rootQ;
+        } else if (rank[rootP] > rank[rootQ]) {
+            parent[rootQ] = rootP;
+        } else {
             parent[rootQ] = rootP;
             rank[rootP]++;
         }
@@ -193,7 +199,9 @@ public class UF {
         while (!StdIn.isEmpty()) {
             int p = StdIn.readInt();
             int q = StdIn.readInt();
-            if (uf.find(p) == uf.find(q)) continue;
+            if (uf.find(p) == uf.find(q)) {
+                continue;
+            }
             uf.union(p, q);
             StdOut.println(p + " " + q);
         }
