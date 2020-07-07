@@ -5,6 +5,12 @@ import com.feyfree.algs4.StdOut;
 
 /**
  * 约瑟夫环问题
+ * <p>
+ * 环形列表简化成一个队列的问题
+ * 相对运动 表盘在动 指针不动
+ * interval: m
+ * total: n
+ * m - 1 次循环将其dequeue 然后 enqueue 将m 位的
  *
  * @author leilei
  */
