@@ -30,8 +30,10 @@ import java.util.NoSuchElementException;
  *  @author Kevin Wayne
  */
 public class ResizingArrayBag<Item> implements Iterable<Item> {
-    private Item[] a;         // array of items
-    private int n;            // number of elements on bag
+    // array of items
+    private Item[] a;
+    // number of elements on bag
+    private int n;
 
     /**
      * Initializes an empty bag.
@@ -61,8 +63,9 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
     private void resize(int capacity) {
         assert capacity >= n;
         Item[] copy = (Item[]) new Object[capacity];
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             copy[i] = a[i];
+        }
         a = copy;
     }
 
@@ -71,7 +74,9 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
      * @param item the item to add to this bag
      */
     public void add(Item item) {
-        if (n == a.length) resize(2*a.length);    // double size of array if necessary
+        if (n == a.length) {
+            resize(2*a.length);    // double size of array if necessary
+        }
         a[n++] = item;                            // add item
     }
 
@@ -80,6 +85,7 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
      * Returns an iterator that iterates over the items in the bag in arbitrary order.
      * @return an iterator that iterates over the items in the bag in arbitrary order
      */
+    @Override
     public Iterator<Item> iterator() {
         return new ArrayIterator();
     }
@@ -87,11 +93,16 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
     // an iterator, doesn't implement remove() since it's optional
     private class ArrayIterator implements Iterator<Item> {
         private int i = 0;
+        @Override
         public boolean hasNext()  { return i < n;                               }
+        @Override
         public void remove()      { throw new UnsupportedOperationException();  }
 
+        @Override
         public Item next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             return a[i++];
         }
     }
@@ -102,15 +113,16 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        ResizingArrayBag<String> bag = new ResizingArrayBag<String>();
+        ResizingArrayBag<String> bag = new ResizingArrayBag<>();
         bag.add("Hello");
         bag.add("World");
         bag.add("how");
         bag.add("are");
         bag.add("you");
 
-        for (String s : bag)
+        for (String s : bag) {
             StdOut.println(s);
+        }
     }
 
 }

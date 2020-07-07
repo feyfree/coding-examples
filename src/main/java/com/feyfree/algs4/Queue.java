@@ -17,27 +17,26 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The {@code Queue} class represents a first-in-first-out (FIFO)
- *  queue of generic items.
- *  It supports the usual <em>enqueue</em> and <em>dequeue</em>
- *  operations, along with methods for peeking at the first item,
- *  testing if the queue is empty, and iterating through
- *  the items in FIFO order.
- *  <p>
- *  This implementation uses a singly linked list with a static nested class for
- *  linked-list nodes. See {@link LinkedQueue} for the version from the
- *  textbook that uses a non-static nested class.
- *  See {@link ResizingArrayQueue} for a version that uses a resizing array.
- *  The <em>enqueue</em>, <em>dequeue</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
- *  operations all take constant time in the worst case.
- *  <p>
- *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code Queue} class represents a first-in-first-out (FIFO)
+ * queue of generic items.
+ * It supports the usual <em>enqueue</em> and <em>dequeue</em>
+ * operations, along with methods for peeking at the first item,
+ * testing if the queue is empty, and iterating through
+ * the items in FIFO order.
+ * <p>
+ * This implementation uses a singly linked list with a static nested class for
+ * linked-list nodes. See {@link LinkedQueue} for the version from the
+ * textbook that uses a non-static nested class.
+ * See {@link ResizingArrayQueue} for a version that uses a resizing array.
+ * The <em>enqueue</em>, <em>dequeue</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
+ * operations all take constant time in the worst case.
+ * <p>
+ * For additional documentation, see <a href="https://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- *
- *  @param <Item> the generic type of an item in this queue
+ * @param <Item> the generic type of an item in this queue
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class Queue<Item> implements Iterable<Item> {
     private Node<Item> first;    // beginning of queue
@@ -55,7 +54,7 @@ public class Queue<Item> implements Iterable<Item> {
      */
     public Queue() {
         first = null;
-        last  = null;
+        last = null;
         n = 0;
     }
 
@@ -84,22 +83,27 @@ public class Queue<Item> implements Iterable<Item> {
      * @throws NoSuchElementException if this queue is empty
      */
     public Item peek() {
-        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue underflow");
+        }
         return first.item;
     }
 
     /**
      * Adds the item to this queue.
      *
-     * @param  item the item to add
+     * @param item the item to add
      */
     public void enqueue(Item item) {
         Node<Item> oldlast = last;
-        last = new Node<Item>();
+        last = new Node<>();
         last.item = item;
         last.next = null;
-        if (isEmpty()) first = last;
-        else           oldlast.next = last;
+        if (isEmpty()) {
+            first = last;
+        } else {
+            oldlast.next = last;
+        }
         n++;
     }
 
@@ -110,11 +114,15 @@ public class Queue<Item> implements Iterable<Item> {
      * @throws NoSuchElementException if this queue is empty
      */
     public Item dequeue() {
-        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue underflow");
+        }
         Item item = first.item;
         first = first.next;
         n--;
-        if (isEmpty()) last = null;   // to avoid loitering
+        if (isEmpty()) {
+            last = null;   // to avoid loitering
+        }
         return item;
     }
 
@@ -123,6 +131,7 @@ public class Queue<Item> implements Iterable<Item> {
      *
      * @return the sequence of items in FIFO order, separated by spaces
      */
+    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (Item item : this) {
@@ -130,15 +139,16 @@ public class Queue<Item> implements Iterable<Item> {
             s.append(' ');
         }
         return s.toString();
-    } 
+    }
 
     /**
      * Returns an iterator that iterates over the items in this queue in FIFO order.
      *
      * @return an iterator that iterates over the items in this queue in FIFO order
      */
-    public Iterator<Item> iterator()  {
-        return new LinkedIterator(first);  
+    @Override
+    public Iterator<Item> iterator() {
+        return new LinkedIterator(first);
     }
 
     // an iterator, doesn't implement remove() since it's optional
@@ -149,13 +159,23 @@ public class Queue<Item> implements Iterable<Item> {
             current = first;
         }
 
-        public boolean hasNext()  { return current != null;                     }
-        public void remove()      { throw new UnsupportedOperationException();  }
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
 
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public Item next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             Item item = current.item;
-            current = current.next; 
+            current = current.next;
             return item;
         }
     }
@@ -170,10 +190,11 @@ public class Queue<Item> implements Iterable<Item> {
         Queue<String> queue = new Queue<String>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            if (!item.equals("-"))
+            if (!item.equals("-")) {
                 queue.enqueue(item);
-            else if (!queue.isEmpty())
+            } else if (!queue.isEmpty()) {
                 StdOut.print(queue.dequeue() + " ");
+            }
         }
         StdOut.println("(" + queue.size() + " left on queue)");
     }

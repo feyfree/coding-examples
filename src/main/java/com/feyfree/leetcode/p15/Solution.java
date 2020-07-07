@@ -21,7 +21,7 @@ public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         // input 数组小于 3 返回
         if (nums.length < 3) {
-            return null;
+            return new ArrayList<>();
         }
         // 数组排序
         Arrays.sort(nums);
