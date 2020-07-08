@@ -13,4 +13,13 @@ public class TestSolution {
         List<List<Integer>> lists = solution.threeSum(nums);
         System.out.println(lists);
     }
+
+    @Test
+    public void testAdvancedSolution() {
+        AdvancedSolution solution = new AdvancedSolution();
+        int[] nums = {0, 0, 0, 0};
+        List<List<Integer>> lists = solution.threeSum(nums);
+        System.out.println(lists);
+
+    }
 }

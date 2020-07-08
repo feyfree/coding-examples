@@ -30,6 +30,7 @@ public class AdvancedSolution {
             while (start < end) {
                 int sum = nums[start] + nums[end] + nums[i];
                 if (marked != null && nums[start] == marked) {
+                    start++;
                     continue;
                 }
                 if (sum == 0) {
@@ -40,6 +41,7 @@ public class AdvancedSolution {
                     result.add(temp);
                     marked = nums[start];
                     compareValue = nums[i];
+                    start++;
                 } else if (sum > 0) {
                     end--;
                 } else {
