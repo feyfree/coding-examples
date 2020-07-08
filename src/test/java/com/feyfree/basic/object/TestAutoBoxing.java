@@ -9,4 +9,9 @@ public class TestAutoBoxing {
         Integer a = null;
         int b = a;
     }
+
+    @Test
+    public void testNull() {
+        Integer.valueOf(0);
+    }
 }
