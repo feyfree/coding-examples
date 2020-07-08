@@ -149,6 +149,8 @@ public class QuickFindUF {
             return;
         }
 
+        // 作为判断条件的变量 一定不能变  所以需要在外面保存一下id[p]
+        // 不能使用id[i] == id[p] then id[i] == id[q]
         for (int i = 0; i < id.length; i++) {
             if (id[i] == pID) {
                 id[i] = qID;
