@@ -23,7 +23,7 @@ public class TestFinal {
         init.add(2);
         // 不可修改
         List<Integer> integers = Collections.unmodifiableList(init);
-        integers.add(3);
+//        integers.add(3);
     }
 
     @Test

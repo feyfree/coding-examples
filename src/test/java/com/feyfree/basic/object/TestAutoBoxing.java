@@ -6,8 +6,8 @@ public class TestAutoBoxing {
 
     @Test
     public void testAutoBoxing() {
-        Integer a = null;
-        int b = a;
+//        Integer a = null;
+//        int b = a;
     }
 
     @Test
