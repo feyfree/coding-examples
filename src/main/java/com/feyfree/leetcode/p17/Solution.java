@@ -2,10 +2,10 @@ package com.feyfree.leetcode.p17;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
+ * DFS 解法
  * 电话号码的字母组合
  * <p>
  * letter-combinations-of-a-phone-number
@@ -16,10 +16,45 @@ import java.util.List;
  *
  * @author leilei
  */
-public class Solution {
-
+class Solution {
     public List<String> letterCombinations(String digits) {
+        String[] d = new String[]{" ",
+                "",
+                "abc",
+                "def",
+                "ghi",
+                "jkl",
+                "mno",
+                "pqrs",
+                "tuv",
+                "wxyz"};
+        char[] cur = new char[digits.length()];
+        List<String> ans = new ArrayList<>();
+        dfs(digits, d, 0, cur, ans);
+        return ans;
+    }
 
-        return new ArrayList<>();
+    /**
+     * @param digits 输入的数字
+     * @param d      数字对应的字符
+     * @param l      当前的index
+     * @param cur    当前保留的字符数组
+     * @param ans    输出
+     */
+    private void dfs(String digits, String[] d,
+                     int l, char[] cur, List<String> ans) {
+        if (l == digits.length()) {
+            if (l > 0) {
+                ans.add(new String(cur));
+            }
+            return;
+        }
+
+        String s = d[Character.getNumericValue(digits.charAt(l))];
+
+        for (int i = 0; i < s.length(); ++i) {
+            cur[l] = s.charAt(i);
+            dfs(digits, d, l + 1, cur, ans);
+        }
     }
 }
