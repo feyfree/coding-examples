@@ -43,7 +43,7 @@ public class Solution {
                         start++;
                         continue;
                     }
-                    int remaining = target - nums[j] - nums[i] - nums[start] - nums[end];
+                    int remaining = nums[j] + nums[i] + nums[start] + nums[end] - target;
                     if (remaining == 0) {
                         List<Integer> temp = new ArrayList<>(4);
                         temp.add(nums[i]);
@@ -68,6 +68,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        solution.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0);
+        List<List<Integer>> lists = solution.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0);
+        System.out.println(lists);
     }
 }
