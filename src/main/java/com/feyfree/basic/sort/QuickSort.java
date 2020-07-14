@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class QuickSort {
 
     public void sort(int[] nums) {
-//        StdRandom.shuffle(nums);
+        StdRandom.shuffle(nums);
         sort(nums, 0, nums.length - 1);
     }
 
@@ -61,8 +61,6 @@ public class QuickSort {
         System.out.println(Arrays.toString(data));
         quickSort.sort(data);
         System.out.println(Arrays.toString(data));
-
-
     }
 
 }
