@@ -24,4 +24,15 @@ public class TestOperation {
         System.out.println(i);
     }
 
+    /**
+    * 测试异或操作
+    * @author leilei
+    */
+    @Test
+    public void testExclusiveOr() {
+        System.out.println(true ^ true);
+        System.out.println(true ^ false);
+        System.out.println(false ^ false);
+    }
+
 }
