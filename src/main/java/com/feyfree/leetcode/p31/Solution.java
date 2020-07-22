@@ -16,14 +16,14 @@ package com.feyfree.leetcode.p31;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/next-permutation
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- *
- *
+ * <p>
+ * <p>
  * 解题思路
- *  sample array
- *  1  2  7  6  5  4  2
- *
+ * sample array
+ * 1  2  7  6  5  4  2
+ * <p>
  * 1. 找到从后往前数第一个  后一个比前一个大的 比如这个是 ‘2’   第二个
- *
+ * <p>
  * 2. 找到从后往前数 第一个  不大于 ‘2’的数
  *
  * @author leilei
@@ -64,5 +64,11 @@ public class Solution {
         while (i < j) {
             swap(nums, i++, j--);
         }
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {1, 2, 7, 6, 5, 4, 2};
+        solution.nextPermutation(nums);
     }
 }
