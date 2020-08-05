@@ -62,8 +62,9 @@ public class SeparateChainingHashST<Key, Value> {
     public SeparateChainingHashST(int m) {
         this.m = m;
         st = (SequentialSearchST<Key, Value>[]) new SequentialSearchST[m];
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < m; i++) {
             st[i] = new SequentialSearchST<Key, Value>();
+        }
     } 
 
     // resize the hash table to have the given number of chains,
@@ -113,7 +114,9 @@ public class SeparateChainingHashST<Key, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public boolean contains(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to contains() is null");
+        if (key == null) {
+            throw new IllegalArgumentException("argument to contains() is null");
+        }
         return get(key) != null;
     } 
 
@@ -126,7 +129,9 @@ public class SeparateChainingHashST<Key, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public Value get(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to get() is null");
+        if (key == null) {
+            throw new IllegalArgumentException("argument to get() is null");
+        }
         int i = hash(key);
         return st[i].get(key);
     } 
