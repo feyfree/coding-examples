@@ -21,24 +21,45 @@ package com.feyfree.leetcode.p34;
  */
 public class Solution {
     public int[] searchRange(int[] nums, int target) {
-        return null;
+        if (nums == null || nums.length <= 0) {
+            return new int[]{-1, -1};
+        }
+        return new int[]{firstPosition(nums, target), lastPosition(nums, target)};
     }
 
-    public int[] findValue(int[] nums, int low, int high, int target) {
-        int[] result = {-1, -1};
-        while (high >= low) {
-            int mid = (high - low) / 2 + low;
-            if (target > nums[mid]) {
-                low = mid + 1;
-            } else if (target == nums[mid]) {
-                if (mid + 1 <= high && nums[mid+1] == target) {
-                    result[1] = mid + 1;
-                    mid = mid + 1;
-                }
+    public int firstPosition(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] >= target) {
+                high = mid;
             } else {
-                high = mid - 1;
+                low = mid + 1;
             }
         }
-        return result;
+
+        if (high == nums.length || nums[high] != target) {
+            return -1;
+        }
+        return high;
+    }
+
+    public int lastPosition(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] > target) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        --low;
+        if (low < 0 || nums[low] != target) {
+            return -1;
+        }
+        return low;
     }
 }

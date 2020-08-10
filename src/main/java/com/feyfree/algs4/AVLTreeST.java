@@ -422,7 +422,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return the updated subtree
      */
     private Node deleteMax(Node x) {
-        if (x.right == null) return x.left;
+        if (x.right == null) {
+            return x.left;
+        }
         x.right = deleteMax(x.right);
         x.size = 1 + size(x.left) + size(x.right);
         x.height = 1 + Math.max(height(x.left), height(x.right));
@@ -436,7 +438,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @throws NoSuchElementException if the symbol table is empty
      */
     public Key min() {
-        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
+        if (isEmpty()) {
+            throw new NoSuchElementException("called min() with empty symbol table");
+        }
         return min(root).key;
     }
 
@@ -460,7 +464,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @throws NoSuchElementException if the symbol table is empty
      */
     public Key max() {
-        if (isEmpty()) throw new NoSuchElementException("called max() with empty symbol table");
+        if (isEmpty()) {
+            throw new NoSuchElementException("called max() with empty symbol table");
+        }
         return max(root).key;
     }
 
@@ -471,7 +477,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return the node with the largest key in the subtree
      */
     private Node max(Node x) {
-        if (x.right == null) return x;
+        if (x.right == null) {
+            return x;
+        }
         return max(x.right);
     }
 
@@ -486,11 +494,18 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public Key floor(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to floor() is null");
-        if (isEmpty()) throw new NoSuchElementException("called floor() with empty symbol table");
+        if (key == null) {
+            throw new IllegalArgumentException("argument to floor() is null");
+        }
+        if (isEmpty()) {
+            throw new NoSuchElementException("called floor() with empty symbol table");
+        }
         Node x = floor(root, key);
-        if (x == null) return null;
-        else return x.key;
+        if (x == null) {
+            return null;
+        } else {
+            return x.key;
+        }
     }
 
     /**
@@ -505,11 +520,18 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     private Node floor(Node x, Key key) {
         if (x == null) return null;
         int cmp = key.compareTo(x.key);
-        if (cmp == 0) return x;
-        if (cmp < 0) return floor(x.left, key);
+        if (cmp == 0) {
+            return x;
+        }
+        if (cmp < 0) {
+            return floor(x.left, key);
+        }
         Node y = floor(x.right, key);
-        if (y != null) return y;
-        else return x;
+        if (y != null) {
+            return y;
+        } else {
+            return x;
+        }
     }
 
     /**
@@ -523,11 +545,18 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public Key ceiling(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to ceiling() is null");
-        if (isEmpty()) throw new NoSuchElementException("called ceiling() with empty symbol table");
+        if (key == null) {
+            throw new IllegalArgumentException("argument to ceiling() is null");
+        }
+        if (isEmpty()) {
+            throw new NoSuchElementException("called ceiling() with empty symbol table");
+        }
         Node x = ceiling(root, key);
-        if (x == null) return null;
-        else return x.key;
+        if (x == null) {
+            return null;
+        } else {
+            return x.key;
+        }
     }
 
     /**
@@ -542,11 +571,18 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     private Node ceiling(Node x, Key key) {
         if (x == null) return null;
         int cmp = key.compareTo(x.key);
-        if (cmp == 0) return x;
-        if (cmp > 0) return ceiling(x.right, key);
+        if (cmp == 0) {
+            return x;
+        }
+        if (cmp > 0) {
+            return ceiling(x.right, key);
+        }
         Node y = ceiling(x.left, key);
-        if (y != null) return y;
-        else return x;
+        if (y != null) {
+            return y;
+        } else {
+            return x;
+        }
     }
 
     /**
@@ -558,7 +594,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      *                                  {@code size() -1 }
      */
     public Key select(int k) {
-        if (k < 0 || k >= size()) throw new IllegalArgumentException("k is not in range 0-" + (size() - 1));
+        if (k < 0 || k >= size()) {
+            throw new IllegalArgumentException("k is not in range 0-" + (size() - 1));
+        }
         Node x = select(root, k);
         return x.key;
     }
@@ -571,11 +609,17 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return the node with key the kth smallest key in the subtree
      */
     private Node select(Node x, int k) {
-        if (x == null) return null;
+        if (x == null) {
+            return null;
+        }
         int t = size(x.left);
-        if (t > k) return select(x.left, k);
-        else if (t < k) return select(x.right, k - t - 1);
-        else return x;
+        if (t > k) {
+            return select(x.left, k);
+        } else if (t < k) {
+            return select(x.right, k - t - 1);
+        } else {
+            return x;
+        }
     }
 
     /**
@@ -588,7 +632,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public int rank(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to rank() is null");
+        if (key == null) {
+            throw new IllegalArgumentException("argument to rank() is null");
+        }
         return rank(key, root);
     }
 
@@ -602,9 +648,13 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
     private int rank(Key key, Node x) {
         if (x == null) return 0;
         int cmp = key.compareTo(x.key);
-        if (cmp < 0) return rank(key, x.left);
-        else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right);
-        else return size(x.left);
+        if (cmp < 0) {
+            return rank(key, x.left);
+        } else if (cmp > 0) {
+            return 1 + size(x.left) + rank(key, x.right);
+        } else {
+            return size(x.left);
+        }
     }
 
     /**
@@ -634,7 +684,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @param queue the queue
      */
     private void keysInOrder(Node x, Queue<Key> queue) {
-        if (x == null) return;
+        if (x == null) {
+            return;
+        }
         keysInOrder(x.left, queue);
         queue.enqueue(x.key);
         keysInOrder(x.right, queue);
@@ -675,8 +727,12 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      *                                  is {@code null}
      */
     public Iterable<Key> keys(Key lo, Key hi) {
-        if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
-        if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
+        if (lo == null) {
+            throw new IllegalArgumentException("first argument to keys() is null");
+        }
+        if (hi == null) {
+            throw new IllegalArgumentException("second argument to keys() is null");
+        }
         Queue<Key> queue = new Queue<Key>();
         keys(root, queue, lo, hi);
         return queue;
@@ -695,9 +751,15 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         if (x == null) return;
         int cmplo = lo.compareTo(x.key);
         int cmphi = hi.compareTo(x.key);
-        if (cmplo < 0) keys(x.left, queue, lo, hi);
-        if (cmplo <= 0 && cmphi >= 0) queue.enqueue(x.key);
-        if (cmphi > 0) keys(x.right, queue, lo, hi);
+        if (cmplo < 0) {
+            keys(x.left, queue, lo, hi);
+        }
+        if (cmplo <= 0 && cmphi >= 0) {
+            queue.enqueue(x.key);
+        }
+        if (cmphi > 0) {
+            keys(x.right, queue, lo, hi);
+        }
     }
 
     /**
@@ -711,11 +773,20 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      *                                  is {@code null}
      */
     public int size(Key lo, Key hi) {
-        if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
-        if (hi == null) throw new IllegalArgumentException("second argument to size() is null");
-        if (lo.compareTo(hi) > 0) return 0;
-        if (contains(hi)) return rank(hi) - rank(lo) + 1;
-        else return rank(hi) - rank(lo);
+        if (lo == null) {
+            throw new IllegalArgumentException("first argument to size() is null");
+        }
+        if (hi == null) {
+            throw new IllegalArgumentException("second argument to size() is null");
+        }
+        if (lo.compareTo(hi) > 0) {
+            return 0;
+        }
+        if (contains(hi)) {
+            return rank(hi) - rank(lo) + 1;
+        } else {
+            return rank(hi) - rank(lo);
+        }
     }
 
     /**
@@ -724,10 +795,18 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return {@code true} if the AVL tree invariants are fine
      */
     private boolean check() {
-        if (!isBST()) StdOut.println("Symmetric order not consistent");
-        if (!isAVL()) StdOut.println("AVL property not consistent");
-        if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
-        if (!isRankConsistent()) StdOut.println("Ranks not consistent");
+        if (!isBST()) {
+            StdOut.println("Symmetric order not consistent");
+        }
+        if (!isAVL()) {
+            StdOut.println("AVL property not consistent");
+        }
+        if (!isSizeConsistent()) {
+            StdOut.println("Subtree counts not consistent");
+        }
+        if (!isRankConsistent()) {
+            StdOut.println("Ranks not consistent");
+        }
         return isBST() && isAVL() && isSizeConsistent() && isRankConsistent();
     }
 
@@ -747,9 +826,13 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return {@code true} if AVL property is consistent in the subtree
      */
     private boolean isAVL(Node x) {
-        if (x == null) return true;
+        if (x == null) {
+            return true;
+        }
         int bf = balanceFactor(x);
-        if (bf > 1 || bf < -1) return false;
+        if (bf > 1 || bf < -1) {
+            return false;
+        }
         return isAVL(x.left) && isAVL(x.right);
     }
 
@@ -774,8 +857,12 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      */
     private boolean isBST(Node x, Key min, Key max) {
         if (x == null) return true;
-        if (min != null && x.key.compareTo(min) <= 0) return false;
-        if (max != null && x.key.compareTo(max) >= 0) return false;
+        if (min != null && x.key.compareTo(min) <= 0) {
+            return false;
+        }
+        if (max != null && x.key.compareTo(max) >= 0) {
+            return false;
+        }
         return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
     }
 
@@ -794,8 +881,12 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return {@code true} if the size of the subtree is consistent
      */
     private boolean isSizeConsistent(Node x) {
-        if (x == null) return true;
-        if (x.size != size(x.left) + size(x.right) + 1) return false;
+        if (x == null) {
+            return true;
+        }
+        if (x.size != size(x.left) + size(x.right) + 1) {
+            return false;
+        }
         return isSizeConsistent(x.left) && isSizeConsistent(x.right);
     }
 
@@ -805,10 +896,16 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return {@code true} if rank is consistent
      */
     private boolean isRankConsistent() {
-        for (int i = 0; i < size(); i++)
-            if (i != rank(select(i))) return false;
-        for (Key key : keys())
-            if (key.compareTo(select(rank(key))) != 0) return false;
+        for (int i = 0; i < size(); i++) {
+            if (i != rank(select(i))) {
+                return false;
+            }
+        }
+        for (Key key : keys()) {
+            if (key.compareTo(select(rank(key))) != 0) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -823,8 +920,9 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
             String key = StdIn.readString();
             st.put(key, i);
         }
-        for (String s : st.keys())
+        for (String s : st.keys()) {
             StdOut.println(s + " " + st.get(s));
+        }
         StdOut.println();
     }
 }
