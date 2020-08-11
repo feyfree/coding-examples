@@ -30,6 +30,7 @@ public class Solution {
     public int firstPosition(int[] nums, int target) {
         int low = 0;
         int high = nums.length;
+        // 二分搜索
         while (low < high) {
             int mid = low + (high - low) / 2;
             if (nums[mid] >= target) {
@@ -39,6 +40,7 @@ public class Solution {
             }
         }
 
+        // 如果搜索结束 并且 high 没变化 或者 是high 不等于target
         if (high == nums.length || nums[high] != target) {
             return -1;
         }
@@ -56,6 +58,7 @@ public class Solution {
                 low = mid + 1;
             }
         }
+        // low 表示第一个大于 target 的元素
         --low;
         if (low < 0 || nums[low] != target) {
             return -1;
