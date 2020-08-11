@@ -65,4 +65,10 @@ public class Solution {
         }
         return low;
     }
+
+    public static void main(String[] args) {
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        Solution solution = new Solution();
+        solution.searchRange(nums, 8);
+    }
 }
