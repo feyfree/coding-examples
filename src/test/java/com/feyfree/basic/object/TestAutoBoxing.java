@@ -14,4 +14,11 @@ public class TestAutoBoxing {
     public void testNull() {
         Integer.valueOf(0);
     }
+
+    @Test
+    public void testChar() {
+        char a = '1';
+        char c = (char) (8 + a);
+        System.out.println(c);
+    }
 }
