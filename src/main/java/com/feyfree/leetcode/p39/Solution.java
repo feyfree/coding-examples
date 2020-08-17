@@ -1,5 +1,7 @@
 package com.feyfree.leetcode.p39;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,6 +50,25 @@ import java.util.List;
  */
 public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        return null;
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> current = new ArrayList<>();
+        Arrays.sort(candidates);
+        dfs(candidates, target, 0, current, result);
+        return result;
+    }
+
+    public void dfs(int[] candidates, int target, int s, List<Integer> current, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(current);
+        }
+
+        for (int i = s; i < candidates.length; i++) {
+            if (candidates[i] > target) {
+                break;
+            }
+            current.add(candidates[i]);
+            dfs(candidates, target - candidates[i], i, current, result);
+            current.remove(candidates.length - 1);
+        }
     }
 }
