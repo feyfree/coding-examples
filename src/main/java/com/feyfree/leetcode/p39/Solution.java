@@ -1,5 +1,7 @@
 package com.feyfree.leetcode.p39;
 
+import java.util.List;
+
 /**
  * 39. 组合总和
  * <p>
@@ -45,4 +47,7 @@ package com.feyfree.leetcode.p39;
  * @date 2020/8/14 17:38
  */
 public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        return null;
+    }
 }
