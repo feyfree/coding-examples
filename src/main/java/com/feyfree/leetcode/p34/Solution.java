@@ -33,6 +33,7 @@ public class Solution {
         // 二分搜索
         while (low < high) {
             int mid = low + (high - low) / 2;
+            // 如果 中间位置的 大于 target
             if (nums[mid] >= target) {
                 high = mid;
             } else {
