@@ -1,14 +1,15 @@
 package com.feyfree.leetcode.p39;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * 按照顺序输出符合要求的组合
- *
+ * <p>
  * 按照组合中的元素个数 从小到大 依次顺序输出
- *
+ * <p>
  * 构造循环 元素个数可能是从 1 ~ target / candidates[0] 这个多， 在循环内部做dfs
  *
  * @author leilei
@@ -41,5 +42,12 @@ public class AdvancedRequirementSolution {
             dfs(candidates, target - candidates[i], i, d + 1, n, current, result);
             current.remove(current.size() - 1);
         }
+    }
+
+    public static void main(String[] args) {
+        AdvancedRequirementSolution solution = new AdvancedRequirementSolution();
+        int[] candidates = {10, 2, 7, 6, 1, 5};
+        List<List<Integer>> lists = solution.combinationSum(candidates, 8);
+        System.out.println(lists);
     }
 }

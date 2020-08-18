@@ -39,6 +39,7 @@ public class Solution {
      */
     private void combination(int[] nums, int s, int target, List<Integer> current, List<List<Integer>> result) {
         if (target == 0) {
+            // 注意必须要新建一个对象, 不然current 的任何更改, result 里面也会更改
             result.add(new ArrayList<>(current));
             return;
         }
