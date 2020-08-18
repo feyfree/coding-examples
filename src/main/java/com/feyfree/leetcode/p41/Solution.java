@@ -20,21 +20,25 @@ package com.feyfree.leetcode.p41;
  */
 public class Solution {
     public int firstMissingPositive(int[] nums) {
-        int minValue = 0;
-        int target = 1;
-        int maxValue = 0;
-        for (int item : nums) {
-            if (item > 0) {
-                if (item == target) {
-                    if (minValue == target) {
-                        target = minValue + 1;
-                    } else {
-
-                    }
-                }
+        int n = nums.length;
+        //
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0) {
+                nums[i] = n + 1;
             }
         }
-        return target == maxValue ? target + 1 : target;
+        for (int i = 0; i < n; i++) {
+            int num = Math.abs(nums[i]);
+            if (num <= n) {
+                nums[num - 1] = -Math.abs(nums[num - 1]);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                return i + 1;
+            }
+        }
+        return n + 1;
     }
 
 
