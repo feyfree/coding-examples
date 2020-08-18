@@ -68,7 +68,7 @@ public class Solution {
             }
             current.add(candidates[i]);
             dfs(candidates, target - candidates[i], i, current, result);
-            current.remove(candidates.length - 1);
+            current.remove(current.size() - 1);
         }
     }
 }

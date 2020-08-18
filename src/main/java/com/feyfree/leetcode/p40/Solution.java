@@ -48,7 +48,7 @@ public class Solution {
             if (num > target) {
                 break;
             }
-            // 如果相邻数字相等  进行跳跃， 因为该前缀的组合已经筛选完毕
+            // 如果相邻数字相等  进行跳跃， 因为该前缀的组合已经在前面筛选完毕
             if (i > s && num == nums[i - 1]) {
                 continue;
             }
