@@ -1,6 +1,8 @@
 package com.feyfree.leetcode.p43;
 
 
+import java.util.Arrays;
+
 /**
  * p43 字符串相乘
  * <p>
@@ -21,24 +23,30 @@ package com.feyfree.leetcode.p43;
  */
 public class Solution {
 
-
     public String multiply(String num1, String num2) {
         int l1 = num1.length();
         int l2 = num2.length();
         char[] result = new char[l1 + l2];
-        for (char i : result) {
-            result[i] = '0';
-        }
+        Arrays.fill(result, '0');
         for (int i = l1 - 1; i >= 0; i--) {
             for (int j = l2 - 1; j >= 0; j--) {
                 int sum = result[i + j + 1] - '0' + (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                result[i + j + 1] = (char) ((sum % 10) + '0');
+                result[i + j] += sum / 10;
             }
         }
-        return null;
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] != '0' || i == result.length - 1) {
+                return String.valueOf(result, i, result.length - i);
+            }
+        }
+        return "";
     }
 
     public static void main(String[] args) {
+        String num1 = "2";
+        String num2 = "3";
         Solution solution = new Solution();
-        solution.multiply("a", "b");
+        System.out.println(solution.multiply(num1, num2));
     }
 }
