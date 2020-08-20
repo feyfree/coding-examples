@@ -1,6 +1,7 @@
 package com.feyfree.leetcode.p207;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
@@ -36,34 +37,54 @@ import java.util.*;
  */
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        // numCourses 表示顶点数  adj 表示临接 点 集合 不是
-        List<Set<Integer>> adj = new ArrayList<>(numCourses);
-        for (int[] sequence : prerequisites) {
-            int start = sequence[1];
-            int end = sequence[0];
-            addEdge(adj, start, end);
+        List<List<Integer>> graph = new ArrayList<>();
+
+        for (int i = 0; i < numCourses; ++i) {
+            graph.add(new ArrayList<>());
         }
-        // 增加一个堆栈
-        Stack<Integer> loop = new Stack<>();
-        // 拓扑排序
-        for (int i = 0; i < adj.size(); i++) {
-            if (adj.get(i) != null && adj.get(i).size() == ) {
-                loop.add(i);
-                break;
+
+        for (int[] ints : prerequisites) {
+            int course = ints[0];
+            int prerequisite = ints[1];
+            graph.get(course).add(prerequisite);
+        }
+
+        int[] visited = new int[numCourses];
+        for (int i = 0; i < numCourses; ++i) {
+            if (dfs(i, graph, visited)) {
+                return false;
             }
         }
-        while (!loop.isEmpty())
-        return false;
 
+        return true;
     }
 
-    private void addEdge(List<Set<Integer>> adj, int start, int end) {
-        if (adj.get(start) != null) {
-            adj.get(start).add(end);
-        } else {
-            Set<Integer> set = new HashSet<>();
-            set.add(end);
-            adj.set(start, set);
+    private boolean dfs(int curr, List<List<Integer>> graph, int[] visited) {
+        if (visited[curr] == 1) {
+            return true;
         }
+        if (visited[curr] == 2) {
+            return false;
+        }
+
+        visited[curr] = 1;
+
+        for (int next : graph.get(curr)) {
+            if (dfs(next, graph, visited)) {
+                return true;
+            }
+        }
+
+        visited[curr] = 2;
+        return false;
+    }
+
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[][] data = new int[2][1];
+        data[0] = new int[]{1, 0};
+        data[1] = new int[]{0, 1};
+        System.out.println(solution.canFinish(2, data));
     }
 }
