@@ -107,7 +107,12 @@ public class BreadthFirstPaths {
     }
 
 
-    // breadth-first search from a single source
+    /**
+     * breadth-first search from a single source
+     *
+     * @param G graph
+     * @param s source-v
+     */
     private void bfs(Graph G, int s) {
         Queue<Integer> q = new Queue<>();
         for (int v = 0; v < G.V(); v++) {
@@ -130,9 +135,14 @@ public class BreadthFirstPaths {
         }
     }
 
-    // breadth-first search from multiple sources
+    /**
+     * breadth-first search from multiple sources
+     *
+     * @param G       graph
+     * @param sources multiple sources
+     */
     private void bfs(Graph G, Iterable<Integer> sources) {
-        Queue<Integer> q = new Queue<Integer>();
+        Queue<Integer> q = new Queue<>();
         for (int s : sources) {
             marked[s] = true;
             distTo[s] = 0;
