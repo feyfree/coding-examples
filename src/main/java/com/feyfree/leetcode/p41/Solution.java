@@ -21,12 +21,13 @@ package com.feyfree.leetcode.p41;
 public class Solution {
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
-        //
+        // 将小于 0 的数 设置为 n + 1
         for (int i = 0; i < n; i++) {
             if (nums[i] <= 0) {
                 nums[i] = n + 1;
             }
         }
+        // 标志
         for (int i = 0; i < n; i++) {
             int num = Math.abs(nums[i]);
             if (num <= n) {
@@ -44,7 +45,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int i = solution.firstMissingPositive(new int[]{4, 2, 1});
+        int i = solution.firstMissingPositive(new int[]{-2, -1, 4, 2, 1});
         System.out.println(i);
     }
 
