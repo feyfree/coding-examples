@@ -86,9 +86,13 @@ public class KruskalMST {
             Edge e = pq.delMin();
             int v = e.either();
             int w = e.other(v);
-            if (uf.find(v) != uf.find(w)) { // v-w does not create a cycle
-                uf.union(v, w);  // merge v and w components
-                mst.enqueue(e);  // add edge e to mst
+            // v-w does not create a cycle
+            if (uf.find(v) != uf.find(w)) {
+                // merge v and w components
+                // 生成并查集的parent 索引 是在union 步骤中逐步建立的
+                uf.union(v, w);
+                // add edge e to mst
+                mst.enqueue(e);
                 weight += e.weight();
             }
         }
