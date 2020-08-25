@@ -136,7 +136,7 @@ public class PrimMST {
      * an iterable of edges
      */
     public Iterable<Edge> edges() {
-        Queue<Edge> mst = new Queue<Edge>();
+        Queue<Edge> mst = new Queue<>();
         for (int v = 0; v < edgeTo.length; v++) {
             Edge e = edgeTo[v];
             if (e != null) {
