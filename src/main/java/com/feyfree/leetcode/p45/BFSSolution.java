@@ -23,7 +23,7 @@ import java.util.Queue;
  *
  * @author leilei
  */
-public class Solution {
+public class BFSSolution {
 
     private static final int INFINITY = Integer.MAX_VALUE;
 
@@ -55,13 +55,16 @@ public class Solution {
                     marked[i] = true;
                     queue.add(i);
                 }
+                if (i == nums.length -1) {
+                    break;
+                }
             }
         }
     }
 
     public static void main(String[] args) {
         int[] nums = {2,3,1,1,4};
-        Solution solution = new Solution();
+        BFSSolution solution = new BFSSolution();
         System.out.println(solution.jump(nums));
     }
 }
