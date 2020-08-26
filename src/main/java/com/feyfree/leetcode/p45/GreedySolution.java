@@ -1,7 +1,7 @@
 package com.feyfree.leetcode.p45;
 
 /**
- * 高效解法
+ * 贪心解法
  * <p>
  * jump as far as possible
  *
