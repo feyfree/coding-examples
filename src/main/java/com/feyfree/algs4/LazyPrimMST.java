@@ -42,32 +42,32 @@
 package com.feyfree.algs4;
 
 /**
- *  The {@code LazyPrimMST} class represents a data type for computing a
- *  <em>minimum spanning tree</em> in an edge-weighted graph.
- *  The edge weights can be positive, zero, or negative and need not
- *  be distinct. If the graph is not connected, it computes a <em>minimum
- *  spanning forest</em>, which is the union of minimum spanning trees
- *  in each connected component. The {@code weight()} method returns the 
- *  weight of a minimum spanning tree and the {@code edges()} method
- *  returns its edges.
- *  <p>
- *  This implementation uses a lazy version of <em>Prim's algorithm</em>
- *  with a binary heap of edges.
- *  The constructor takes &Theta;(<em>E</em> log <em>E</em>) time in
- *  the worst case, where <em>V</em> is the number of vertices and
- *  <em>E</em> is the number of edges.
- *  Each instance method takes &Theta;(1) time.
- *  It uses &Theta;(<em>E</em>) extra space in the worst case
- *  (not including the edge-weighted graph).
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/43mst">Section 4.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *  For alternate implementations, see {@link PrimMST}, {@link KruskalMST},
- *  and {@link BoruvkaMST}.
+ * The {@code LazyPrimMST} class represents a data type for computing a
+ * <em>minimum spanning tree</em> in an edge-weighted graph.
+ * The edge weights can be positive, zero, or negative and need not
+ * be distinct. If the graph is not connected, it computes a <em>minimum
+ * spanning forest</em>, which is the union of minimum spanning trees
+ * in each connected component. The {@code weight()} method returns the
+ * weight of a minimum spanning tree and the {@code edges()} method
+ * returns its edges.
+ * <p>
+ * This implementation uses a lazy version of <em>Prim's algorithm</em>
+ * with a binary heap of edges.
+ * The constructor takes &Theta;(<em>E</em> log <em>E</em>) time in
+ * the worst case, where <em>V</em> is the number of vertices and
+ * <em>E</em> is the number of edges.
+ * Each instance method takes &Theta;(1) time.
+ * It uses &Theta;(<em>E</em>) extra space in the worst case
+ * (not including the edge-weighted graph).
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/43mst">Section 4.3</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * For alternate implementations, see {@link PrimMST}, {@link KruskalMST},
+ * and {@link BoruvkaMST}.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public class LazyPrimMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
@@ -79,6 +79,7 @@ public class LazyPrimMST {
 
     /**
      * Compute a minimum spanning tree (or forest) of an edge-weighted graph.
+     *
      * @param G the edge-weighted graph
      */
     public LazyPrimMST(EdgeWeightedGraph G) {
@@ -86,7 +87,11 @@ public class LazyPrimMST {
         pq = new MinPQ<Edge>();
         marked = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++)     // run Prim from all vertices to
-            if (!marked[v]) prim(G, v);     // get a minimum spanning forest
+        {
+            if (!marked[v]) {
+                prim(G, v);     // get a minimum spanning forest
+            }
+        }
 
         // check optimality conditions
         assert check(G);
@@ -99,11 +104,17 @@ public class LazyPrimMST {
             Edge e = pq.delMin();                      // smallest edge on pq
             int v = e.either(), w = e.other(v);        // two endpoints
             assert marked[v] || marked[w];
-            if (marked[v] && marked[w]) continue;      // lazy, both v and w already scanned
+            if (marked[v] && marked[w]) {
+                continue;      // lazy, both v and w already scanned
+            }
             mst.enqueue(e);                            // add e to MST
             weight += e.weight();
-            if (!marked[v]) scan(G, v);               // v becomes part of tree
-            if (!marked[w]) scan(G, w);               // w becomes part of tree
+            if (!marked[v]) {
+                scan(G, v);               // v becomes part of tree
+            }
+            if (!marked[w]) {
+                scan(G, w);               // w becomes part of tree
+            }
         }
     }
 
@@ -111,14 +122,18 @@ public class LazyPrimMST {
     private void scan(EdgeWeightedGraph G, int v) {
         assert !marked[v];
         marked[v] = true;
-        for (Edge e : G.adj(v))
-            if (!marked[e.other(v)]) pq.insert(e);
+        for (Edge e : G.adj(v)) {
+            if (!marked[e.other(v)]) {
+                pq.insert(e);
+            }
+        }
     }
-        
+
     /**
      * Returns the edges in a minimum spanning tree (or forest).
+     *
      * @return the edges in a minimum spanning tree (or forest) as
-     *    an iterable of edges
+     * an iterable of edges
      */
     public Iterable<Edge> edges() {
         return mst;
@@ -126,6 +141,7 @@ public class LazyPrimMST {
 
     /**
      * Returns the sum of the edge weights in a minimum spanning tree (or forest).
+     *
      * @return the sum of the edge weights in a minimum spanning tree (or forest)
      */
     public double weight() {
@@ -172,7 +188,9 @@ public class LazyPrimMST {
             uf = new UF(G.V());
             for (Edge f : mst) {
                 int x = f.either(), y = f.other(x);
-                if (f != e) uf.union(x, y);
+                if (f != e) {
+                    uf.union(x, y);
+                }
             }
 
             // check that e is min weight edge in crossing cut
@@ -190,8 +208,8 @@ public class LazyPrimMST {
 
         return true;
     }
-    
-    
+
+
     /**
      * Unit tests the {@code LazyPrimMST} data type.
      *

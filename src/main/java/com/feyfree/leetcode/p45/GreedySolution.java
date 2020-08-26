@@ -13,6 +13,7 @@ public class GreedySolution {
         int steps = 0;
         //
         int near = 0;
+        // far 表示在 下一个step 能到达的最远距离
         int far = 0;
         for (int i = 0; i < nums.length; i++) {
             if (i > near) {
