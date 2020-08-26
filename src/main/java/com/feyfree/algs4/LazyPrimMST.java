@@ -72,10 +72,25 @@ package com.feyfree.algs4;
 public class LazyPrimMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
 
-    private double weight;       // total weight of MST
-    private Queue<Edge> mst;     // edges in the MST
-    private boolean[] marked;    // marked[v] = true iff v on tree
-    private MinPQ<Edge> pq;      // edges with one endpoint in tree
+    /**
+     * total weight of MST
+     */
+    private double weight;
+
+    /**
+     * edges in the MST
+     */
+    private Queue<Edge> mst;
+
+    /**
+     * marked[v] = true iff v on tree
+     */
+    private boolean[] marked;
+
+    /**
+     * edges with one endpoint in tree
+     */
+    private MinPQ<Edge> pq;
 
     /**
      * Compute a minimum spanning tree (or forest) of an edge-weighted graph.
@@ -83,13 +98,14 @@ public class LazyPrimMST {
      * @param G the edge-weighted graph
      */
     public LazyPrimMST(EdgeWeightedGraph G) {
-        mst = new Queue<Edge>();
-        pq = new MinPQ<Edge>();
+        mst = new Queue<>();
+        pq = new MinPQ<>();
         marked = new boolean[G.V()];
-        for (int v = 0; v < G.V(); v++)     // run Prim from all vertices to
-        {
+        // run Prim from all vertices to
+        for (int v = 0; v < G.V(); v++) {
             if (!marked[v]) {
-                prim(G, v);     // get a minimum spanning forest
+                // get a minimum spanning forest
+                prim(G, v);
             }
         }
 
@@ -97,28 +113,47 @@ public class LazyPrimMST {
         assert check(G);
     }
 
-    // run Prim's algorithm
+    /**
+     * Prim's algorithm
+     *
+     * @param G EdgeWeightedGraph
+     * @param s 起点
+     */
     private void prim(EdgeWeightedGraph G, int s) {
         scan(G, s);
-        while (!pq.isEmpty()) {                        // better to stop when mst has V-1 edges
-            Edge e = pq.delMin();                      // smallest edge on pq
-            int v = e.either(), w = e.other(v);        // two endpoints
+        // better to stop when mst has V-1 edges
+        while (!pq.isEmpty()) {
+            // smallest edge on pq
+            Edge e = pq.delMin();
+            // two endpoints
+            int v = e.either(), w = e.other(v);
             assert marked[v] || marked[w];
             if (marked[v] && marked[w]) {
-                continue;      // lazy, both v and w already scanned
+                // lazy, both v and w already scanned
+                continue;
             }
-            mst.enqueue(e);                            // add e to MST
+            // add e to MST
+            mst.enqueue(e);
             weight += e.weight();
             if (!marked[v]) {
-                scan(G, v);               // v becomes part of tree
+                // v becomes part of tree
+                scan(G, v);
             }
             if (!marked[w]) {
-                scan(G, w);               // w becomes part of tree
+                // w becomes part of tree
+                scan(G, w);
             }
         }
     }
 
-    // add all edges e incident to v onto pq if the other endpoint has not yet been scanned
+    /**
+     * add all edges e incident to v onto pq if the other endpoint has not yet been scanned
+     * <p>
+     * 将 与 v 相连的, 且该边 另一个点尚未 被扫描过的点 加入MinPQ
+     *
+     * @param G EdgeWeightedGraph
+     * @param v specific vertex
+     */
     private void scan(EdgeWeightedGraph G, int v) {
         assert !marked[v];
         marked[v] = true;

@@ -69,9 +69,16 @@ package com.feyfree.algs4;
 public class PrimMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
 
-    private Edge[] edgeTo;        // edgeTo[v] = shortest edge from tree vertex to non-tree vertex
-    private double[] distTo;      // distTo[v] = weight of shortest such edge
-    private boolean[] marked;     // marked[v] = true if v on tree, false otherwise
+    /**
+     * edgeTo[v] = shortest edge from tree vertex to non-tree vertex
+     */
+    private Edge[] edgeTo;
+
+    // distTo[v] = weight of shortest such edge
+    private double[] distTo;
+
+    // marked[v] = true if v on tree, false otherwise
+    private boolean[] marked;
     private IndexMinPQ<Double> pq;
 
     /**
