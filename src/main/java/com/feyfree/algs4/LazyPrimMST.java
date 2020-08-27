@@ -65,6 +65,13 @@ package com.feyfree.algs4;
  * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  * For alternate implementations, see {@link PrimMST}, {@link KruskalMST},
  * and {@link BoruvkaMST}.
+ * <p>
+ * notice:
+ * This implementation of Prim’s algorithm uses a priority queue to hold crossing edges,
+ * a vertex-indexed array to mark tree vertices,
+ * and a queue to hold MST edges.
+ * This implementation is a lazy approach
+ * where we leave ineligible edges in the priority queue.
  *
  * @author Robert Sedgewick
  * @author Kevin Wayne

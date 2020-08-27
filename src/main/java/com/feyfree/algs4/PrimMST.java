@@ -74,10 +74,14 @@ public class PrimMST {
      */
     private Edge[] edgeTo;
 
-    // distTo[v] = weight of shortest such edge
+    /**
+     * distTo[v] = weight of shortest such edge
+     */
     private double[] distTo;
 
-    // marked[v] = true if v on tree, false otherwise
+    /**
+     * marked[v] = true if v on tree, false otherwise
+     */
     private boolean[] marked;
     private IndexMinPQ<Double> pq;
 
@@ -94,11 +98,11 @@ public class PrimMST {
         for (int v = 0; v < G.V(); v++) {
             distTo[v] = Double.POSITIVE_INFINITY;
         }
-
-        for (int v = 0; v < G.V(); v++)      // run from each vertex to find
-        {
+        // run from each vertex to find
+        for (int v = 0; v < G.V(); v++) {
             if (!marked[v]) {
-                prim(G, v);      // minimum spanning forest
+                // minimum spanning forest
+                prim(G, v);
             }
         }
 
@@ -106,7 +110,12 @@ public class PrimMST {
         assert check(G);
     }
 
-    // run Prim's algorithm in graph G, starting from vertex s
+    /**
+     * run Prim's algorithm in graph G, starting from vertex s
+     *
+     * @param G EdgeWeightedGraph
+     * @param s vertex
+     */
     private void prim(EdgeWeightedGraph G, int s) {
         distTo[s] = 0.0;
         pq.insert(s, distTo[s]);
@@ -116,13 +125,19 @@ public class PrimMST {
         }
     }
 
-    // scan vertex v
+    /**
+     * scan vertex v
+     *
+     * @param G EdgeWeightedGraph
+     * @param v vertex
+     */
     private void scan(EdgeWeightedGraph G, int v) {
         marked[v] = true;
         for (Edge e : G.adj(v)) {
             int w = e.other(v);
             if (marked[w]) {
-                continue;         // v-w is obsolete edge
+                // v-w is obsolete edge
+                continue;
             }
             if (e.weight() < distTo[w]) {
                 distTo[w] = e.weight();
