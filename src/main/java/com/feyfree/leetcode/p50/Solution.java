@@ -34,12 +34,12 @@ public class Solution {
         if (n == 0) {
             return 1;
         }
-        return myPowImpl(x * x, n / 2) * (n % 2 == 0 ? x : 1);
+        return myPowImpl(x * x, n / 2) * (n % 2 == 0 ? 1 : x);
     }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.myPow(0, 0));
+        System.out.println(solution.myPow(2.0, 10));
     }
 
 
