@@ -18,6 +18,9 @@ package com.feyfree.leetcode.p37;
  */
 public class Solution {
 
+    /**
+     * rows[i][j] 表示 第 i 行 数字 j 的使用情况, true 表示已经使用  false 表示未使用
+     */
     private boolean[][] rows = new boolean[9][9];
     private boolean[][] cols = new boolean[9][9];
     private boolean[][] boxes = new boolean[9][9];
