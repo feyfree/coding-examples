@@ -26,7 +26,7 @@ public class Solution {
     private boolean[][] boxes = new boolean[9][9];
 
     public void solveSudoku(char[][] board) {
-
+        // 对已经填充的位置进行 标记
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 char cur = board[i][j];
@@ -43,11 +43,22 @@ public class Solution {
         fill(board, 0, 0);
     }
 
+    /**
+     * 搜索填充
+     *
+     * @param board 给定数组
+     * @param x     搜索起点 x
+     * @param y     搜索起点 y
+     * @return 是否结束
+     */
     private boolean fill(char[][] board, int x, int y) {
+        // 终止条件 到了第十行
         if (y == 9) {
             return true;
         }
+        // 下一个点的列号
         int nextX = (x + 1) % 9;
+        // 下一个点的行号
         int nextY = (nextX == 0) ? y + 1 : y;
         if (board[y][x] != '.') {
             return fill(board, nextX, nextY);
@@ -55,6 +66,7 @@ public class Solution {
         for (int i = 0; i < 9; i++) {
             int bx = x / 3;
             int by = y / 3;
+            // 计算所在的九宫格序列号
             int boxNo = by * 3 + bx;
             if (!rows[y][i] && !cols[x][i] && !boxes[boxNo][i]) {
                 rows[y][i] = true;
