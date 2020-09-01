@@ -53,9 +53,21 @@ package com.feyfree.algs4;
  * @author Kevin Wayne
  */
 public class DijkstraSP {
-    private double[] distTo;          // distTo[v] = distance  of shortest s->v path
-    private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
-    private IndexMinPQ<Double> pq;    // priority queue of vertices
+
+    /**
+     * distTo[v] = distance  of shortest s->v path
+     */
+    private double[] distTo;
+
+    /**
+     * edgeTo[v] = last edge on shortest s->v path
+     */
+    private DirectedEdge[] edgeTo;
+
+    /**
+     * priority queue of vertices
+     */
+    private IndexMinPQ<Double> pq;
 
     /**
      * Computes a shortest-paths tree from the source vertex {@code s} to every other
@@ -84,7 +96,7 @@ public class DijkstraSP {
         distTo[s] = 0.0;
 
         // relax vertices in order of distance from s
-        pq = new IndexMinPQ<Double>(G.V());
+        pq = new IndexMinPQ<>(G.V());
         pq.insert(s, distTo[s]);
         while (!pq.isEmpty()) {
             int v = pq.delMin();
@@ -150,7 +162,7 @@ public class DijkstraSP {
         if (!hasPathTo(v)) {
             return null;
         }
-        Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+        Stack<DirectedEdge> path = new Stack<>();
         for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
             path.push(e);
         }
