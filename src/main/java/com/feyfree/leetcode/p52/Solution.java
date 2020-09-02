@@ -9,7 +9,6 @@ import java.util.Arrays;
  */
 public class Solution {
 
-    private char[][] board;
     private boolean[] cols;
     private boolean[] diag1;
     private boolean[] diag2;
@@ -17,10 +16,6 @@ public class Solution {
 
     public int totalNQueens(int n) {
         cols = new boolean[n];
-        board = new char[n][n];
-        for (char[] data : board) {
-            Arrays.fill(data, '.');
-        }
         diag1 = new boolean[2 * n - 1];
         diag2 = new boolean[2 * n - 1];
         nQueens(n, 0);
