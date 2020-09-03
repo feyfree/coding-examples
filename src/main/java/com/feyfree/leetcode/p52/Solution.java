@@ -1,7 +1,5 @@
 package com.feyfree.leetcode.p52;
 
-import java.util.Arrays;
-
 /**
  * 52. N 皇后 ii
  *
@@ -9,8 +7,17 @@ import java.util.Arrays;
  */
 public class Solution {
 
+    /**
+     * 每一行
+     */
     private boolean[] cols;
+    /**
+     * 对角线 1
+     */
     private boolean[] diag1;
+    /**
+     * 对角线 2
+     */
     private boolean[] diag2;
     private int result = 0;
 
