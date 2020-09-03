@@ -13,7 +13,31 @@ package com.feyfree.leetcode.p53;
  */
 public class Solution {
     public int maxSubArray(int[] nums) {
-        return 0;
+        boolean belowZero = true;
+        int m = Integer.MIN_VALUE;
+        for (int num : nums) {
+            if (num >= 0) {
+                belowZero = false;
+                break;
+            }
+            m = Math.max(m, num);
+        }
+        if (belowZero) {
+            return m;
+        }
+        int maxSoFar = 0;
+        int maxEndingHere = 0;
+        for (int num : nums) {
+            maxEndingHere = Math.max(maxEndingHere + num, 0);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {-1};
+        System.out.println(solution.maxSubArray(nums));
     }
 
 }
