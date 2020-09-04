@@ -8,6 +8,9 @@ package com.feyfree.leetcode.p53;
  * 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
  * <p>
  * 思路: 线性扫描算法
+ * <p>
+ * 前i个元素中, 最大子数组要么在前 i - 1 中  ---> 存储在maxSoFar
+ * 要么其结束位置在 i ---> 存储在maxEndingHere
  *
  * @author leilei
  */
