@@ -27,23 +27,43 @@ public class Solution {
         if (n == 0) {
             return new ArrayList<>();
         }
+        // 总数 注意r实际上是n - 1 , b 实际上是m - 1
+        int total = (m--) * (n--);
+        // left , top
+        int l = 0;
+        int t = 0;
+        int r = n;
+        int b = m;
         List<Integer> result = new ArrayList<>(m * n);
+        int x = 0, y = 0;
+        int d = 0;
         // 遍历循环
-        for (int x = 0; x <= m / 2; x++) {
-            for (int i = x; i <= n - 1 - x; i++) {
-                if (i < n - 1 - x || (x == n - 1 - x)) {
-                    result.add(matrix[x][i]);
+        while (result.size() < total - 1) {
+            if (d == 0) {
+                while (x < r) {
+                    result.add(matrix[y][x++]);
                 }
+                ++t;
+            } else if (d == 1) {
+                while (y < b) {
+                    result.add(matrix[y++][x]);
+                }
+                --r;
+            } else if (d == 2) {
+                while (x > l) {
+                    result.add(matrix[y][x--]);
+                }
+                --b;
+            } else if (d == 3) {
+                while (y > t) {
+                    result.add(matrix[y--][x]);
+                }
+                ++l;
             }
-            for (int j = x; j < m - 1 - x; j++) {
-                result.add(matrix[j][n - 1 - x]);
-            }
-            for (int i = n - 1 - x; i > x; i--) {
-                result.add(matrix[m - 1 - x][i]);
-            }
-            for (int j = m - 1 - x; j > x; j--) {
-                result.add(matrix[j][x]);
-            }
+            d = (d + 1) % 4;
+        }
+        if (result.size() != total) {
+            result.add(matrix[y][x]);
         }
         return result;
     }
