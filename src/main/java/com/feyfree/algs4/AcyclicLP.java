@@ -43,8 +43,14 @@ package com.feyfree.algs4;
  * @author Kevin Wayne
  */
 public class AcyclicLP {
-    private double[] distTo;          // distTo[v] = distance  of longest s->v path
-    private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on longest s->v path
+    /**
+     * distTo[v] = distance  of longest s->v path
+     */
+    private double[] distTo;
+    /**
+     * edgeTo[v] = last edge on longest s->v path
+     **/
+    private DirectedEdge[] edgeTo;
 
     /**
      * Computes a longest paths tree from {@code s} to every other vertex in
@@ -123,8 +129,10 @@ public class AcyclicLP {
      */
     public Iterable<DirectedEdge> pathTo(int v) {
         validateVertex(v);
-        if (!hasPathTo(v)) return null;
-        Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack<DirectedEdge> path = new Stack<>();
         for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
             path.push(e);
         }

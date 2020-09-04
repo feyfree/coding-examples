@@ -22,19 +22,23 @@ public class RedisLock {
      */
     public static final String LOCKED = "TRUE";
     public static final long ONE_MILLI_NANOS = 1000000L;
-    /*
+    /**
      * 默认超时时间（毫秒）
-     * */
+     */
     public static final long DEFAULT_TIME_OUT = 3000;
     public static JedisPool pool;
     public static final Random R = new Random();
 
-    //锁的超时时间（秒），过期删除
+    /**
+     * 锁的超时时间（秒），过期删除
+     */
     public static final int EXPIRE = 5 * 60;
 
     private final Jedis jedis;
     private final String key;
-    //锁状态标志
+    /**
+     * 锁状态标志
+     */
     private boolean locked = false;
 
     public RedisLock(String key) {
@@ -56,7 +60,7 @@ public class RedisLock {
                 if (jedis.setnx(key, LOCKED) == 1) {
                     jedis.expire(key, EXPIRE);
                     locked = true;
-                    return locked;
+                    return true;
                 }
                 // 短暂休眠，nano避免出现活锁
                 Thread.sleep(3, R.nextInt(500));
@@ -70,8 +74,8 @@ public class RedisLock {
      * 事务和管道都是异步模式。在事务和管道中不能同步查询结果，因此下面 t.getSet(key, LOCKED);只能被一个线程查询
      * 否则线程获取不到
      *
-     * @param timeout
-     * @return
+     * @param timeout 超时时间
+     * @return 加锁标志
      */
     public boolean lock2(long timeout) {
         long nano = System.nanoTime();

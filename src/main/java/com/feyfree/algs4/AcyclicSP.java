@@ -41,9 +41,14 @@ package com.feyfree.algs4;
  * @author Kevin Wayne
  */
 public class AcyclicSP {
-    private double[] distTo;         // distTo[v] = distance  of shortest s->v path
-    private DirectedEdge[] edgeTo;   // edgeTo[v] = last edge on shortest s->v path
-
+    /**
+     * distTo[v] = distance  of longest s->v path
+     */
+    private double[] distTo;
+    /**
+     * edgeTo[v] = last edge on longest s->v path
+     **/
+    private DirectedEdge[] edgeTo;
 
     /**
      * Computes a shortest paths tree from {@code s} to every other vertex in
