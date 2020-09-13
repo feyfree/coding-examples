@@ -29,4 +29,8 @@ public class TestString {
         phone = phone.substring(0, 3) + "****" + phone.substring(8, 11);
         return phone;
     }
+
+    @Test
+    public void testStringSort() {
+    }
 }
