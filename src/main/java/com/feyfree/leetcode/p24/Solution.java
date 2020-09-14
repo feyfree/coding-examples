@@ -12,9 +12,9 @@ class Solution {
     public ListNode swapPairs(ListNode head) {
         ListNode dummy = new ListNode();
         dummy.next = head;
-        ListNode temp = dummy;
+        ListNode cur = dummy;
         while (true) {
-            ListNode b = temp.next;
+            ListNode b = cur.next;
             if (b == null) {
                 break;
             }
@@ -22,11 +22,11 @@ class Solution {
             if (c == null) {
                 break;
             }
-            temp.next = c;
+            cur.next = c;
             ListNode d = c.next;
             c.next = b;
             b.next = d;
-            temp = temp.next.next;
+            cur = cur.next.next;
         }
         return dummy.next;
     }
