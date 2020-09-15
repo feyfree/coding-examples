@@ -51,8 +51,10 @@ public class Solution {
         while (n-- > 0) {
             int d = k / fact[n];
             k %= fact[n];
-            s.append('0' + num[d]);
-            System.arraycopy(num, d + 1, num, d + 1 - 1, 10 - d + 1);
+            s.append((char) ('0' + num[d]));
+            for (int i = d + 1; i <= 9; i++) {
+                num[i - 1] = num[i];
+            }
         }
         return s.toString();
     }
