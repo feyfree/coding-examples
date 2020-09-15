@@ -49,7 +49,9 @@ public class Solution {
         StringBuilder s = new StringBuilder();
         k--;
         while (n-- > 0) {
+            // 查找阶乘所在数
             int d = k / fact[n];
+            // 查找偏移量
             k %= fact[n];
             s.append((char) ('0' + num[d]));
             for (int i = d + 1; i <= 9; i++) {
