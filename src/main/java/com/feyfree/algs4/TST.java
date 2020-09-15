@@ -166,7 +166,7 @@ public class TST<Value> {
     private Node<Value> put(Node<Value> x, String key, Value val, int d) {
         char c = key.charAt(d);
         if (x == null) {
-            x = new Node<Value>();
+            x = new Node<>();
             x.c = c;
         }
         if (c < x.c) {
