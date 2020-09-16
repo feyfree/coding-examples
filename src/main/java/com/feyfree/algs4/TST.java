@@ -225,7 +225,7 @@ public class TST<Value> {
      * @return all keys in the symbol table as an {@code Iterable}
      */
     public Iterable<String> keys() {
-        Queue<String> queue = new Queue<String>();
+        Queue<String> queue = new Queue<>();
         collect(root, new StringBuilder(), queue);
         return queue;
     }
