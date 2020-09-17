@@ -5,7 +5,7 @@ package com.feyfree.leetcode.p62;
  *
  * @author leilei
  */
-class ModifiedSolution {
+public class ModifiedSolution {
 
     private int[][] dp;
     private int m;
