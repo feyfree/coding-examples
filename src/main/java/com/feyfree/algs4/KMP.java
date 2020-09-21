@@ -72,12 +72,15 @@ public class KMP {
         dfa[pat.charAt(0)][0] = 1;
         for (int x = 0, j = 1; j < m; j++) {
             for (int c = 0; c < R; c++) {
-                // Copy mismatch cases.
+                // Copy mismatch cases
+                // 不匹配的话 则沿用上一个状态的
                 dfa[c][j] = dfa[c][x];
             }
             // Set match case.
+            // 如果匹配的话 则next place
             dfa[pat.charAt(j)][j] = j + 1;
             // Update restart state.
+            // 更新x 实际上是保持
             x = dfa[pat.charAt(j)][x];
         }
     }
