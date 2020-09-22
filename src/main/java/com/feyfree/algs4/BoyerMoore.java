@@ -33,22 +33,26 @@
 package com.feyfree.algs4;
 
 /**
- *  The {@code BoyerMoore} class finds the first occurrence of a pattern string
- *  in a text string.
- *  <p>
- *  This implementation uses the Boyer-Moore algorithm (with the bad-character
- *  rule, but not the strong good suffix rule).
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * The {@code BoyerMoore} class finds the first occurrence of a pattern string
+ * in a text string.
+ * <p>
+ * This implementation uses the Boyer-Moore algorithm (with the bad-character
+ * rule, but not the strong good suffix rule).
+ * <p>
+ * For additional documentation,
+ * see <a href="https://algs4.cs.princeton.edu/53substring">Section 5.3</a> of
+ * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
 public class BoyerMoore {
-    private final int R;     // the radix
-    private int[] right;     // the bad-character skip array
+    // the radix
+    private final int R;
+    // the bad-character skip array
+    private int[] right;
 
-    private char[] pattern;  // store the pattern as a character array
-    private String pat;      // or as a string
+    // store the pattern as a character array
+    private char[] pattern;
+    // or as a string
+    private String pat;
 
     /**
      * Preprocesses the pattern string.
@@ -61,39 +65,45 @@ public class BoyerMoore {
 
         // position of rightmost occurrence of c in the pattern
         right = new int[R];
-        for (int c = 0; c < R; c++)
+        for (int c = 0; c < R; c++) {
             right[c] = -1;
-        for (int j = 0; j < pat.length(); j++)
+        }
+        for (int j = 0; j < pat.length(); j++) {
             right[pat.charAt(j)] = j;
+        }
     }
 
     /**
      * Preprocesses the pattern string.
      *
      * @param pattern the pattern string
-     * @param R the alphabet size
+     * @param R       the alphabet size
      */
     public BoyerMoore(char[] pattern, int R) {
         this.R = R;
         this.pattern = new char[pattern.length];
-        for (int j = 0; j < pattern.length; j++)
+        for (int j = 0; j < pattern.length; j++) {
             this.pattern[j] = pattern[j];
+        }
 
         // position of rightmost occurrence of c in the pattern
         right = new int[R];
-        for (int c = 0; c < R; c++)
+        for (int c = 0; c < R; c++) {
             right[c] = -1;
-        for (int j = 0; j < pattern.length; j++)
+        }
+        // 相当于以右边的出现为准
+        for (int j = 0; j < pattern.length; j++) {
             right[pattern[j]] = j;
+        }
     }
 
     /**
      * Returns the index of the first occurrrence of the pattern string
      * in the text string.
      *
-     * @param  txt the text string
+     * @param txt the text string
      * @return the index of the first occurrence of the pattern string
-     *         in the text string; n if no such match
+     * in the text string; n if no such match
      */
     public int search(String txt) {
         int m = pat.length();
@@ -101,15 +111,20 @@ public class BoyerMoore {
         int skip;
         for (int i = 0; i <= n - m; i += skip) {
             skip = 0;
-            for (int j = m-1; j >= 0; j--) {
-                if (pat.charAt(j) != txt.charAt(i+j)) {
-                    skip = Math.max(1, j - right[txt.charAt(i+j)]);
+            for (int j = m - 1; j >= 0; j--) {
+                if (pat.charAt(j) != txt.charAt(i + j)) {
+                    // j - right[txt.charAt(i+j)] 相当于 当前位置 - 右边第一次出现的位置
+                    skip = Math.max(1, j - right[txt.charAt(i + j)]);
                     break;
                 }
             }
-            if (skip == 0) return i;    // found
+            if (skip == 0) {
+                // found
+                return i;
+            }
         }
-        return n;                       // not found
+        // not found
+        return n;
     }
 
 
@@ -117,9 +132,9 @@ public class BoyerMoore {
      * Returns the index of the first occurrrence of the pattern string
      * in the text string.
      *
-     * @param  text the text string
+     * @param text the text string
      * @return the index of the first occurrence of the pattern string
-     *         in the text string; n if no such match
+     * in the text string; n if no such match
      */
     public int search(char[] text) {
         int m = pattern.length;
@@ -127,15 +142,19 @@ public class BoyerMoore {
         int skip;
         for (int i = 0; i <= n - m; i += skip) {
             skip = 0;
-            for (int j = m-1; j >= 0; j--) {
-                if (pattern[j] != text[i+j]) {
-                    skip = Math.max(1, j - right[text[i+j]]);
+            for (int j = m - 1; j >= 0; j--) {
+                if (pattern[j] != text[i + j]) {
+                    skip = Math.max(1, j - right[text[i + j]]);
                     break;
                 }
             }
-            if (skip == 0) return i;    // found
+            if (skip == 0) {
+                // found
+                return i;
+            }
         }
-        return n;                       // not found
+        // not found
+        return n;
     }
 
 
@@ -150,7 +169,7 @@ public class BoyerMoore {
         String pat = args[0];
         String txt = args[1];
         char[] pattern = pat.toCharArray();
-        char[] text    = txt.toCharArray();
+        char[] text = txt.toCharArray();
 
         BoyerMoore boyermoore1 = new BoyerMoore(pat);
         BoyerMoore boyermoore2 = new BoyerMoore(pattern, 256);
@@ -161,13 +180,15 @@ public class BoyerMoore {
         StdOut.println("text:    " + txt);
 
         StdOut.print("pattern: ");
-        for (int i = 0; i < offset1; i++)
+        for (int i = 0; i < offset1; i++) {
             StdOut.print(" ");
+        }
         StdOut.println(pat);
 
         StdOut.print("pattern: ");
-        for (int i = 0; i < offset2; i++)
+        for (int i = 0; i < offset2; i++) {
             StdOut.print(" ");
+        }
         StdOut.println(pat);
     }
 }
