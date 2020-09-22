@@ -41,7 +41,24 @@ public class TestRegex {
     }
 
     @Test
-    public void testNoDigits() {
+    public void testMatchingDigits() {
+        String regex = "Hi\\d";
+        boolean matches = Pattern.matches(regex, "Hi1");
+        System.out.println(matches);
+        boolean unmatched = Pattern.matches(regex, "Him");
+        System.out.println(unmatched);
+    }
 
+    @Test
+    public void testNoDigits() {
+        String regex = "Hi\\D";
+        boolean matches = Pattern.matches(regex, "Hi1");
+        System.out.println(matches);
+    }
+
+    @Test
+    public void testMatchingAnyCharacterInSet() {
+        String regex = "H[ae]llo";
+        System.out.println(Pattern.matches(regex, "Hello"));
     }
 }
