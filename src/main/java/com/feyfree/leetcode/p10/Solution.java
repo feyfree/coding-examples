@@ -32,42 +32,14 @@ package com.feyfree.leetcode.p10;
 public class Solution {
 
     public boolean isMatch(String s, String p) {
-        return isMatch(s.toCharArray(), p.toCharArray(), 0, 0);
-    }
-
-    /**
-     * 模式匹配
-     *
-     * @param s  字符数组
-     * @param p  模式数组
-     * @param si 字符索引
-     * @param pi 模式数组索引
-     * @return 是否匹配
-     */
-    private boolean isMatch(char[] s, char[] p, int si, int pi) {
-        if (pi == p.length) {
-            return si == s.length;
+        if (p.isEmpty()) {
+            return s.isEmpty();
         }
-        if (p.length > 1 && p[1] != '*') {
-            if (s.length == si) {
-                return false;
-            }
-            if (s[si] == p[pi] || p[pi] == '.') {
-                return isMatch(s, p, si + 1, pi + 1);
-            } else {
-                return false;
-            }
+        boolean firstMatch = !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.');
+        if (p.length() >= 2 && p.charAt(1) == '*') {
+            return isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p));
         } else {
-            int i = -1;
-            while (i == -1 || s[si] == p[0] || p[0] == '.') {
-                if (isMatch(s, p, si + i + 1, pi + 2)) {
-                    return true;
-                }
-                if (++i == s.length) {
-                    break;
-                }
-            }
-            return false;
+            return firstMatch && isMatch(s.substring(1), p.substring(1));
         }
     }
 }
