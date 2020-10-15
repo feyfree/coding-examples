@@ -1,5 +1,6 @@
 package com.feyfree.basic.collection;
 
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,5 +22,23 @@ public class TestList {
         System.out.println("----after modified");
         System.out.println(part1);
         System.out.println(all);
+    }
+
+    @Test
+    public void testListsPartition() {
+        int total = 6;
+        int taskNum = 5;
+        List<Integer> data = new ArrayList<>(total);
+        for (int i = 0; i < total; i++) {
+            data.add(1);
+        }
+        int size = total / taskNum == 0 ? 1 : total / taskNum + 1;
+        List<List<Integer>> partition = Lists.partition(data, size);
+        System.out.println(partition.size());
+        for (List<Integer> item : partition) {
+            System.out.println(item.size());
+        }
+
+
     }
 }
