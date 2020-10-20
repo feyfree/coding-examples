@@ -31,6 +31,8 @@ public class TestString {
     }
 
     @Test
-    public void testStringSort() {
+    public void testImmutable() {
+        String a = "123456";
+        a.toCharArray();
     }
 }

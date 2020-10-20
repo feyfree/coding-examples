@@ -3,8 +3,11 @@ package com.feyfree.others;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
+/**
+ * @author leilei
+ */
 public class CyclicBarrierSample {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         CyclicBarrier barrier = new CyclicBarrier(5, new Runnable() {
             @Override
             public void run() {
