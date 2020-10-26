@@ -25,7 +25,7 @@ public class ClassTransformerTest {
                 return new MethodVisitor(ASM4, mv) {
                     @Override
                     public void visitCode() {
-                        visitMethodInsn(INVOKESTATIC, "com/feyfree/jvm/asm/TimeProxy.java", "before", "()V", false);
+                        visitMethodInsn(INVOKESTATIC, "com/feyfree/jvm/asm/TimeProxy", "before", "()V", false);
                         super.visitCode();
                     }
                 };
