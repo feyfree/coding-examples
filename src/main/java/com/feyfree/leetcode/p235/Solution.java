@@ -18,7 +18,12 @@ import com.feyfree.leetcode.commons.TreeNode;
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return null;
+        if (root.val > q.val && root.val > p.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        if (p.val > root.val && root.val < q.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        return root;
     }
-
 }
