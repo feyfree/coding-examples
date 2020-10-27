@@ -6,8 +6,8 @@ package com.feyfree.design.factory.simple;
  * @author leilei
  */
 public class ChartFactory {
-    public static IChartable getChart(String type) {
-        IChartable chart;
+    public static IChart getChart(String type) {
+        IChart chart;
         if ("line".equals(type)) {
             chart = new LineChart();
             return chart;

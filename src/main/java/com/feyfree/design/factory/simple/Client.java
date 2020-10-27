@@ -7,7 +7,7 @@ package com.feyfree.design.factory.simple;
  */
 public class Client {
     public static void main(String[] args) {
-        IChartable chart = ChartFactory.getChart("line");
+        IChart chart = ChartFactory.getChart("line");
         if (chart != null) {
             chart.display();
         }

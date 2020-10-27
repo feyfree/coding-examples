@@ -5,7 +5,7 @@ package com.feyfree.design.factory.simple;
  *
  * @author leilei
  */
-public class LineChart implements IChartable {
+public class LineChart implements IChart {
     public LineChart() {
         System.out.println("Creating a line chart!");
     }

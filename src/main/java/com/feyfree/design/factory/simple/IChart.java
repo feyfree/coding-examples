@@ -5,7 +5,7 @@ package com.feyfree.design.factory.simple;
  *
  * @author leilei
  */
-public interface IChartable {
+public interface IChart {
     /**
      * 展示接口
      */

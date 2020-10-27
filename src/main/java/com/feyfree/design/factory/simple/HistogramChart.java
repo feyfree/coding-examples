@@ -5,7 +5,7 @@ package com.feyfree.design.factory.simple;
  *
  * @author leilei
  */
-public class HistogramChart implements IChartable {
+public class HistogramChart implements IChart {
 
     public HistogramChart() {
         System.out.println("Creating a histogram chart!");
