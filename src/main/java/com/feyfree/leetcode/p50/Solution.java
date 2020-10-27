@@ -24,7 +24,7 @@ public class Solution {
     }
 
     /**
-     * 递归的思想
+     * 递归的思想  分治的思想
      *
      * @param x 输入
      * @param n 幂
