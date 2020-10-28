@@ -5,7 +5,6 @@ public class Client {
         Car car = new Car();
         car.addVisit(new Body());
         car.addVisit(new Engine());
-
         Visitor print = new PrintCar();
         car.show(print);
     }
