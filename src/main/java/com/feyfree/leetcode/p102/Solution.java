@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （
  * 即逐层地，从左到右访问所有节点）
- *
+ * <p>
  * https://zxi.mytechroad.com/blog/leetcode/leetcode-102-binary-tree-level-order-traversal/
  * <p>
  * BFS solution
@@ -20,7 +20,9 @@ class Solution {
             return new ArrayList<>();
         }
         List<List<Integer>> result = new ArrayList<>();
+        // 当前需要访问的node 列表
         List<TreeNode> curr = new ArrayList<>();
+        // 下一次需要访问的 node 列表
         List<TreeNode> next = new ArrayList<>();
         curr.add(root);
         while (!curr.isEmpty()) {
