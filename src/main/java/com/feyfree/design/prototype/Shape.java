@@ -10,6 +10,9 @@ public abstract class Shape implements Cloneable {
     private String id;
     protected String type;
 
+    /**
+     * 抽象方法
+     */
     abstract void draw();
 
     public String getType() {
