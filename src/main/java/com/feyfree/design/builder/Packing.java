@@ -6,5 +6,5 @@ package com.feyfree.design.builder;
  * @author leilei
  */
 public interface Packing {
-    public String pack();
+    String pack();
 }

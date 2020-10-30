@@ -6,9 +6,9 @@ package com.feyfree.design.builder;
  * @author leilei
  */
 public interface Item {
-    public String name();
+    String name();
 
-    public Packing packing();
+    Packing packing();
 
-    public float price();
+    float price();
 }
