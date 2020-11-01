@@ -3,7 +3,23 @@ package com.feyfree.basic.generics.demo6;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 异构容器
+ *
+ * @author feyfree
+ */
 class Favorites {
+
+    /**
+     * 异构容器
+     * <p>
+     * 这个Favorites类型里面的键都不同类型的，这里将Favorites称为异构容器。
+     * <p>
+     * 它又两个局限性：
+     * <p>
+     * 1. 用户可以轻松地破坏Favorites的实例安全（可以用put方法中cast来避免）
+     * 2. 它只能用于可具体化的类ing中（比如List这个类型你就不能传过去）
+     */
     private Map<Class<?>, Object> favorites = new HashMap<>();
 
     /**
