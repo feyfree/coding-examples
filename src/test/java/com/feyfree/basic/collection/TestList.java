@@ -38,7 +38,20 @@ public class TestList {
         for (List<Integer> item : partition) {
             System.out.println(item.size());
         }
+    }
 
-
+    @Test
+    public void testMyList() {
+        MyList myList = new MyList();
+        List<Integer> data = new ArrayList<>();
+        myList.setMyList(data);
+        data.add(1);
+        System.out.println(myList.getMyList().get(0));
+        System.out.println("-------------");
+        MyList myList2 = new MyList();
+        myList2.setMyList(new ArrayList<>(2));
+        List<Integer> list = myList2.getMyList();
+        list.add(1);
+        System.out.println(myList2.getMyList().size());
     }
 }
