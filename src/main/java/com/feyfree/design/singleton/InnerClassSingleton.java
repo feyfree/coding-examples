@@ -12,6 +12,10 @@ public class InnerClassSingleton {
     }
 
     private InnerClassSingleton() {
+        // 可以增加 避免反射调用
+        if (SingletonHolder.instance != null) {
+            throw new RuntimeException("Not allowed create multi instance");
+        }
     }
 
     public static InnerClassSingleton newInstance() {
