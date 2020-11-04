@@ -1,4 +1,4 @@
-package com.feyfree.design.proxy;
+package com.feyfree.design.proxy.search;
 
 public class RealSearcher implements Searcher {
     @Override

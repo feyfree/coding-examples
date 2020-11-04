@@ -1,5 +1,8 @@
 package com.feyfree.design.decorator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 装饰器模式
  * demo
@@ -10,8 +13,9 @@ public class DecoratorPatternDemo {
     public static void main(String[] args) {
 
         Shape circle = new Circle();
-        ShapeDecorator redCircle = new RedShapeDecorator(new Circle());
-        ShapeDecorator redRectangle = new RedShapeDecorator(new Rectangle());
+        // 类型实际上还是Shape 也可以用 ShapeDecorator
+        Shape redCircle = new RedShapeDecorator(new Circle());
+        Shape redRectangle = new RedShapeDecorator(new Rectangle());
         //Shape redCircle = new RedShapeDecorator(new Circle());
         //Shape redRectangle = new RedShapeDecorator(new Rectangle());
         System.out.println("Circle with normal border");
@@ -22,5 +26,10 @@ public class DecoratorPatternDemo {
 
         System.out.println("\nRectangle of red border");
         redRectangle.draw();
+
+        List<Shape> data = new ArrayList<>();
+        data.add(redCircle);
+        data.get(0).draw();
     }
+
 }
