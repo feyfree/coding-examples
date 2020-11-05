@@ -1,4 +1,4 @@
-package com.feyfree.design.visitor;
+package com.feyfree.design.visitor.demo1;
 
 public class Client {
     static public void main(String[] args) {

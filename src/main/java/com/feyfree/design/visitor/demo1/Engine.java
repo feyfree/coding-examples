@@ -1,11 +1,11 @@
-package com.feyfree.design.visitor;
+package com.feyfree.design.visitor.demo1;
 
 /**
  * 具体对象
  *
- * @author feyfree
+ * @author leilei
  */
-public class Body implements Visitable {
+public class Engine implements Visitable {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

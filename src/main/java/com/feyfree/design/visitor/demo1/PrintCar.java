@@ -1,4 +1,4 @@
-package com.feyfree.design.visitor;
+package com.feyfree.design.visitor.demo1;
 
 /**
  * 真正的访问者
