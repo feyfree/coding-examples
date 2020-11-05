@@ -1,6 +1,6 @@
 package com.feyfree.leetcode.p208;
 
-class Trie {
+public class Trie {
 
     private static final int R = 26;
 
