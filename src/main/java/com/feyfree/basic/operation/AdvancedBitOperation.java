@@ -1,5 +1,7 @@
 package com.feyfree.basic.operation;
 
+import org.junit.Assert;
+
 /**
  * 复杂的位运算
  *
@@ -39,9 +41,18 @@ public class AdvancedBitOperation {
     }
 
 
+
+
+
     public static void main(String[] args) {
         AdvancedBitOperation operation = new AdvancedBitOperation();
-        System.out.println(operation.isOdd(1));
+        Assert.assertTrue(operation.isOdd(1));
+        Assert.assertTrue(operation.isOdd(13));
+
+        // 10000 = 18
+        Assert.assertEquals(16, operation.removeLowestOne(18));
+
+        System.out.println(operation.getLowestOne(16));
     }
 
 
