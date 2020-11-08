@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -29,6 +30,8 @@ public class LeastActiveLoadBalance extends AbstractLoadBalance {
     private ConcurrentMap<String, Pair<Integer, Integer>> activeMap;
 
     private List<Invoker> invokers = new ArrayList<>();
+
+    private final Random random = new Random();
 
     /**
      * 初始化权重
@@ -68,17 +71,35 @@ public class LeastActiveLoadBalance extends AbstractLoadBalance {
         List<Invoker> least = new ArrayList<>();
         Invoker minActive = invokers.get(0);
         boolean sameWeight = true;
+        int totalWeight = 0;
         for (int i = 0; i < invokers.size(); i++) {
             // 找到invoker 里面最小的active 如果集合数只有1 个立刻返回
             Invoker invoker = invokers.get(i);
+            totalWeight += invoker.getWeight();
             if (invoker.getActive() < minActive.getActive() && !least.isEmpty()) {
                 least.clear();
                 least.add(invoker);
                 minActive = invoker;
+                sameWeight = false;
             } else if (invoker.getActive().equals(minActive.getActive())) {
                 least.add(invoker);
+            } else {
+                sameWeight = false;
             }
         }
-        return null;
+        if (sameWeight) {
+            int i = random.nextInt(totalWeight);
+            int temp = 0;
+            for (Invoker invoker : invokers) {
+                if (temp >= i) {
+                    return invoker;
+                }
+                temp += invoker.getWeight();
+            }
+        }
+        if (!least.isEmpty()) {
+            return least.get(random.nextInt(least.size()));
+        }
+        return minActive;
     }
 }
