@@ -44,4 +44,54 @@ public class TestOperation {
         System.out.println(a);
     }
 
+    @Test
+    public void testDouble() {
+        double a = (double) (1 << 28) + (172701471);
+        long value = (long) a;
+        System.out.println(value);
+        System.out.println(value >> 28);
+        double b = (double) ((((long) a) << 28 + 1) << 28) + 172701471;
+    }
+
+    @Test
+    public void testDouble2() {
+        System.out.println(1 >> 28 + 1);
+    }
+
+    public double incr(Double a) {
+        System.out.println(a.longValue() >> 28 + 1);
+        double v = (double) ((a.longValue() >> 28 + 1) << 28) + 172701471;
+        return v;
+    }
+
+    @Test
+    public void testIncr() {
+        double a = (double) (1 << 28) + 172701471;
+        for (int i = 0; i < 100000; i++) {
+            a = newIncr(a);
+        }
+    }
+
+    private double newIncr(double a) {
+        long result = (long) a >> 28;
+        double b = (double) ((result + 1) << 28) + 172701471;
+        long bResult = (long) b >> 28;
+        System.out.println(bResult);
+        return b;
+    }
+
+    private void incrLong(long bResult) {
+        double c = (double) ((bResult + 1) << 28) + 172701471;
+        long cResult = (long) c >> 28;
+        System.out.println(cResult);
+    }
+
+    @Test
+    public void testLoopIncr() {
+        double a = (double) (1 << 28) + 172701471;
+        System.out.println(Double.valueOf(a).longValue() >> 28);
+        double v = incr(a);
+        long result = Double.valueOf(v).longValue() >> 28;
+        System.out.println(result);
+    }
 }
