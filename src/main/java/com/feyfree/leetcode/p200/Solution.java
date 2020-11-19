@@ -14,6 +14,26 @@ package com.feyfree.leetcode.p200;
  * @author leilei
  */
 public class Solution {
+
+    private int[] dx = {-1, 1, 0, 0};
+
+    private int[] dy = {0, 0, -1, 1};
+
+    /**
+     * parent[i] = parent of i
+     */
+    private int[] parent;
+
+    /**
+     * rank[i] = rank of subtree rooted at i (never more than 31)
+     */
+    private int[] rank;
+
+    /**
+     * 总数
+     */
+    private int count;
+
     /**
      * 使用并查集的结构
      *
@@ -21,6 +41,74 @@ public class Solution {
      * @return 返回岛屿数目
      */
     public int numIslands(char[][] grid) {
-        return 0;
+        if (grid == null || grid[0] == null) {
+            return 0;
+        }
+        int m = grid.length;
+        int n = grid[0].length;
+        parent = new int[m * n];
+        rank = new int[m * n];
+        count = m * n;
+        // 初始化数组
+        init(grid);
+        // 进行并查集合的合并
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '0') {
+                    continue;
+                }
+                for (int k = 0; k < dx.length; k++) {
+                    int x = dx[k] + i;
+                    int y = dy[k] + j;
+                    if (x >= 0 && y >= 0 && x < m && y < n && grid[x][y] == '1') {
+                        union(j * m + i, y * m + x);
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 初始化并查询集合
+     *
+     * @param grid
+     */
+    private void init(char[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                int index = i + j * grid.length;
+                parent[index] = index;
+                rank[index] = 0;
+            }
+        }
+    }
+
+
+    private int find(int i) {
+        while (i != parent[i]) {
+            parent[i] = parent[parent[i]];
+            i = parent[i];
+        }
+        return i;
+    }
+
+    private void union(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX == rootY) {
+            return;
+        }
+
+        // make root of smaller rank point to root of larger rank
+        if (rank[rootX] < rank[rootY]) {
+            parent[rootX] = rootY;
+        } else if (rank[rootX] > rank[rootY]) {
+            parent[rootY] = rootX;
+        } else {
+            parent[rootY] = rootX;
+            rank[rootX]++;
+        }
+        count--;
     }
 }
