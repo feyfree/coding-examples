@@ -1,5 +1,7 @@
 package com.feyfree.leetcode.p200;
 
+import java.util.Arrays;
+
 /**
  * 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
  * <p>
@@ -11,6 +13,7 @@ package com.feyfree.leetcode.p200;
  * 链接：https://leetcode-cn.com/problems/number-of-islands
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
+ * TODO 测试用例不通过 需要改动
  * @author leilei
  */
 public class Solution {
@@ -47,6 +50,7 @@ public class Solution {
         int m = grid.length;
         int n = grid[0].length;
         parent = new int[m * n];
+        Arrays.fill(parent, -1);
         rank = new int[m * n];
         count = m * n;
         // 初始化数组
@@ -61,7 +65,7 @@ public class Solution {
                     int x = dx[k] + i;
                     int y = dy[k] + j;
                     if (x >= 0 && y >= 0 && x < m && y < n && grid[x][y] == '1') {
-                        union(j * m + i, y * m + x);
+                        union(i * m + j, x * m + y);
                     }
                 }
             }
@@ -72,14 +76,16 @@ public class Solution {
     /**
      * 初始化并查询集合
      *
-     * @param grid
+     * @param grid 输入
      */
     private void init(char[][] grid) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                int index = i + j * grid.length;
-                parent[index] = index;
-                rank[index] = 0;
+                int index = i * grid[0].length + j;
+                if (grid[i][j] == '1') {
+                    parent[index] = index;
+                    count += 1;
+                }
             }
         }
     }
