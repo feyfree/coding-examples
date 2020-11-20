@@ -42,6 +42,7 @@ public class FloodFillSolution {
         }
         visited[x][y] = true;
         for (int i = 0; i < dx.length; i++) {
+            // 同理 如果使用BFS 的话 使用注释中的代码
             floodFillDfs(x + dx[i], y + dy[i], visited, grid);
         }
         return 1;
