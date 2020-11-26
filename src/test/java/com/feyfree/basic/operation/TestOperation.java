@@ -60,8 +60,7 @@ public class TestOperation {
 
     public double incr(Double a) {
         System.out.println(a.longValue() >> 28 + 1);
-        double v = (double) ((a.longValue() >> 28 + 1) << 28) + 172701471;
-        return v;
+        return (double) ((a.longValue() >> 28 + 1) << 28) + 172701471;
     }
 
     @Test
