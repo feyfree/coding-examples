@@ -25,9 +25,9 @@ public class Solution {
             i--;
         }
         StringBuilder result = new StringBuilder();
-        for (int value : numArray) {
-            while (value != 0) {
-                result.append(valArray[9 * value - 3]);
+        for (int j = 0; j < 4; j++) {
+            if (numArray[j] != 0) {
+                result.append(valArray[9 * (3 - j) + numArray[j] - 1]);
             }
         }
         return result.toString();
