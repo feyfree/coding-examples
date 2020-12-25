@@ -54,4 +54,21 @@ public class TestList {
         list.add(1);
         System.out.println(myList2.getMyList().size());
     }
+
+
+    private List<Integer> getItems() {
+        List<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(2);
+        data.add(3);
+        data.add(4);
+        return data.subList(1, 2);
+    }
+
+    @Test
+    public void test() {
+        List<Integer> data = getItems();
+        System.out.println(data);
+        System.out.println(data.size());
+    }
 }

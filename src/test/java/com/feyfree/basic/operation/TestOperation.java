@@ -93,4 +93,17 @@ public class TestOperation {
         long result = Double.valueOf(v).longValue() >> 28;
         System.out.println(result);
     }
+
+    public long convertInviteCountWithNoTimeBit(long innerScore) {
+        if (innerScore >= (1 << 28)) {
+            return innerScore >>> 28;
+        }
+        return innerScore;
+    }
+
+    @Test
+    public void testResult() {
+        long data = convertInviteCountWithNoTimeBit(2147483647);
+        System.out.println(data);
+    }
 }
