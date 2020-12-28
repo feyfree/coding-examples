@@ -28,7 +28,7 @@ public class AdvancedRequirementSolution {
     public void dfs(int[] candidates, int target, int s, int d, int n, List<Integer> current, List<List<Integer>> result) {
         if (d == n) {
             if (target == 0) {
-                result.add(current);
+                result.add(new ArrayList<>(current));
                 return;
             }
 
@@ -46,7 +46,7 @@ public class AdvancedRequirementSolution {
 
     public static void main(String[] args) {
         AdvancedRequirementSolution solution = new AdvancedRequirementSolution();
-        int[] candidates = {10, 2, 7, 6, 1, 5};
+        int[] candidates = {2, 3, 5};
         List<List<Integer>> lists = solution.combinationSum(candidates, 8);
         System.out.println(lists);
     }
