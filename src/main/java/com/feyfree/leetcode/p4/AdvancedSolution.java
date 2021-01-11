@@ -1,5 +1,7 @@
 package com.feyfree.leetcode.p4;
 
+import java.util.Arrays;
+
 /**
  * 寻找中位数 优化算法
  * <p>
@@ -41,6 +43,15 @@ public class AdvancedSolution {
         int m1 = l;
         int m2 = k - l;
 
+        System.out.print("nums1:");
+        System.out.println(Arrays.toString(nums1));
+        System.out.print("nums2:");
+        System.out.println(Arrays.toString(nums2));
+        System.out.println("两个数组的k值: " + k);
+        System.out.println("数组1的中间m1值: " + m1);
+        System.out.println("数组2的中间m2值: " + m2);
+
+
 
         // c1 相当于 V1(m1 -1) 和 V2(m2 - 1) 的最大值， 作为终点
         int c1 = Math.max(m1 <= 0 ? Integer.MIN_VALUE : nums1[m1 - 1],
@@ -56,5 +67,12 @@ public class AdvancedSolution {
                 m2 >= n2 ? Integer.MAX_VALUE : nums2[m2]);
 
         return (c1 + c2) * 0.5;
+    }
+
+    public static void main(String[] args) {
+        AdvancedSolution solution = new AdvancedSolution();
+        int[] nums1 = {1, 4};
+        int[] nums2 = {2, 3};
+        solution.findMedianSortedArrays(nums1, nums2);
     }
 }
