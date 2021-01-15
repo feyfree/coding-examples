@@ -21,7 +21,9 @@ class Solution {
             valid = true;
             pathStack.push("/");
             StringBuilder current = new StringBuilder();
+            int idx = 0;
             for (int j = i + 1; j < path.length(); j++) {
+                idx = j;
                 if (path.charAt(j) == '/' && current.length() == 0) {
                     continue;
                 }
@@ -32,6 +34,7 @@ class Solution {
                     break;
                 }
             }
+            i = idx;
             // 堆栈弹出
             String currentPath = current.toString();
             if ("..".equals(currentPath)) {
