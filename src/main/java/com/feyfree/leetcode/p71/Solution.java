@@ -1,6 +1,7 @@
 package com.feyfree.leetcode.p71;
 
-import com.feyfree.algs4.Stack;
+
+import java.util.Stack;
 
 class Solution {
     public String simplifyPath(String path) {
@@ -19,31 +20,29 @@ class Solution {
                 return "/";
             }
             valid = true;
-            pathStack.push("/");
             StringBuilder current = new StringBuilder();
-            int idx = 0;
-            for (int j = i + 1; j < path.length(); j++) {
-                idx = j;
-                if (path.charAt(j) == '/' && current.length() == 0) {
+            int idx = i;
+            while (idx < path.length()) {
+                if (path.charAt(idx) == '/' && current.length() > 0) {
+                    idx++;
                     continue;
                 }
-                if (path.charAt(j) == '.') {
-                    current.append('.');
-                }
-                if (path.charAt(j) == '/' && current.length() > 0) {
+                current.append(path.charAt(idx));
+                idx++;
+                if (idx < path.length() && path.charAt(idx) == '/') {
                     break;
                 }
             }
             i = idx;
             // 堆栈弹出
             String currentPath = current.toString();
-            if ("..".equals(currentPath)) {
+            if ("/..".equals(currentPath)) {
                 if (!pathStack.isEmpty()) {
                     pathStack.pop();
-                    continue;
                 }
+                continue;
             }
-            if (current.length() == 0 || ".".equals(currentPath)) {
+            if (current.length() == 0 || "/".equals(currentPath) || "/.".equals(currentPath)) {
                 continue;
             }
             pathStack.push(currentPath);
@@ -55,10 +54,12 @@ class Solution {
         for (String s : pathStack) {
             builder.append(s);
         }
-        String result = builder.toString();
-        if (result.length() > 1 && result.endsWith("/")) {
-            return result.substring(0, result.length() - 1);
-        }
-        return result;
+        return builder.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "/../";
+        Solution solution = new Solution();
+        System.out.println(solution.simplifyPath(input));
     }
 }
