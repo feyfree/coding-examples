@@ -14,10 +14,45 @@ package com.feyfree.leetcode.p75;
 public class Solution {
     public void sortColors(int[] nums) {
         // 手撸快排
-
+        sort(nums, 0, nums.length - 1);
     }
 
     private void sort(int[] nums, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int partition = partition(nums, low, high);
+        sort(nums, low, partition - 1);
+        sort(nums, partition + 1, high);
+    }
 
+    private int partition(int[] data, int low, int high) {
+        int i = low;
+        int j = high + 1;
+        int v = data[low];
+        while (true) {
+            while (data[++i] < v) {
+                if (i == high) {
+                    break;
+                }
+            }
+            while (v < data[--j]) {
+                if (j == low) {
+                    break;
+                }
+            }
+            if (i >= j) {
+                break;
+            }
+            swap(data, i, j);
+        }
+        swap(data, low, j);
+        return j;
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }

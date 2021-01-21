@@ -1,5 +1,6 @@
 package com.feyfree.leetcode.p45;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -37,15 +38,16 @@ public class BFSSolution {
         for (int v = 0; v < nums.length; v++) {
             distTo[v] = INFINITY;
         }
-        bfs(nums, 0);
+        bfs(nums);
+        System.out.println(Arrays.toString(distTo));
         return distTo[nums.length - 1];
     }
 
-    private void bfs(int[] nums, int v) {
+    private void bfs(int[] nums) {
         Queue<Integer> queue = new LinkedList<>();
-        marked[v] = true;
-        distTo[v] = 0;
-        queue.add(v);
+        marked[0] = true;
+        distTo[0] = 0;
+        queue.add(0);
         while (!queue.isEmpty()) {
             int s = queue.poll();
             int steps = nums[s];
