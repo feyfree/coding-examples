@@ -1,4 +1,4 @@
-package com.feyfree.jvm;
+package com.feyfree.jvm.gc;
 
 /**
  * 一次对象的自我拯救的演示
