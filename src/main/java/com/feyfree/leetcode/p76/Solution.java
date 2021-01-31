@@ -43,5 +43,6 @@ class Solution {
         String s = "ADOBECODEBANC";
         String t = "ABC";
         solution.minWindow(s, t);
+        System.out.println(Math.random() * 1000);
     }
 }

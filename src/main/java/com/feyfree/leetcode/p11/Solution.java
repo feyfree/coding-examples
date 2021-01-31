@@ -5,7 +5,7 @@ package com.feyfree.leetcode.p11;
  * <p>
  * container-with-most-water
  * <p>
- * 区间容量取决于开始和结束的 短板
+ * 区间容量取决于开始和结束的 短板 * 间隔
  *
  * @author leilei
  */
