@@ -4,6 +4,8 @@ package com.feyfree.leetcode.p84;
  * p84 柱状图最大的矩形
  * 和接雨水不同
  *
+ * todo 优化空间复杂度
+ *
  * @author leilei
  */
 class Solution {
