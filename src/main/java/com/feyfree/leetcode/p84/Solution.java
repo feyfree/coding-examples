@@ -1,10 +1,20 @@
 package com.feyfree.leetcode.p84;
 
+
+import java.util.Stack;
+
 /**
  * p84 柱状图最大的矩形
  * 和接雨水不同
+ * <p>
+ * Use a monotonic stack to maintain the higher bars’s indices in ascending order.
+ * When encounter a lower bar, pop the tallest bar and use it as the bottleneck to compute the area.
+ * <p>
+ * Time complexity: O(n)
+ * Space complexity: O(n)
  *
- * todo 优化空间复杂度
+ * reference:
+ * https://zxi.mytechroad.com/blog/stack/leetcode-84-largest-rectangle-in-histogram/
  *
  * @author leilei
  */
@@ -12,19 +22,18 @@ class Solution {
     public int largestRectangleArea(int[] heights) {
         int n = heights.length;
         // dp[start][end]
-        int[][] dp = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            dp[i][i] = heights[i];
-        }
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                dp[i][j] = Math.min(dp[i][j - 1], heights[j]);
-            }
-        }
-        int result = dp[0][0];
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                result = Math.max(result, dp[i][j] * (j - i + 1));
+        Stack<Integer> stack = new Stack<>();
+        int result = 0;
+        int i = 0;
+        while (i <= n) {
+            int height = i == n ? 0 : heights[i];
+            if (stack.isEmpty() || height >= heights[stack.peek()]) {
+                stack.push(i++);
+            } else {
+                int h = heights[stack.peek()];
+                stack.pop();
+                int w = stack.isEmpty() ? i : i - stack.peek() - 1;
+                result = Math.max(result, h * w);
             }
         }
         return result;
