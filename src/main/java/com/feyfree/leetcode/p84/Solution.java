@@ -12,7 +12,7 @@ import java.util.Stack;
  * <p>
  * Time complexity: O(n)
  * Space complexity: O(n)
- *
+ * <p>
  * reference:
  * https://zxi.mytechroad.com/blog/stack/leetcode-84-largest-rectangle-in-histogram/
  *
@@ -25,6 +25,7 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         int result = 0;
         int i = 0;
+        // 单调栈的思想
         while (i <= n) {
             int height = i == n ? 0 : heights[i];
             if (stack.isEmpty() || height >= heights[stack.peek()]) {
@@ -40,7 +41,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        int[] heights = {0, 9};
+        int[] heights = {2, 1, 5, 6, 2, 3};
         Solution solution = new Solution();
         System.out.println(solution.largestRectangleArea(heights));
     }
