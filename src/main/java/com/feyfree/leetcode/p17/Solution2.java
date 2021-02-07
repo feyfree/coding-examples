@@ -41,5 +41,4 @@ class Solution2 {
 
         return ans;
     }
-
 }

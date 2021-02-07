@@ -8,6 +8,32 @@ package com.feyfree.leetcode.p85;
  */
 public class Solution {
     public int maximalRectangle(char[][] matrix) {
-        return 0;
+        // DP
+        int rows = matrix.length;
+        if (rows == 0) {
+            return 0;
+        }
+        int cols = matrix[0].length;
+        int[][] dp = new int[rows][cols];
+        // dp[i][j] 存储的是
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                dp[i][j] = (matrix[i][j] == '1') ? (j == 0 ? 1 : dp[i][j - 1] + 1) : 0;
+            }
+        }
+        int result = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int len = Integer.MAX_VALUE;
+                for (int k = i; k < rows; k++) {
+                    len = Math.min(len, dp[k][j]);
+                    if (len == 0) {
+                        break;
+                    }
+                    result = Math.max(len * (k - i + 1), result);
+                }
+            }
+        }
+        return result;
     }
 }
