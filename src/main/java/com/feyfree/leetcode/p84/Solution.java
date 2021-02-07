@@ -9,6 +9,9 @@ import java.util.Stack;
  * <p>
  * Use a monotonic stack to maintain the higher bars’s indices in ascending order.
  * When encounter a lower bar, pop the tallest bar and use it as the bottleneck to compute the area.
+ *
+ * 用一个单调的栈区维持一个更高的柱 的索引（高度递增）
+ * 如果遇到了一个更低的柱子， 将最高的柱子弹出，
  * <p>
  * Time complexity: O(n)
  * Space complexity: O(n)
@@ -21,7 +24,6 @@ import java.util.Stack;
 class Solution {
     public int largestRectangleArea(int[] heights) {
         int n = heights.length;
-        // dp[start][end]
         Stack<Integer> stack = new Stack<>();
         int result = 0;
         int i = 0;
@@ -31,6 +33,7 @@ class Solution {
             if (stack.isEmpty() || height >= heights[stack.peek()]) {
                 stack.push(i++);
             } else {
+                // 实际相当于end 确定，不断地换 start 来计算最大值
                 int h = heights[stack.peek()];
                 stack.pop();
                 int w = stack.isEmpty() ? i : i - stack.peek() - 1;
