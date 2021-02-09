@@ -6,40 +6,35 @@ import com.feyfree.leetcode.commons.ListNode;
  * p86 solution
  * <p>
  * 分隔链表
- * 思路上面:
- * 这个跟快排的最底层的思想
+ * 给你一个链表和一个特定值 x ，请你对链表进行分隔，使得所有小于 x 的节点都出现在大于或等于 x 的节点之前。
+ * <p>
+ * 你应当保留两个分区中每个节点的初始相对位置。
+ * <p>
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/partition-list
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
  * @author leilei
  */
 public class Solution {
     public ListNode partition(ListNode head, int x) {
-        return null;
-    }
-
-    private void swapNode(ListNode pre, ListNode a, ListNode b) {
-        if (a != null && b != null) {
-            ListNode temp = a.next;
-            a.next = b.next;
-            b.next = temp;
-            pre.next = b;
-        }
-    }
-
-    public static void main(String[] args) {
-        ListNode head = new ListNode();
-        ListNode a = new ListNode(1);
-        ListNode b = new ListNode(2);
-        ListNode c = new ListNode(3);
-        ListNode d = new ListNode(4);
-        head.next = a;
-        a.next = b;
-        b.next = c;
-        c.next = d;
-        Solution solution = new Solution();
-        solution.swapNode(head, a, d);
+        ListNode dummyL = new ListNode();
+        ListNode pl = dummyL;
+        ListNode dummyR = new ListNode();
+        ListNode pr = dummyR;
         while (head != null) {
-            System.out.println(head.val);
+            boolean flag = head.val < x;
+            if (flag) {
+                pl.next = head;
+                pl = pl.next;
+            } else {
+                pr.next = head;
+                pr = pr.next;
+            }
             head = head.next;
         }
+        pr.next = null;
+        pl.next = dummyR.next;
+        return dummyL.next;
     }
 }
