@@ -2,6 +2,9 @@ package com.feyfree.leetcode.p87;
 
 /**
  * p87 扰乱字符串
+ * <p>
+ * hint by:
+ * https://zxi.mytechroad.com/blog/searching/leetcode-87-scramble-string/
  *
  * @author leilei
  */
