@@ -138,6 +138,7 @@ public class TrieSET implements Iterable<String> {
      *
      * @return an iterator to all of the keys in the set
      */
+    @Override
     public Iterator<String> iterator() {
         return keysWithPrefix("").iterator();
     }
