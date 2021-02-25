@@ -15,30 +15,23 @@ public class Solution {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
         int n = nums.length;
-        boolean[] used = new boolean[n];
-        for (int i = 0; i < n; i++) {
-            dfs(n, i, 0, new ArrayList<>(), result, nums, used);
-        }
+        dfs(n, 0, new ArrayList<>(), result, nums);
         return result;
     }
 
-    private void dfs(int n, int k, int d, List<Integer> current, List<List<Integer>> result, int[] nums, boolean[] used) {
-        if (current.size() == k) {
-            result.add(new ArrayList<>(current));
+    private void dfs(int n, int d, List<Integer> current, List<List<Integer>> result, int[] nums) {
+        result.add(new ArrayList<>(current));
+        if (current.size() == n) {
             return;
         }
         for (int i = d; i < n; i++) {
-            if (used[i]) {
-                continue;
-            }
-            if (i > d && nums[i] == nums[i - 1] && !used[i]) {
+            // 避免重复的方法 - 相同深度 相同起点, 只需要搜索一次
+            if (i > d && nums[i] == nums[i - 1]) {
                 continue;
             }
             current.add(nums[i]);
-            used[i] = true;
-            dfs(n, k, i + 1, current, result, nums, used);
+            dfs(n, i + 1, current, result, nums);
             current.remove(current.size() - 1);
-            used[i] = false;
         }
     }
 }
