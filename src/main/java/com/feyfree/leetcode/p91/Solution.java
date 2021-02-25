@@ -40,6 +40,5 @@ public class Solution {
             dfs(n, k + 1, s, result, 1);
             dfs(n, k + 2, s, result, 2);
         }
-
     }
 }
