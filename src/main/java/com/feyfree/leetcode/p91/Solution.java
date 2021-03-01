@@ -1,44 +1,44 @@
 package com.feyfree.leetcode.p91;
 
 /**
- * p91 solution
- * <p>
- * 本质上是单词树
+ * dp 滚动数组解法
  *
  * @author leilei
  */
 public class Solution {
     public int numDecodings(String s) {
-        if (s == null || s.isEmpty()) {
+        if (s == null || s.isEmpty() || s.charAt(0) == '0') {
             return 0;
         }
-        int result = 0;
-        dfs(s.length(), -1, s, result, 1);
-        dfs(s.length(), -1, s, result, 2);
-        return result;
+        if (s.length() == 1) {
+            return 1;
+        }
+        int n = s.length();
+        int w1 = 1;
+        int w2 = 1;
+        for (int i = 1; i < n; i++) {
+            int w = 0;
+            if (!isValid(s.charAt(i)) && !isValid(s.charAt(i - 1), s.charAt(i))) {
+                return 0;
+            }
+            if (isValid(s.charAt(i))) {
+                w = w1;
+            }
+            if (isValid(s.charAt(i - 1), s.charAt(i))) {
+                w += w2;
+            }
+            w2 = w1;
+            w1 = w;
+        }
+        return w1;
     }
 
-    private void dfs(int n, int k, String s, int result, int step) {
-        if (k > n) {
-            result += 1;
-            return;
-        }
-        if (step == 1 || (k + 2 > n - 1)) {
-            if (s.charAt(k) == '0' || s.charAt(k) - '2' > 0) {
-                return;
-            }
-            dfs(n, k + 1, s, result, 1);
-            dfs(n, k + 2, s, result, 2);
-        } else {
-            if (s.charAt(k) == '0' || s.charAt(k) - '2' > 0) {
-                return;
-            }
-            String current = s.substring(k, k + 2);
-            if (Integer.parseInt(current) - 26 > 0) {
-                return;
-            }
-            dfs(n, k + 1, s, result, 1);
-            dfs(n, k + 2, s, result, 2);
-        }
+    private boolean isValid(char a) {
+        return a != '0';
+    }
+
+    private boolean isValid(char a, char b) {
+        int num = (a - '0') * 10 + (b - '0');
+        return num >= 10 && num <= 26;
     }
 }

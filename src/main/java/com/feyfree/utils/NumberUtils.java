@@ -1,5 +1,8 @@
 package com.feyfree.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 数字判断
  *
@@ -18,9 +21,13 @@ public class NumberUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(Integer.toBinaryString(9));
-        System.out.println(Integer.toBinaryString(-9));
-        System.out.println(Integer.toBinaryString(9 & -9));
-        System.out.println(isPowerOfTwo(9));
+        List<String> a = new ArrayList<>();
+        a.add("1");
+        a.add("2");
+        List<String> b = new ArrayList<>();
+        b.add("1");
+        b.add("3");
+        b.retainAll(a);
+        System.out.println(b);
     }
 }

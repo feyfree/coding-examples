@@ -1,6 +1,5 @@
 package com.feyfree.develop;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,6 +17,7 @@ public class TestProjects {
         instance.set(Calendar.MONTH, instance.get(Calendar.MONTH) - 1);
         return sd.format(instance.getTime());
     }
+
 
     public static Date getDate(String dateString) throws ParseException {
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
