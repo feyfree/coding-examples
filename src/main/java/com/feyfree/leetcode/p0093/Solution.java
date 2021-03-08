@@ -44,14 +44,12 @@ public class Solution {
                 dfs(s.substring(i), d + 1, ip + (d == 0 ? "" : ".") + ss, result);
             }
         }
-
     }
 
     public static void main(String[] args) {
         String input = "25525511135";
         Solution solution = new Solution();
         System.out.println(solution.restoreIpAddresses(input));
-
         String test = "1";
         System.out.println(test.substring(1));
     }
