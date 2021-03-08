@@ -1,4 +1,4 @@
-package com.feyfree.jvm;
+package com.feyfree.jvm.dispatch;
 
 /**
  * 字段不参与多态

@@ -1,4 +1,4 @@
-package com.feyfree.jvm;
+package com.feyfree.jvm.dispatch;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.feyfree.jvm;
+package com.feyfree.jvm.dispatch;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;

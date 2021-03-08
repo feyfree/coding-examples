@@ -1,4 +1,4 @@
-package com.feyfree.jvm;
+package com.feyfree.jvm.dispatch;
 
 /**
  * 单分派，多分派演示
