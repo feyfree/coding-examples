@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 二叉搜索树的性质
+ * 根节点的值大于左子树所有节点的值，小于右子树所有节点的值
  * Hint https://zxi.mytechroad.com/blog/uncategorized/leetcode-95-unique-binary-search-trees-ii/
  *
  * @author leilei
