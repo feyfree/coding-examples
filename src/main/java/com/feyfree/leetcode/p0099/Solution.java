@@ -21,12 +21,11 @@ public class Solution {
             return;
         }
         inOrder(root.left);
-        if (prev != null && root.val <= prev.val) {
-            if (first != null) {
+        if (prev != null && root.val < prev.val) {
+            if (first == null) {
                 first = prev;
-            } else {
-                second = root;
             }
+            second = root;
         }
         // 前继 节点设置为 当前节点 继续递归
         prev = root;
@@ -35,8 +34,10 @@ public class Solution {
 
     public void recoverTree(TreeNode root) {
         inOrder(root);
-        int temp = second.val;
-        second.val = first.val;
-        first.val = temp;
+        if (first != null && second != null) {
+            int temp = second.val;
+            second.val = first.val;
+            first.val = temp;
+        }
     }
 }
