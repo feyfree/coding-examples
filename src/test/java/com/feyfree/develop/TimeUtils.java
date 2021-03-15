@@ -314,6 +314,15 @@ public class TimeUtils {
         lastDate.setDate(lastDay);
         return lastDate;
     }
+    private static  String getPastTimeByDays(int day) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_YEAR, -day);
+        date = calendar.getTime();
+        return format.format(date);
+    }
 
 
     /**
@@ -326,6 +335,11 @@ public class TimeUtils {
     public static boolean sameMonth(Date a, Date b) {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
         return format.format(a).equals(format.format(b));
+    }
+
+    public static void main(String[] args) {
+        String pastTimeByDays = getPastTimeByDays(5);
+        System.out.println(pastTimeByDays);
     }
 }
 
