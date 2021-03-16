@@ -3,9 +3,9 @@ package com.feyfree.leetcode.p0034;
 /**
  * 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
  * <p>
- * 你的算法时间复杂度必须是 O(log n) 级别。
+ * 你的算法时间复杂度必须是O(log n) 级别。
  * <p>
- * 如果数组中不存在目标值，返回 [-1, -1]。
+ * 如果数组中不存在目标值，返回[-1, -1]。
  * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array

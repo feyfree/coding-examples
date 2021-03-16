@@ -4,14 +4,14 @@ package com.feyfree.leetcode.p0040;
 import java.util.*;
 
 /**
- * 给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+ * 给定一个数组candidates和一个目标数target，找出candidates中所有可以使数字和为target的组合。
  * <p>
- * candidates 中的每个数字在每个组合中只能使用一次。
+ * candidates中的每个数字在每个组合中只能使用一次。
  * <p>
  * 说明：
  * <p>
  * 所有数字（包括目标数）都是正整数。
- * 解集不能包含重复的组合。 
+ * 解集不能包含重复的组合。
  * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/combination-sum-ii

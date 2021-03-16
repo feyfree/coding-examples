@@ -1,9 +1,9 @@
 package com.feyfree.leetcode.p0028;
 
 /**
- * 实现 strStr() 函数。
+ * 实现strStr()函数。
  * <p>
- * 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+ * 给定一个haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。
  * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/implement-strstr
