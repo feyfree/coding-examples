@@ -25,24 +25,15 @@ public class Solution {
         int l2 = text2.length();
         // dp[i][j] 实际上是值  text1[i - 1] 和 text2[j -1] 的数值
         int[][] dp = new int[l1 + 1][l2 + 1];
-        for (int i = 1; i <= l1; i++) {
-            for (int j = 1; j <= l2; j++) {
-                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                boolean matchHere = text1.charAt(i - 1) == text2.charAt(j - 1);
-                boolean matchFirst = i - 2 >= 0 && text1.charAt(i - 2) != text2.charAt(j - 1) && matchHere;
-                boolean matchSecond = j - 2 >= 0 && text1.charAt(i - 1) != text2.charAt(j - 2) && matchHere;
-                if (matchFirst || matchSecond) {
-                    dp[i][j] += 1;
+        for (int i = 0; i < l1; i++) {
+            for (int j = 0; j < l2; j++) {
+                if (text1.charAt(i) == text2.charAt(j)) {
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
+                } else {
+                    dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
                 }
             }
         }
         return dp[l1][l2];
-    }
-
-    public static void main(String[] args) {
-        String text1 = "abcde";
-        String text2 = "ace";
-        Solution solution = new Solution();
-        solution.longestCommonSubsequence(text1, text2);
     }
 }

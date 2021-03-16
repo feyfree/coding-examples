@@ -26,7 +26,6 @@ public class Solution {
         int m = word2.length();
         // dp[][] 里面要保存多一位
         int[][] dp = new int[n + 1][m + 1];
-        // 初始化
         for (int i = 0; i <= n; i++) {
             dp[i][0] = i;
         }
@@ -43,10 +42,5 @@ public class Solution {
             }
         }
         return dp[n][m];
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        solution.minDistance("", "12");
     }
 }
