@@ -2,6 +2,9 @@ package com.feyfree.basic.operation;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestOperation {
     @Test
     public void testPlusPlus() {
@@ -105,5 +108,17 @@ public class TestOperation {
     public void testResult() {
         long data = convertInviteCountWithNoTimeBit(2147483647);
         System.out.println(data);
+    }
+
+
+    @Test
+    public void testListRemove() {
+        List<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(2);
+        Integer i = 1;
+        data.remove(i);
+        System.out.println(data);
+
     }
 }

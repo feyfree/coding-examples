@@ -42,6 +42,12 @@ public class Solution {
         return temp;
     }
 
+    /**
+     * 根据当前的值, 构造下一个值
+     *
+     * @param init 当前的值
+     * @return 构造下一个值
+     */
     public String generateNext(String init) {
         StringBuilder result = new StringBuilder();
         Character before = null;
@@ -59,11 +65,5 @@ public class Solution {
             result.append(count).append(before);
         }
         return result.toString();
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.countAndSay(20));
-
     }
 }

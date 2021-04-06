@@ -29,9 +29,9 @@ import java.util.List;
  * 输入：candidates = [2,3,5], target = 8,
  * 所求解集为：
  * [
- *  [2,2,2,2],
- *  [2,3,3],
- *  [3,5]
+ * [2,2,2,2],
+ * [2,3,3],
+ * [3,5]
  * ]
  * <p>
  * 提示：
@@ -59,7 +59,7 @@ public class Solution {
 
     public void dfs(int[] candidates, int target, int s, List<Integer> current, List<List<Integer>> result) {
         if (target == 0) {
-            result.add(current);
+            result.add(new ArrayList<>(current));
         }
 
         for (int i = s; i < candidates.length; i++) {
