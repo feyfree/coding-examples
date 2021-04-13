@@ -14,7 +14,7 @@ import java.util.Random;
 public class RandomLoadBalance extends AbstractLoadBalance {
 
     private List<Pair<String, Integer>> weights;
-    private List<String> invokers = new ArrayList<>();
+    private final List<String> invokers = new ArrayList<>();
 
     private final Random random = new Random();
 

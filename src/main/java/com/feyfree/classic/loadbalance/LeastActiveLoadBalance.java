@@ -72,9 +72,8 @@ public class LeastActiveLoadBalance extends AbstractLoadBalance {
         Invoker minActive = invokers.get(0);
         boolean sameWeight = true;
         int totalWeight = 0;
-        for (int i = 0; i < invokers.size(); i++) {
+        for (Invoker invoker : invokers) {
             // 找到invoker 里面最小的active 如果集合数只有1 个立刻返回
-            Invoker invoker = invokers.get(i);
             totalWeight += invoker.getWeight();
             if (invoker.getActive() < minActive.getActive() && !least.isEmpty()) {
                 least.clear();
