@@ -23,9 +23,8 @@ public class Solution {
         }
         if (root.left == null && root.right == null) {
             if (targetSum == root.val) {
-                current.add(root.val);
                 result.add(new ArrayList<>(current));
-                current.remove(current.size() - 1);
+                result.get(result.size() - 1).add(root.val);
             }
             return;
         }
