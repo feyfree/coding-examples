@@ -6,17 +6,12 @@ package com.feyfree.design.singleton;
  * @author leilei
  */
 public class ThreadLocalSingleton {
-    private static final ThreadLocal<ThreadLocalSingleton> threadLocalInstance = new ThreadLocal<ThreadLocalSingleton>() {
-        @Override
-        protected ThreadLocalSingleton initialValue() {
-            return new ThreadLocalSingleton();
-        }
-    };
+    private static final ThreadLocal<ThreadLocalSingleton> THREAD_LOCAL_INSTANCE = ThreadLocal.withInitial(ThreadLocalSingleton::new);
 
     private ThreadLocalSingleton() {
     }
 
     public static ThreadLocalSingleton getInstance() {
-        return threadLocalInstance.get();
+        return THREAD_LOCAL_INSTANCE.get();
     }
 }

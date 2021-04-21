@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 public class TestThreadLocal {
 
 
-    private ThreadLocal<String> simpleThreadLocal = new ThreadLocal<>();
+    private final ThreadLocal<String> simpleThreadLocal = new ThreadLocal<>();
 
     private final Logger logger = LoggerFactory.getLogger(TestThreadLocal.class);
 
@@ -62,7 +62,7 @@ public class TestThreadLocal {
         };
         thread.start();
         thread2.start();
-        Thread.sleep(1000000);
+        Thread.sleep(1000);
     }
 
 
