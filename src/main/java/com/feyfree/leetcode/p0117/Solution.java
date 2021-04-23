@@ -8,27 +8,33 @@ package com.feyfree.leetcode.p0117;
  */
 public class Solution {
     public Node connect(Node root) {
-        if (root == null) {
+        if (null == root) {
             return null;
         }
-        if (root.left == null && root.right == null) {
-            return root;
+        if (root.left != null && root.right != null) {
+            root.left.next = root.right;
+            root.right.next = getNext(root.next);
+        } else if (root.left != null) {
+            root.left.next = getNext(root.next);
+        } else if (root.right != null) {
+            root.right.next = getNext(root.next);
         }
-        if (root.left != null) {
-            if (root.right != null) {
-                root.left.next = root.right;
-            }
-        }
-        if (root.next != null && root.right != null) {
-            if (root.next.left != null) {
-                root.right.next = root.next.left;
-            } else {
-                root.right.next = root.next.right;
-            }
-        }
-        connect(root.left);
+        // right first
+        // 因为是从左边访问右边 所以右边需要先结束
         connect(root.right);
+        connect(root.left);
         return root;
+    }
+
+    private Node getNext(Node root) {
+        if (null == root) {
+            return null;
+        } else if (null != root.left) {
+            return root.left;
+        } else if (null != root.right) {
+            return root.right;
+        }
+        return getNext(root.next);
     }
 }
 
