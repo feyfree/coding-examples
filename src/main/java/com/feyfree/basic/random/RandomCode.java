@@ -13,6 +13,7 @@ public class RandomCode {
             for (int j = 0; j < 3; j++) {
                 String randomData = RandomStringUtils.random(6, true, true);
                 randomData = StringUtils.lowerCase(randomData);
+                System.out.println(randomData);
                 if (!data.contains(randomData)) {
                     data.add(randomData);
                     break;
