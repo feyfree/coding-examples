@@ -20,8 +20,31 @@ class TreeNode {
     }
 }
 
+/**
+ * 124. 二叉树最长路径
+ *
+ * @author leilei
+ */
 class Solution {
+
+    private int result = Integer.MIN_VALUE;
+
     public int maxPathSum(TreeNode root) {
-        return 0;
+        if (root == null) {
+            return 0;
+        }
+        findMaxPathSum(root);
+        return result;
+    }
+
+    private int findMaxPathSum(TreeNode root) {
+        if (root == null) {
+            return Integer.MIN_VALUE;
+        }
+        int l = Math.max(0, findMaxPathSum(root.left));
+        int r = Math.max(0, findMaxPathSum(root.right));
+        int sum = l + r + root.val;
+        result = Math.max(result, sum);
+        return root.val + Math.max(l, r);
     }
 }
