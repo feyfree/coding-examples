@@ -73,6 +73,13 @@
             <version>3.11</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/gov.nist.math/jama -->
         <dependency>
             <groupId>gov.nist.math</groupId>
