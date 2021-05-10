@@ -21,13 +21,7 @@ public class NumberUtils {
     }
 
     public static void main(String[] args) {
-        List<String> a = new ArrayList<>();
-        a.add("1");
-        a.add("2");
-        List<String> b = new ArrayList<>();
-        b.add("1");
-        b.add("3");
-        b.retainAll(a);
-        System.out.println(b);
+        int a = (int)(15552000000L) / 1000;
+        System.out.println(a);
     }
 }
