@@ -1,9 +1,6 @@
 package com.feyfree.leetcode.p0129;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 class TreeNode {
     int val;
     TreeNode left;

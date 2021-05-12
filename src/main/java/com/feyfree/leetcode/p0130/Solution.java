@@ -1,8 +1,5 @@
 package com.feyfree.leetcode.p0130;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 130. 被围绕的区域
  * https://leetcode-cn.com/problems/surrounded-regions/
@@ -28,13 +25,13 @@ class Solution {
             dfs(x, 0, board, m, n);
             dfs(x, m - 1, board, m, n);
         }
-        Map<Character, Character> map = new HashMap<>();
-        map.put('G', 'O');
-        map.put('O', 'X');
-        map.put('X', 'X');
         for (int y = 0; y < m; ++y) {
             for (int x = 0; x < n; ++x) {
-                board[y][x] = map.get(board[y][x]);
+                if (board[y][x] == 'G') {
+                    board[y][x] = 'O';
+                } else if (board[y][x] == 'O') {
+                    board[y][x] = 'X';
+                }
             }
         }
 
