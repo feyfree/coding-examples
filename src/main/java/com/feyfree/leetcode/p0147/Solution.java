@@ -26,39 +26,29 @@ class ListNode {
  */
 public class Solution {
     public ListNode insertionSortList(ListNode head) {
-        ListNode current = head.next;
-        ListNode preAdded = head;
-        while (current != null) {
-            insertionNode(head, current, preAdded);
-            preAdded = current;
-            current = current.next;
+        if (head == null) {
+            return null;
         }
-        return head;
-    }
-
-
-    private void insertionNode(ListNode head, ListNode added, ListNode preAdded) {
-        ListNode pre = new ListNode();
-        pre.next = head;
-        ListNode current = head;
-        while (current != null) {
-            if (current.equals(added)) {
-                break;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode last = head, curr = head.next;
+        while (curr != null) {
+            if (last.val <= curr.val) {
+                last = last.next;
+            } else {
+                ListNode prev = dummy;
+                while (prev.next.val <= curr.val) {
+                    prev = prev.next;
+                }
+                last.next = curr.next;
+                curr.next = prev.next;
+                prev.next = curr;
             }
-            // front
-            if (current.val >= added.val) {
-                // 进行断链
-                ListNode preNext = pre.next;
-                current.next = added.next;
-                added.next = preNext;
-                pre.next = added;
-            }
-            // next
-            else {
-                // 指针前进找到索引 前进步数不能大于 index
-                pre = current;
-                current = current.next;
-            }
+            curr = last.next;
         }
+        return dummy.next;
     }
 }
+
+
+
