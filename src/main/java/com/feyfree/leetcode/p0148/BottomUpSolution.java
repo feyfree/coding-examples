@@ -83,6 +83,6 @@ public class BottomUpSolution {
         while (tail.next != null) {
             tail = tail.next;
         }
-        return new ListNode[]{dummy, tail};
+        return new ListNode[]{dummy.next, tail};
     }
 }

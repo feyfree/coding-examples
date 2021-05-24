@@ -1,8 +1,6 @@
 package com.feyfree.leetcode.p0148;
 
 
-
-
 /**
  * 148. 排序链表
  * Top-Down
