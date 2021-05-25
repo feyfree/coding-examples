@@ -15,7 +15,7 @@ public class Solution {
         int n = points.length;
         int ans = 0;
         for (int i = 0; i < n; ++i) {
-            Map<int[], Integer> count = new HashMap<>();
+            Map<String, Integer> count = new HashMap<>();
             int samePoints = 1;
             int maxPoints = 0;
             for (int j = i + 1; j < n; ++j) {
@@ -25,11 +25,10 @@ public class Solution {
                     samePoints++;
                 } else {
                     int[] slope = getSlope(p1, p2);
-                    System.out.println("slope:" + "p1"  + Arrays.toString(p1) + "p2:" + Arrays.toString(p2));
-                    Integer val = count.getOrDefault(slope, 0);
+                    String key = Arrays.toString(slope);
+                    Integer val = count.getOrDefault(key, 0);
                     maxPoints = Math.max(maxPoints, val + 1);
-                    System.out.println("maxPoints:" + maxPoints);
-                    count.put(slope, val + 1);
+                    count.put(key, val + 1);
                 }
             }
             ans = Math.max(ans, samePoints + maxPoints);
@@ -56,15 +55,5 @@ public class Solution {
 
     private int gcd(int m, int n) {
         return n == 0 ? m : gcd(n, m % n);
-    }
-
-    public static void main(String[] args) {
-        int[][] data = new int[3][2];
-        data[0] = new int[]{1, 1};
-        data[1] = new int[]{2, 2};
-        data[2] = new int[]{3, 3};
-        Solution solution = new Solution();
-        int length = solution.maxPoints(data);
-        System.out.println(length);
     }
 }
