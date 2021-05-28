@@ -1,30 +1,28 @@
 package com.feyfree.leetcode.p0151;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * 151. 翻转字符串里的单词
+ * https://leetcode-cn.com/problems/reverse-words-in-a-string/
+ *
+ * @author leilei
+ */
 class Solution {
     public String reverseWords(String s) {
-        int start = 0;
-        List<String> store = new ArrayList<>();
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == ' ') {
-                start = i + 1;
-            } else {
-                store.add(s.substring(start, i + 1));
-            }
-        }
-        StringBuilder result = new StringBuilder();
-        for (int i = store.size() - 1; i >= 0; i--) {
-            result.append(store.get(i));
-        }
-        return result.toString();
+        // 除去开头和末尾的空白字符
+        s = s.trim();
+        // 正则匹配连续的空白字符作为分隔符分割
+        List<String> wordList = Arrays.asList(s.split("\\s+"));
+        Collections.reverse(wordList);
+        return String.join(" ", wordList);
     }
 
     public static void main(String[] args) {
         String s = "  hello world!  ";
-        String[] s1 = s.split(" ");
-        System.out.println(Arrays.toString(s1));
+        Solution solution = new Solution();
+        System.out.println((solution.reverseWords(s)));
     }
 }
