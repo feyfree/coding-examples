@@ -1,5 +1,8 @@
 package com.feyfree.leetcode.p0155;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * 155. 最小栈
  * https://leetcode-cn.com/problems/min-stack/
@@ -7,29 +10,31 @@ package com.feyfree.leetcode.p0155;
  * @author leilei
  */
 class MinStack {
+    Deque<Integer> xStack;
+    Deque<Integer> minStack;
 
-    /**
-     * initialize your data structure here.
-     */
     public MinStack() {
-
+        xStack = new LinkedList<>();
+        minStack = new LinkedList<>();
+        minStack.push(Integer.MAX_VALUE);
     }
 
-    public void push(int val) {
-
+    public void push(int x) {
+        xStack.push(x);
+        minStack.push(Math.min(minStack.peek(), x));
     }
 
     public void pop() {
-
+        xStack.pop();
+        minStack.pop();
     }
 
     public int top() {
-        return 0;
-
+        return xStack.peek();
     }
 
     public int getMin() {
-        return 0;
+        return minStack.peek();
     }
 }
 
