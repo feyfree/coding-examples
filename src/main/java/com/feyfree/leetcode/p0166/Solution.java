@@ -13,19 +13,21 @@ class Solution {
     public String fractionToDecimal(int numerator, int denominator) {
         boolean minus = (numerator > 0 && denominator < 0)
                 || (numerator < 0 && denominator > 0);
-        int absNumerator = Math.abs(numerator);
-        int absDenominator = Math.abs(denominator);
-        int[] divMod = divMod(absNumerator, absDenominator);
-        int quotient = divMod[0];
-        int remainder = divMod[1];
+        long absNumerator = Math.abs(Long.valueOf(numerator));
+        long absDenominator = Math.abs(Long.valueOf(denominator));
+        long[] divMod = divMod(absNumerator, absDenominator);
+        long quotient = divMod[0];
+        long remainder = divMod[1];
 
         List<String> result = new ArrayList<>();
         if (minus) {
             result.add("-");
+        } else {
+            result.add("");
         }
         result.add(String.valueOf(quotient));
         result.add(".");
-        List<Integer> remainders = new ArrayList<>();
+        List<Long> remainders = new ArrayList<>();
         while (!remainders.contains(remainder)) {
             remainders.add(remainder);
             divMod = divMod(remainder * 10, absDenominator);
@@ -43,7 +45,7 @@ class Solution {
         return temp;
     }
 
-    private int[] divMod(int a, int b) {
-        return new int[]{a % b, a / b};
+    private long[] divMod(long a, long b) {
+        return new long[]{a / b, a % b};
     }
 }
