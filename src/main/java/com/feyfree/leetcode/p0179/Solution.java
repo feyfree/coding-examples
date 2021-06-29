@@ -11,49 +11,20 @@ import java.util.Arrays;
  */
 public class Solution {
     public String largestNumber(int[] nums) {
-        nums = Arrays.stream(nums).
-                boxed().
-                sorted((a, b) -> {
-                    char[] parseA
-                            = String.valueOf(a).toCharArray();
-                    char[] parseB = String.valueOf(b).toCharArray();
-                    for (int i = 0; i < parseA.length && i < parseB.length; i++) {
-                        if (parseA[i] > parseB[i]) {
-                            return -1;
-                        }
-                        if (parseA[i] < parseB[i]) {
-                            return 1;
-                        }
-                    }
-                    return Integer.compare(parseA.length, parseB.length);
-                }).mapToInt(i -> i).
-                toArray();
-        StringBuilder result = new StringBuilder();
-        for (int a : nums) {
-            result.append(a);
+        int n = nums.length;
+        String[] numsString = new String[n];
+        for (int i = 0; i < n; i++) {
+            numsString[i] = String.valueOf(nums[i]);
         }
-        return result.toString();
-    }
-
-
-    public static int compareInt(int a, int b) {
-        char[] parseA
-                = String.valueOf(a).toCharArray();
-        char[] parseB = String.valueOf(b).toCharArray();
-        for (int i = 0; i < parseA.length && i < parseB.length; i++) {
-            if (parseA[i] > parseB[i]) {
-                return -1;
-            }
-            if (parseA[i] < parseB[i]) {
-                return 1;
-            }
+        Arrays.sort(numsString, (a, b) -> (b + a).compareTo(a + b));
+        //如果排序后的第一个元素是0，那后面的元素肯定小于或等于0，则可直接返回0
+        if ("0".equals(numsString[0])) {
+            return "0";
         }
-        return Integer.compare(parseA.length, parseB.length);
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] nums = new int[]{3, 30, 34, 5, 9};
-        System.out.println(solution.largestNumber(nums));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(numsString[i]);
+        }
+        return sb.toString();
     }
 }
