@@ -40,8 +40,4 @@ public class Solution {
         }
         return s.substring(begin, begin + maxLen);
     }
-
-    public static void main(String[] args) {
-
-    }
 }
