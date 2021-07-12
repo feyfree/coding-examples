@@ -3,6 +3,11 @@ package com.feyfree.leetcode.p0068;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 轮循解法
+ *
+ * @author leilei
+ */
 public class RoundRobinSolution {
 
     private static final String EMPTY_SPACE = " ";

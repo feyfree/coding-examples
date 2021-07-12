@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 线程工厂模式
  *
- * @author leilei
+ * @author leilei`
  */
 public class UserThreadFactory implements ThreadFactory {
 

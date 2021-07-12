@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.concurrent.RecursiveTask;
 
 
+/**
+ * @author leilei
+ */
 public class MyRecursiveTask extends RecursiveTask<Long> {
 
     private long workLoad = 0;
