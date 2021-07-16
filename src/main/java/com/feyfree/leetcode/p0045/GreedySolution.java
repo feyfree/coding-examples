@@ -21,7 +21,7 @@ public class GreedySolution {
         // far 表示在 点i 通过一个step 能到达的最远距离
         int far = 0;
         for (int i = 0; i < nums.length; i++) {
-            System.out.println(String.format("访问第%s个节点, 当前可跨步数为%s", i, nums[i]));
+            System.out.printf("访问第%s个节点, 当前可跨步数为%s%n", i, nums[i]);
             if (i > near) {
                 ++steps;
                 // 之前能达到的最远距离
