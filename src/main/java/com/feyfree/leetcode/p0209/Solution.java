@@ -29,12 +29,21 @@ public class Solution {
         if (left > right || right < 0 || left >= nums.length || current < target) {
             return;
         }
-        length = Math.min(right - left + 1, length);
         if (left + 1 < nums.length) {
+            length = Math.min(right - left + 1, length);
             dfs(current - nums[left], target, nums, left + 1, right);
         }
         if (right - 1 > 0) {
+            length = Math.min(right - left + 1, length);
             dfs(current - nums[right], target, nums, left, right - 1);
         }
+        length = Math.min(right - left + 1, length);
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {10, 2, 3};
+        int target = 6;
+        System.out.println(solution.minSubArrayLen(target, nums));
     }
 }
