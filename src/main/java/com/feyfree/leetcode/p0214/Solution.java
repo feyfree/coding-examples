@@ -6,21 +6,66 @@ package com.feyfree.leetcode.p0214;
  * <p>
  * s = 回文 + T
  * Tr + 回文 + T
+ * <p>
+ * 这个解法会超出内存限制
  *
  * @author leilei
  */
 public class Solution {
     public String shortestPalindrome(String s) {
-        return null;
+        if (s.isEmpty()) {
+            return "";
+        }
+        int index = longestPrefixPalindrome(s);
+        System.out.println("index:" + index);
+        if (index == s.length() - 1) {
+            return s;
+        }
+        String t = s.substring(index + 1);
+        char[] chars = t.toCharArray();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < chars.length; i++) {
+            result.append(chars[chars.length - 1 - i]);
+        }
+        return result + s;
     }
 
     /**
      * 找到一个字符串 最长的suffix palindrome
      *
-     * @param a 输入
-     * @return 起点索引
+     * @param s 输入
+     * @return 终点索引
      */
-    private int longestPrefixPalindrome(String a) {
-        return 0;
+    private int longestPrefixPalindrome(String s) {
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        int maxLen = 1;
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = true;
+        }
+        for (int j = 1; j < n; j++) {
+            for (int i = 0; i < j; i++) {
+                if (s.charAt(i) != s.charAt(j)) {
+                    dp[i][j] = false;
+                } else {
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                if (dp[i][j] && i == 0 && (j - i + 1) > maxLen) {
+                    maxLen = j - i + 1;
+                    index = j;
+                }
+            }
+        }
+        return index;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.shortestPalindrome("q"));
     }
 }
