@@ -7,8 +7,8 @@ package com.feyfree.leetcode.p0079;
  */
 class Solution {
 
-    private int[] dx = {-1, 1, 0, 0};
-    private int[] dy = {0, 0, -1, 1};
+    private final int[] dx = {-1, 1, 0, 0};
+    private final int[] dy = {0, 0, -1, 1};
 
     private int rows = 0;
     private int cols = 0;
