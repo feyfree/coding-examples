@@ -35,7 +35,7 @@ public class Solution {
                 return;
             }
             current.add(i);
-            dfs(d + 1, k - 1, n - i, current, result);
+            dfs(i + 1, k - 1, n - i, current, result);
             current.remove(current.size() - 1);
         }
     }
