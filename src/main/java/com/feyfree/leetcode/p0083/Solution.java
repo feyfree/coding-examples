@@ -3,6 +3,7 @@ package com.feyfree.leetcode.p0083;
 import com.feyfree.leetcode.commons.ListNode;
 
 /**
+ * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/submissions/
  * p83
  *
  * @author leilei
