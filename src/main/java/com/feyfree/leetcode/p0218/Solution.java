@@ -15,7 +15,7 @@ class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
         int n = buildings.length;
         // {x, h, id}
-        ArrayList<int[]> es = new ArrayList<>();
+        List<int[]> es = new ArrayList<>();
 
         for (int i = 0; i < n; ++i) {
             es.add(new int[]{buildings[i][0], buildings[i][2], i});
@@ -91,10 +91,9 @@ class Solution {
         private void heapifyUp(int i) {
             while (i != 0) {
                 int p = (i - 1) / 2;
-                if (nodes.get(i)[0] <= nodes.get(p)[0]) {
+                if (i >= nodes.size() || nodes.get(i)[0] <= nodes.get(p)[0]) {
                     return;
                 }
-
                 swapNode(i, p);
                 i = p;
             }
@@ -130,6 +129,11 @@ class Solution {
                 i = c;
             }
         }
+    }
 
+    public static void main(String[] args) {
+        int[][] buildings = new int[][]{{2, 9, 10}, {3, 7, 15}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8}};
+        Solution solution = new Solution();
+        System.out.println(solution.getSkyline(buildings));
     }
 }
