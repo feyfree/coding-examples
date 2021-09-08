@@ -1,6 +1,5 @@
 package com.feyfree.basic.thread;
 
-import lombok.SneakyThrows;
 import org.junit.Test;
 
 public class TestThread {
