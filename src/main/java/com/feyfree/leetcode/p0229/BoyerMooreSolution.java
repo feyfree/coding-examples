@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author leilei
  */
-public class MooreSolution {
+public class BoyerMooreSolution {
 
     public List<Integer> majorityElement(int[] nums) {
         int n1 = 0;
