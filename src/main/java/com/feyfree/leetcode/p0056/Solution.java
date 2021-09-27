@@ -29,22 +29,18 @@ import java.util.List;
 public class Solution {
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
-        List<List<Integer>> result = new ArrayList<>();
+        List<int[]> result = new ArrayList<>();
         for (int[] data : intervals) {
-            if (result.size() == 0 || data[0] > result.get(result.size() - 1).get(1)) {
-                List<Integer> temp = new ArrayList<>();
-                temp.add(data[0]);
-                temp.add(data[1]);
-                result.add(temp);
+            if (result.size() == 0 || data[0] > result.get(result.size() - 1)[1]) {
+                result.add(data);
             } else {
-                result.get(result.size() - 1).set(1, Math.max(result.get(result.size() - 1).get(1), data[1]));
+                result.get(result.size() - 1)[1] = Math.max(result.get(result.size() - 1)[1], data[1]);
             }
         }
         // list to array
         int[][] output = new int[result.size()][2];
         for (int i = 0; i < result.size(); i++) {
-            output[i][0] = result.get(i).get(0);
-            output[i][1] = result.get(i).get(1);
+            output[i] = result.get(i);
         }
         return output;
     }
