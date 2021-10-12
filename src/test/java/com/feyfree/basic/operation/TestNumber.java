@@ -14,4 +14,11 @@ public class TestNumber {
         System.out.println(result);
     }
 
+    @Test
+    public void test() {
+        int[] numbers = new int[]{1, 1};
+        System.out.println(numbers[1] -- > 0);
+        System.out.println(numbers[1]);
+    }
+
 }
