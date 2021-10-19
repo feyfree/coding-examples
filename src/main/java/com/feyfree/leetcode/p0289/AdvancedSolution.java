@@ -14,6 +14,7 @@ public class AdvancedSolution {
                 int lives = 0;
                 for (int y = Math.max(0, i - 1); y < Math.min(m, i + 2); y++) {
                     for (int x = Math.max(0, j - 1); x < Math.min(n, j + 2); x++) {
+                        // 置位方法
                         lives += board[y][x] & 1;
                     }
                 }
