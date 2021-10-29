@@ -10,6 +10,7 @@ import java.util.List;
  * @author leilei
  */
 public class Solution {
+
     public boolean isAdditiveNumber(String num) {
         int n = num.length();
         for (int i = 1; i < (n / 2 + 1); i++) {
@@ -22,12 +23,12 @@ public class Solution {
         return false;
     }
 
-    private boolean isValid(String s) {
+    private boolean invalid(String s) {
         return s.length() != 1 && s.charAt(0) == '0';
     }
 
     private boolean additive(String s1, String s2, String right) {
-        if (isValid(s1) || isValid(s2)) {
+        if (invalid(s1) || invalid(s2)) {
             return false;
         }
         String s3 = add(s1, s2);
@@ -76,3 +77,4 @@ public class Solution {
     }
 
 }
+
