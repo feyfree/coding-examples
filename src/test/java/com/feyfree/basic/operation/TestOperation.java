@@ -121,4 +121,12 @@ public class TestOperation {
         System.out.println(data);
 
     }
+
+    @Test
+    public void testBitAnd() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("i:" + (i & -i));
+
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.feyfree.leetcode.p0307;
+package com.feyfree.leetcode.p0307.simple;
 
 /**
  * https://leetcode-cn.com/problems/range-sum-query-mutable/
