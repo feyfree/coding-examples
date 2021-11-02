@@ -34,7 +34,9 @@ class NumArray {
             sums = new int[n + 1];
         }
 
+
         public void update(int i, int delta) {
+            // 实际上是partial sum
             while (i < sums.length) {
                 sums[i] += delta;
                 i += i & -i;
@@ -43,6 +45,7 @@ class NumArray {
 
         public int query(int i) {
             int sum = 0;
+            // 2的幂次节点存储了该节点之前的sum
             while (i > 0) {
                 sum += sums[i];
                 i -= i & -i;
