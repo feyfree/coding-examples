@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestList {
 
@@ -70,5 +71,17 @@ public class TestList {
         List<Integer> data = getItems();
         System.out.println(data);
         System.out.println(data.size());
+    }
+
+    @Test
+    public void testDistinct() {
+        List<Integer> data = new ArrayList<>();
+        data.add(3);
+        data.add(1);
+        data.add(3);
+        data.add(1);
+        data.add(2);
+        List<Integer> collect = data.stream().distinct().collect(Collectors.toList());
+        System.out.println(collect);
     }
 }
