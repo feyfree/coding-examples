@@ -8,11 +8,16 @@ import java.util.*;
  * <p>
  * 给你`一个整数数组 nums ，按要求返回一个新数组counts 。
  * 数组 counts 有该性质： counts[i] 的值是 nums[i] 右侧小于nums[i] 的元素的数量
+ * <p>
+ * raw:  5, 2, 6, 1
+ * sort: 1, 2, 5, 6
+ * reverse: 1, 6, 2, 5
+ * rank: 1, 4, 2, 3
  *
  * @author leilei
  */
 public class Solution {
-    private static int lowbit(int x) {
+    private static int lowBit(int x) {
         return x & (-x);
     }
 
@@ -26,7 +31,7 @@ public class Solution {
         public void update(int i, int delta) {
             while (i < sums.length) {
                 sums[i] += delta;
-                i += lowbit(i);
+                i += lowBit(i);
             }
         }
 
@@ -34,13 +39,12 @@ public class Solution {
             int sum = 0;
             while (i > 0) {
                 sum += sums[i];
-                i -= lowbit(i);
+                i -= lowBit(i);
             }
             return sum;
         }
     }
 
-    ;
 
     public List<Integer> countSmaller(int[] nums) {
         int[] sorted = Arrays.copyOf(nums, nums.length);
@@ -56,6 +60,7 @@ public class Solution {
         FenwickTree tree = new FenwickTree(ranks.size());
         List<Integer> ans = new ArrayList<>();
         for (int i = nums.length - 1; i >= 0; --i) {
+            //
             ans.add(tree.query(ranks.get(nums[i]) - 1));
             tree.update(ranks.get(nums[i]), 1);
         }
