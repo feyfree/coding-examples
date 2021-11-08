@@ -1,5 +1,6 @@
 package com.feyfree.work.case001;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 
 import java.util.*;
@@ -54,6 +55,9 @@ public class Insertion {
         // 普通商品
         List<Item> normals = origin.stream().filter(o -> !insertionSet.contains(o.getId())).collect(Collectors.toList());
         List<Item> result = new ArrayList<>(origin.size());
+
+        System.out.println("新品数据:" + JSONObject.toJSONString(insertions.stream().map(Item::getId).collect(Collectors.toList())));
+        System.out.println("全部数据" + JSONObject.toJSONString(origin.stream().map(Item::getId).collect(Collectors.toList())));
         int interval = range / insertions.size();
         // 间隔一定大于1
         if (interval > 1) {
@@ -86,13 +90,14 @@ public class Insertion {
             }
             result.addAll(Arrays.stream(container).filter(Objects::nonNull).collect(Collectors.toList()));
             result.addAll(normals.subList(i, normals.size()));
+            System.out.println("插值后顺序" + JSONObject.toJSONString(result.stream().map(Item::getId).collect(Collectors.toList())));
             return result;
         }
         return origin;
     }
 
     public static void main(String[] args) {
-        String[] data = new String[]{"707054","567666","19404","639817","702456","670971","702099","694768","709713","666197","526837","703701","256378","709966","344350","440345","520336","657561","22163","698093","653889","706468","650934","384411","53773","16038","62571","707055","222507","702580","630700","569145","685318","526193","416077","634846","703641","645386","233932","514504","371316","259261","611209","253625","270576","566092","538947","610524","686651","10625","656642","704649","692350","477465","511431","320846","341062","660938","660206","13857","596627","518651","618160","562034","183242","427545","3613","4731","155952","488144","531060","21483","495464","498388","627286","686445","366586","589324","13831","3025","695881","537135","698852","664603","4948","10135","350668","412206","350181","332676","139252","391415","64986","539353","527682","12793"};
+        String[] data = new String[]{"696297", "286734", "351876", "388106", "577086", "660206", "349839", "647158", "221877", "704523", "701814", "37159", "419449", "432699", "628630", "689711", "648304", "602270", "423649", "562034", "7793", "8159", "17398", "664603", "711272", "707159", "22163", "609511", "317278", "708664", "708119", "610252", "292884", "681278", "610524", "598792", "555263", "7648", "604252", "678528", "470841", "693820", "25293", "8820", "476656", "605571", "682163", "684990", "648680", "338581", "577129", "701166", "371481", "691127", "608011", "714665", "705196", "577082", "280954", "667789", "488065", "25258", "644659", "713927", "105617", "493913", "362123", "90872", "481448", "634973", "543779", "438259", "7043", "681788", "288098", "698916", "680461", "613462", "710490", "263365", "696296", "440345", "646508", "494697", "577775", "6052", "702529", "577084", "679721", "666565", "18160", "596624", "702532", "454289", "396305", "698092", "608610", "629156", "270576", "16065", "408706"};
         List<Item> origin = new ArrayList<>();
         Map<String, Item> map = new HashMap<>();
         for (String one : data) {
@@ -101,12 +106,12 @@ public class Insertion {
             map.put(one, e);
         }
         // 创建insertion
-        String[] insertionData = new String[]{"707054","702456","702099","694768","709713","666197","703701","709966","440345","698093"};
+        String[] insertionData = new String[]{"696297", "286734", "704523", "701814", "689711", "711272", "707159", "708664", "708119", "605571"};
         List<Item> insertion = new ArrayList<>();
-        for (String one : insertionData
-        ) {
+        for (String one : insertionData) {
             insertion.add(map.get(one));
         }
+
         Insertion f = new Insertion();
         List<Item> result = f.afterInsertion2(insertion, origin, 50);
         // find interval
