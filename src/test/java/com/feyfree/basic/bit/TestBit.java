@@ -6,18 +6,18 @@ public class TestBit {
 
     @Test
     public void test() {
-        int i = -1;
-        System.out.println(Integer.toBinaryString(i));
-        // 算术右移
-        System.out.println((i >> 1) + ":" + Integer.toBinaryString(i >> 1));
-        // 逻辑右移
-        System.out.println((i >>> 1) + ":" + Integer.toBinaryString(i >>> 1));
+        printResult(-1);
+        printResult(3);
+        printResult(-3);
+        printResult(-2);
+    }
 
-        int j = 3;
+    private void printResult(int j) {
+        System.out.println("***************" + j + "***************");
         System.out.println(Integer.toBinaryString(j));
-        // 算术右移
+        // 算术右移 看符号位的
         System.out.println((j >> 1) + ":" + Integer.toBinaryString(j >> 1));
-        // 逻辑右移
+        // 逻辑右移 不看符号位(默认是0补齐)
         System.out.println((j >> 1) + ":" + Integer.toBinaryString(j >>> 1));
     }
 }

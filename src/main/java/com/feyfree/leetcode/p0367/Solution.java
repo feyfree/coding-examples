@@ -11,10 +11,14 @@ public class Solution {
         int high = num;
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            int target = mid * mid;
-            if (target == num) {
-                return true;
-            } else if (target > num) {
+            // 用乘法会存在 mid * mid;
+            int t = num / mid;
+            if (t == mid) {
+                if (num % mid == 0) {
+                    return true;
+                }
+                low = mid + 1;
+            } else if (t < mid) {
                 high = mid - 1;
             } else {
                 low = mid + 1;
@@ -25,6 +29,6 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.isPerfectSquare(1));
+        System.out.println(solution.isPerfectSquare(Integer.MAX_VALUE));
     }
 }
