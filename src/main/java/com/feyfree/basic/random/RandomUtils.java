@@ -1,5 +1,7 @@
 package com.feyfree.basic.random;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,7 +32,7 @@ public class RandomUtils {
             }
             remaining--;
         }
-        System.out.println(result.size());
+        System.out.println(JSONObject.toJSONString(result));
         return result;
     }
 

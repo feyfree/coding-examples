@@ -17,8 +17,13 @@ public class TestNumber {
     @Test
     public void test() {
         int[] numbers = new int[]{1, 1};
-        System.out.println(numbers[1] -- > 0);
+        System.out.println(numbers[1]-- > 0);
         System.out.println(numbers[1]);
+    }
+
+    @Test
+    public void testMod() {
+        System.out.println(-11 % 10);
     }
 
 }
