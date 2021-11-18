@@ -10,7 +10,7 @@ import java.util.Random;
  */
 class Solution {
 
-    private int[] nums;
+    private final int[] nums;
 
     public Solution(int[] nums) {
         this.nums = nums;
