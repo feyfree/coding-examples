@@ -26,4 +26,10 @@ public class TestNumber {
         System.out.println(-11 % 10);
     }
 
+    @Test
+    public void testBinary() {
+        System.out.println(Integer.toBinaryString(192));
+    }
+
+
 }
