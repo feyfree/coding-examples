@@ -51,7 +51,7 @@ public class Insertion {
 
 
     private List<Item> afterInsertion2(List<Item> insertions, List<Item> origin, int range) {
-        Set<String> insertionSet = insertions.stream().map(Item::getId).collect(Collectors.toSet());
+        Set<String> insertionSet = insertions.stream().map(Item::getId).limit(Math.min(origin.size(), insertions.size())).collect(Collectors.toSet());
         // 普通商品
         List<Item> normals = origin.stream().filter(o -> !insertionSet.contains(o.getId())).collect(Collectors.toList());
         List<Item> result = new ArrayList<>(origin.size());
@@ -97,29 +97,15 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        String[] data = new String[]{"696297", "286734", "351876", "388106", "577086", "660206", "349839", "647158", "221877", "704523", "701814", "37159", "419449", "432699", "628630", "689711", "648304", "602270", "423649", "562034", "7793", "8159", "17398", "664603", "711272", "707159", "22163", "609511", "317278", "708664", "708119", "610252", "292884", "681278", "610524", "598792", "555263", "7648", "604252", "678528", "470841", "693820", "25293", "8820", "476656", "605571", "682163", "684990", "648680", "338581", "577129", "701166", "371481", "691127", "608011", "714665", "705196", "577082", "280954", "667789", "488065", "25258", "644659", "713927", "105617", "493913", "362123", "90872", "481448", "634973", "543779", "438259", "7043", "681788", "288098", "698916", "680461", "613462", "710490", "263365", "696296", "440345", "646508", "494697", "577775", "6052", "702529", "577084", "679721", "666565", "18160", "596624", "702532", "454289", "396305", "698092", "608610", "629156", "270576", "16065", "408706"};
-        List<Item> origin = new ArrayList<>();
-        Map<String, Item> map = new HashMap<>();
-        for (String one : data) {
-            Item e = new Item(one);
-            origin.add(e);
-            map.put(one, e);
-        }
-        // 创建insertion
-        String[] insertionData = new String[]{"696297", "286734", "704523", "701814", "689711", "711272", "707159", "708664", "708119", "605571"};
-        List<Item> insertion = new ArrayList<>();
-        for (String one : insertionData) {
-            insertion.add(map.get(one));
-        }
-
+        String[] input = new String[]{"687658", "710874", "707215", "721100", "706959", "715499", "538464", "538511"};
+        String[] newItems = new String[]{"700921"};
+        List<Item> data = Arrays.stream(input).map(Item::new).collect(Collectors.toList());
+        List<Item> insertion = Arrays.stream(newItems).map(Item::new).collect(Collectors.toList());
+        data.addAll(insertion);
         Insertion f = new Insertion();
-        List<Item> result = f.afterInsertion2(insertion, origin, 50);
-        // find interval
-        f.printIndexes(result, insertion);
-        // find missing
-        f.findMissing(result, origin);
-        // find compare
-        f.printShuffled(result, origin, insertion);
+        System.out.println(JSONObject.toJSONString(insertion));
+        List<Item> result = f.afterInsertion2(insertion, data, 5);
+        System.out.println(JSONObject.toJSONString(result));
 
     }
 
