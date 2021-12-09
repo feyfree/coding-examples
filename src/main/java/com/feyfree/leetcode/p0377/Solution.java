@@ -1,32 +1,34 @@
 package com.feyfree.leetcode.p0377;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author leilei
  */
 class Solution {
 
-    private int result;
+    private int[] summary;
 
     public int combinationSum4(int[] nums, int target) {
-        result = 0;
-        Arrays.sort(nums);
-        // dfs 搜索
-        dfs(nums, 0, target);
-        return result;
+        summary = new int[target + 1];
+        Arrays.fill(summary, -1);
+        summary[0] = 1;
+        return dp(nums, target);
     }
 
 
-    private void dfs(int[] nums, int current, int target) {
-        if (current == target) {
-            result += 1;
-        } else if (current < target) {
-            for (int num : nums) {
-                dfs(nums, current + num, target);
-            }
+    private int dp(int[] nums, int target) {
+        if (target < 0) {
+            return 0;
         }
+        if (summary[target] != -1) {
+            return summary[target];
+        }
+        int result = 0;
+        for (int num : nums) {
+            result += dp(nums, target - num);
+        }
+        summary[target] = result;
+        return result;
     }
 }
