@@ -5,6 +5,10 @@ import java.util.Arrays;
 /**
  * huahua 解法
  *
+ * 给你一个特定的数字 n ，返回能够 确保你获胜 的最小现金数，不管我选择那个数字
+ *
+ * [1, 2] 必猜1, 猜2 的试错成本太高
+ *
  * @author leilei
  */
 public class SimpleSolution {
