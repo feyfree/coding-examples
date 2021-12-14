@@ -14,20 +14,23 @@ public class Solution {
         int i = 0;
         int n = s.length();
         int c = 0;
+        // 先统计数字
         while (i < n && Character.isDigit(s.charAt(i))) {
             c = c * 10 + (s.charAt(i) - '0');
             i++;
         }
-        int j = i;
+        // 统计数字后面跟着的方括号的内容 确定前后索引
+        int j = i + 1;
         if (i < n && s.charAt(i) == '[') {
             int open = 1;
-            while (++j < n && open > 0) {
+            while (j < n && open > 0) {
                 if (s.charAt(j) == '[') {
                     ++open;
                 }
                 if (s.charAt(j) == ']') {
                     --open;
                 }
+                j++;
             }
         } else {
             while (j < n && Character.isAlphabetic(s.charAt(j))) {
@@ -37,10 +40,13 @@ public class Solution {
         if (i == 0) {
             return s.substring(0, j) + decodeString(s.substring(j));
         }
+        // 如果c 大于0
         String ss = decodeString(s.substring(i + 1, j - 1));
-        while (c-- > 0) {
+        while (c > 0) {
             ans.append(ss);
+            c--;
         }
+        // 封装后面的
         ans.append(decodeString(s.substring(j)));
         return ans.toString();
     }
