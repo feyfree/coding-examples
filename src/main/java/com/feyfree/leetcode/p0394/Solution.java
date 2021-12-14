@@ -37,7 +37,7 @@ public class Solution {
         if (i == 0) {
             return s.substring(0, j) + decodeString(s.substring(j));
         }
-        String ss = decodeString(s.substring(i + 1, Math.max(i + 1, j - i - 2)));
+        String ss = decodeString(s.substring(i + 1, j - 1));
         while (c-- > 0) {
             ans.append(ss);
         }
