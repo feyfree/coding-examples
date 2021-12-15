@@ -6,6 +6,8 @@ import java.util.Set;
 
 /**
  * 计算corner
+ * <p>
+ * 重复的点可以移除 看下最后剩下来的点是不是4个, 另外计算面积
  *
  * @author leilei
  */
