@@ -17,6 +17,13 @@ class Solution {
         return nums;
     }
 
+    /**
+     * fisher-yates算法
+     * 主要思路为每次随机挑选一个值，放在数组末尾。
+     * 然后在n-1个元素的数组中再随机挑选一个值，放在数组末尾，以此类推
+     *
+     * @return 打散数据
+     */
     public int[] shuffle() {
         for (int i = 0; i < nums.length; ++i) {
             int j = i + new Random().nextInt(nums.length - i);
