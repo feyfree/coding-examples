@@ -11,6 +11,18 @@ import java.util.List;
  */
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
-        return new ArrayList<>(n);
+        List<Integer> result = new ArrayList<>(n);
+        int num = 1;
+        while (result.size() < n) {
+            while (num <= n) {
+                result.add(num);
+                num *= 10;
+            }
+            while (num % 10 == 9 || num > n) {
+                num /= 10;
+            }
+            num += 1;
+        }
+        return result;
     }
 }
