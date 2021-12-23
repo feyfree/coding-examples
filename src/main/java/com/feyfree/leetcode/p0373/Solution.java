@@ -11,10 +11,8 @@ import java.util.PriorityQueue;
  */
 class Solution {
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
-        // 大堆
-        PriorityQueue<List<Integer>> maxHeap = new PriorityQueue<>(((o1, o2) -> {
-            return (o2.get(0) + o2.get(1)) - (o1.get(0) + o1.get(1));
-        }));
+        // 大堆  维护K个选项
+        PriorityQueue<List<Integer>> maxHeap = new PriorityQueue<>(((o1, o2) -> (o2.get(0) + o2.get(1)) - (o1.get(0) + o1.get(1))));
         for (int i = 0; i < Math.min(nums1.length, k); i++) {
             for (int j = 0; j < Math.min(nums2.length, k); j++) {
                 if (maxHeap.size() < k) {
@@ -33,13 +31,11 @@ class Solution {
                     }
                 }
             }
-
         }
-        List<List<Integer>> ret = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
         for (int i = 0; i < k && !maxHeap.isEmpty(); i++) {
-            ret.add(maxHeap.poll());
+            result.add(maxHeap.poll());
         }
-        return ret;
-
+        return result;
     }
 }
