@@ -30,8 +30,8 @@ public class TreeTraverse {
 
     public void postOrder(TreeNode root) {
         if (root != null) {
-            inOrder(root.left);
-            inOrder(root.right);
+            postOrder(root.left);
+            postOrder(root.right);
             System.out.println(root.val);
         }
     }
