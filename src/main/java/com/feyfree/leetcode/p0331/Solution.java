@@ -2,6 +2,9 @@ package com.feyfree.leetcode.p0331;
 
 /**
  * https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/
+ * <p>
+ * If a node is not null, it must has two children, thus verify left subtree and right subtree recursively.
+ * If a node is null, the current char must be ‘#’
  *
  * @author leilei
  */
