@@ -17,7 +17,7 @@ public class Solution {
             return false;
         }
         if (Character.isDigit(s.charAt(pos))) {
-            while (Character.isDigit(s.charAt(pos))) {
+            while (pos < s.length() && Character.isDigit(s.charAt(pos))) {
                 pos++;
             }
             pos++;
@@ -27,5 +27,10 @@ public class Solution {
             return left && right;
         }
         return s.charAt(pos++) == '#';
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        solution.isValidSerialization("1");
     }
 }
