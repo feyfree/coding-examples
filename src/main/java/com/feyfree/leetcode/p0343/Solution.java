@@ -1,7 +1,5 @@
 package com.feyfree.leetcode.p0343;
 
-import java.util.concurrent.LinkedTransferQueue;
-
 /**
  * https://leetcode-cn.com/problems/integer-break/
  * 343. 整数拆分
