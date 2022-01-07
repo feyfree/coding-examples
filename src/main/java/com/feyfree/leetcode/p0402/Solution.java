@@ -3,6 +3,8 @@ package com.feyfree.leetcode.p0402;
 /**
  * 402. 移掉 K 位数字
  * https://leetcode-cn.com/problems/remove-k-digits/
+ * <p>
+ * dfs 会超时
  *
  * @author leilei
  */
@@ -43,7 +45,6 @@ public class Solution {
 
 
     private String min(String a, String b) {
-        System.out.println(a + ":" + b);
         if ("*".equals(a)) {
             return b;
         }
@@ -58,14 +59,14 @@ public class Solution {
             }
             ai++;
         }
-        if (ai == a.length() - 1 || bi == b.length() - 1) {
-            return "0";
-        }
         while (bi < b.length()) {
             if (b.charAt(bi) != '0') {
                 break;
             }
             bi++;
+        }
+        if (ai == a.length() || bi == b.length()) {
+            return "0";
         }
         if (a.length() - ai > (b.length() - bi)) {
             return b.substring(bi);
@@ -93,12 +94,6 @@ public class Solution {
         return number.toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Solution().removeKdigits("10", 1));
-        Solution solution = new Solution();
-        System.out.println(solution.min("0", "1"));
-    }
-
-
 
 }
+
