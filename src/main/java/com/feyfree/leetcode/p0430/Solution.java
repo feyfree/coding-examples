@@ -21,8 +21,6 @@ class Solution {
             //  如果有子节点，那么首先处理子节点
             if (current.child != null) {
                 Node lastChild = flatten0(current.child);
-
-                next = current.next;
                 //  将 node 与 child 相连
                 current.next = current.child;
                 current.child.prev = current;
