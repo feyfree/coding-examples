@@ -7,7 +7,7 @@ import lombok.SneakyThrows;
  * <p>
  * 调用notify或notifyAll方法后，当前线程并不会立即放弃锁的持有权，
  * 而必须要等待当前同步代码块执行完或者调用了wait方法才会让出锁资源
- *
+ * <p>
  * WARNING- 编程的时候必须保证wait方法比notify方法先执行，
  * 否则可能会导致wait方法进入休眠的线程接收不到唤醒通知的问题
  *
@@ -25,30 +25,31 @@ public class NotifyWait {
             @Override
             public void run() {
                 synchronized (OBJ) {
+                    OBJ.notifyAll();
+
                     while (count <= 5) {
-                        OBJ.notifyAll();
                         System.out.println("线程1");
                         System.out.println(count++);
-                        OBJ.wait();
                     }
+                    OBJ.wait(100);
+
                     System.out.println("线程1END");
                 }
             }
         });
 
-        // 这个线程2运行起来会有问题, 因为 wait 没有超时的话,
-        // t2线程一直挂起, 导致daemon线程一直无法退出
+
         Thread t2 = new Thread(new Runnable() {
             @SneakyThrows
             @Override
             public void run() {
                 synchronized (OBJ) {
+                    OBJ.notifyAll();
                     while (count <= 5) {
-                        OBJ.notifyAll();
                         System.out.println("线程2");
                         System.out.println(count++);
-                        OBJ.wait();
                     }
+                    OBJ.wait(100);
                     System.out.println("线程2END");
 
                 }
