@@ -142,6 +142,7 @@ public class BankRR {
             }
             for (int i = 0; i < pcbNums; i++) {
                 if (pcbs[i].finishStatus) {
+                    // 这地方是否会存在死循环， 比如第一个进程  完成了， 这个safeStatus 会一直是 true ?
                     safeStatus = true;
                     break;
                 } else {
