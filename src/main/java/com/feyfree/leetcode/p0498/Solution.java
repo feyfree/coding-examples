@@ -1,5 +1,7 @@
 package com.feyfree.leetcode.p0498;
 
+import java.util.Arrays;
+
 /**
  * https://leetcode-cn.com/problems/diagonal-traverse/
  *
@@ -22,29 +24,27 @@ class Solution {
             result[count] = mat[row][col];
             count++;
             if (dir == 1) {
-                if (row == minRow) {
+                if (row == minRow || col == cols - 1) {
                     if (col + 1 < cols) {
                         col = col + 1;
                     } else {
-                        row = minRow + 1;
-                        col = cols - 1;
-                        dir = 0;
+                        row = row + 1;
                         minRow = minRow + 1;
                     }
+                    dir = 0;
                 } else {
                     row--;
                     col++;
                 }
             } else {
-                if (col == minCol) {
+                if (col == minCol || row == rows - 1) {
                     if (row + 1 < rows) {
                         row = row + 1;
                     } else {
-                        col = minCol + 1;
-                        row = rows - 1;
+                        col = col + 1;
                         minCol = minCol + 1;
-                        dir = 1;
                     }
+                    dir = 1;
                 } else {
                     row++;
                     col--;
@@ -57,6 +57,7 @@ class Solution {
     public static void main(String[] args) {
         int[][] data = new int[][]{new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9}};
         Solution s = new Solution();
-        s.findDiagonalOrder(data);
+        int[] result = s.findDiagonalOrder(data);
+        System.out.println(Arrays.toString(result));
     }
 }
