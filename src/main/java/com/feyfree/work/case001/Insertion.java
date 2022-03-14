@@ -60,6 +60,7 @@ public class Insertion {
         System.out.println("全部数据" + JSONObject.toJSONString(origin.stream().map(Item::getId).collect(Collectors.toList())));
         int interval = range / insertions.size();
         // 间隔一定大于1
+        System.out.println("interval:" + interval);
         if (interval > 1) {
             // 分桶
             // calculate relative index
@@ -104,7 +105,7 @@ public class Insertion {
         data.addAll(insertion);
         Insertion f = new Insertion();
         System.out.println(JSONObject.toJSONString(insertion));
-        List<Item> result = f.afterInsertion2(insertion, data, 5);
+        List<Item> result = f.afterInsertion2(insertion, data, 2);
         System.out.println(JSONObject.toJSONString(result));
 
     }
