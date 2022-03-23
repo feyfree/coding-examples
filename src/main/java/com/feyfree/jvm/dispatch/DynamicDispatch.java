@@ -1,7 +1,5 @@
 package com.feyfree.jvm.dispatch;
 
-import org.omg.CORBA.portable.ValueBase;
-
 /**
  * 动态分配
  *
