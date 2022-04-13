@@ -1,8 +1,5 @@
 package com.feyfree.leetcode.p0474;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 /**
  * https://leetcode-cn.com/problems/ones-and-zeroes/
  *
