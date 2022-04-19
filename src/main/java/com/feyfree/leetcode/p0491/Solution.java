@@ -16,7 +16,7 @@ class Solution {
 
     public List<List<Integer>> findSubsequences(int[] nums) {
         // Q: 为什么这边不需要对start 进行 for loop 搜索
-        dfs(0, Integer.MIN_VALUE, nums);
+        dfs(0, nums);
         return ans;
     }
 
@@ -29,10 +29,9 @@ class Solution {
      * 3. 如果 start < last, 只能直接向后推
      *
      * @param start 搜索起点
-     * @param last  current 最后一个值
      * @param nums  搜索数组
      */
-    public void dfs(int start, int last, int[] nums) {
+    public void dfs(int start, int[] nums) {
         if (start == nums.length) {
             if (current.size() > 1) {
                 ans.add(new ArrayList<>(current));
@@ -40,16 +39,24 @@ class Solution {
             return;
         }
         // A1: 如果 start 满足 递增, current 添加 start 并往后搜索
-        if (nums[start] >= last) {
+        if (nums[start] >= getLast(current)) {
             current.add(nums[start]);
-            dfs(start + 1, nums[start], nums);
+            dfs(start + 1, nums);
             current.remove(current.size() - 1);
         }
 
         // A2: 如果 start 不和上一次相等
-        if (nums[start] > last || nums[start] < last) {
-            dfs(start + 1, last, nums);
+        if (nums[start] > getLast(current) || nums[start] < getLast(current)) {
+            dfs(start + 1, nums);
         }
+    }
+
+
+    private int getLast(List<Integer> data) {
+        if (data.isEmpty()) {
+            return Integer.MIN_VALUE;
+        }
+        return data.get(data.size() - 1);
     }
 
     public static void main(String[] args) {
