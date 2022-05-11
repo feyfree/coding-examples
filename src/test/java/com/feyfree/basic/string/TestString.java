@@ -35,4 +35,13 @@ public class TestString {
         String a = "123456";
         a.toCharArray();
     }
+
+    @Test
+    public void testStringIteration() {
+        String a = "Hello, 世界";
+        System.out.println(a.length());
+        for (int i = 0; i < a.length(); i++) {
+            System.out.println(a.charAt(i));
+        }
+    }
 }
