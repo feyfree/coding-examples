@@ -11,6 +11,7 @@ public class Solution {
         boolean[] visited = new boolean[nums.length];
         // 从 0 开始访问， 访问到的添加到visited 当中
         for (int i = 0; i < nums.length; i++) {
+            // TODO 这地方需要修复下逻辑  A -> B 会将 B 标记， 但是并不能代表 B 以后就不能使用
             // i 相当于是 start
             if (visited[i]) {
                 continue;
@@ -37,6 +38,8 @@ public class Solution {
     }
 
     public static void main(String[] args) {
+        // [2,-1,1,-2,-2]
+        // A -> B 会将 B 标记， 但是并不能代表 B 以后就不能使用
         System.out.println(-5 % 3);
     }
 
