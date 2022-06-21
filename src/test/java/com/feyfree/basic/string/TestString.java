@@ -4,6 +4,7 @@ import org.junit.Test;
 
 public class TestString {
 
+
     @Test
     public void testString() {
         String a = "abcd";
@@ -43,5 +44,11 @@ public class TestString {
         for (int i = 0; i < a.length(); i++) {
             System.out.println(a.charAt(i));
         }
+    }
+
+
+    @Test
+    public void testNullString() {
+        System.out.println("a" + null);
     }
 }

@@ -1,5 +1,6 @@
 package com.feyfree.basic.collection;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
