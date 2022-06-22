@@ -8,40 +8,38 @@ package com.feyfree.leetcode.p0457;
  */
 public class Solution {
     public boolean circularArrayLoop(int[] nums) {
-        boolean[] visited = new boolean[nums.length];
-        // 从 0 开始访问， 访问到的添加到visited 当中
-        for (int i = 0; i < nums.length; i++) {
-            // TODO 这地方需要修复下逻辑  A -> B 会将 B 标记， 但是并不能代表 B 以后就不能使用
-            // i 相当于是 start
-            if (visited[i]) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
                 continue;
             }
-            int j = i + nums[i];
-            while (true) {
-                if (j < 0) {
-                    j = j % nums.length + nums.length;
-                } else {
-                    j = j % nums.length;
+            int slow = i, fast = next(nums, i);
+            // 判断非零且方向相同
+            // 因为是环， 所以方向永远是单向的
+            while (nums[slow] * nums[fast] > 0 && nums[slow] * nums[next(nums, fast)] > 0) {
+                if (slow == fast) {
+                    if (slow != next(nums, slow)) {
+                        return true;
+                    } else {
+                        break;
+                    }
                 }
-                if (j == i) {
-                    return true;
-                }
-                if (!visited[j]) {
-                    visited[j] = true;
-                    j = j + nums[j];
-                } else {
-                    break;
-                }
+                slow = next(nums, slow);
+                fast = next(nums, next(nums, fast));
+            }
+            int add = i;
+            while (nums[add] * nums[next(nums, add)] > 0) {
+                int tmp = add;
+                // 计算next jump 先访问后修改
+                add = next(nums, add);
+                nums[tmp] = 0;
             }
         }
         return false;
     }
 
-    public static void main(String[] args) {
-        // [2,-1,1,-2,-2]
-        // A -> B 会将 B 标记， 但是并不能代表 B 以后就不能使用
-        System.out.println(-5 % 3);
+    public int next(int[] nums, int cur) {
+        int n = nums.length;
+        return ((cur + nums[cur]) % n + n) % n;
     }
-
-
 }
