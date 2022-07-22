@@ -1,6 +1,8 @@
 package com.feyfree.jvm.clazz;
 
 
+import junit.framework.TestCase;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -10,6 +12,7 @@ import java.io.InputStream;
  * @author leilei
  */
 public class ClassLoaderTest {
+
     public static void main(String[] args) throws Exception {
         ClassLoader myLoader = new ClassLoader() {
 
@@ -29,8 +32,11 @@ public class ClassLoaderTest {
                 }
             }
         };
-        Object obj = myLoader.loadClass("com.feyfree.jvm.clazz.ClassLoaderTest").newInstance();
+        Object obj = myLoader.loadClass("com.feyfree.jvm.clazz.TestClass").getDeclaredConstructor().newInstance();
         System.out.println(obj.getClass());
-        System.out.println(obj instanceof com.feyfree.jvm.clazz.ClassLoaderTest);
+        System.out.println(obj instanceof com.feyfree.jvm.clazz.TestClass);
+        System.out.println(obj.getClass().getClassLoader()); // com.feyfree.jvm.clazz.ClassLoaderTest$1@214c265e
+        System.out.println(TestClass.class.getClassLoader()); // jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7
+
     }
 }
