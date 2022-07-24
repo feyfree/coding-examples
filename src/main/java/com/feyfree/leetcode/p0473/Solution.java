@@ -1,8 +1,6 @@
 package com.feyfree.leetcode.p0473;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * https://leetcode.cn/problems/matchsticks-to-square/
@@ -10,58 +8,38 @@ import java.util.stream.Collectors;
  *
  * @author leilei
  */
-public class Solution {
-
-
-    private boolean[] used;
-
-    private final int edges = 4;
-
+class Solution {
     public boolean makesquare(int[] matchsticks) {
-        if (matchsticks.length < edges) {
+        int totalLen = Arrays.stream(matchsticks).sum();
+        if (totalLen % 4 != 0) {
             return false;
         }
-        int total = Arrays.stream(matchsticks).sum();
-        if (total % edges != 0) {
-            return false;
-        }
-        // 边的长度
-        int target = total / 4;
-        for (int matchstick : matchsticks) {
-            if (matchstick > target) {
-                return false;
-            }
-        }
-        this.used = new boolean[matchsticks.length];
-
-        // 排序, 从后往前搜索
         Arrays.sort(matchsticks);
-        return false;
-
-
+        reverseArray(matchsticks);
+        int[] edges = new int[4];
+        return dfs(0, matchsticks, edges, totalLen / 4);
     }
 
 
-    private boolean dfs(int target, int left, int[] sticks, List<Integer> current, int index) {
-        if (calculateSum(current, sticks) == target && left - 1 == 0) {
+    private void reverseArray(int[] data) {
+        for (int i = 0, j = data.length - 1; i < j; i++, j--) {
+            int temp = data[i];
+            data[i] = data[j];
+            data[j] = temp;
+        }
+    }
 
+    public boolean dfs(int index, int[] matchsticks, int[] edges, int len) {
+        if (index == matchsticks.length) {
+            return true;
+        }
+        for (int i = 0; i < edges.length; i++) {
+            edges[i] += matchsticks[index];
+            if (edges[i] <= len && dfs(index + 1, matchsticks, edges, len)) {
+                return true;
+            }
+            edges[i] -= matchsticks[index];
         }
         return false;
-
-
     }
-
-
-    private int calculateSum(List<Integer> current, int[] data) {
-        int sum = 0;
-        for (Integer index : current) {
-            sum += data[index];
-        }
-        return sum;
-    }
-
-    public static void main(String[] args) {
-    }
-
-
 }
