@@ -22,14 +22,7 @@ class Solution {
             target[1] = target[1] - 1;
             int[] data = tree.higher(target);
             if (data != null) {
-                if (data[0] != i) {
-                    result[i] = data[0];
-                } else {
-                    int[] ceiling = tree.ceiling(target);
-                    if (ceiling != null && ceiling[0] != i) {
-                        result[i] = data[0];
-                    }
-                }
+                result[i] = data[0];
             }
         }
         return result;
@@ -37,9 +30,10 @@ class Solution {
 
     public static void main(String[] args) {
         int[][] data = new int[][]{
-                new int[]{3, 4}, new int[]{2, 3}, new int[]{1, 2}
+                new int[]{1, 1}, new int[]{3, 4}
         };
         Solution solution = new Solution();
-        solution.findRightInterval(data);
+        int[] result = solution.findRightInterval(data);
+        System.out.println(Arrays.toString(result));
     }
 }
