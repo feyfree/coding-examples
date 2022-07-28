@@ -7,12 +7,22 @@ package com.feyfree.leetcode.p0476;
  */
 public class Solution {
     public int findComplement(int num) {
-        return 0;
+        // 判断num的二进制长度
+        int index = 0;
+        int result = 0;
+        while (num > 0) {
+            int mod = num & 1;
+            if (mod == 0) {
+                result += 1 << index;
+            }
+            num = num >> 1;
+            index++;
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-        System.out.println(~1);
-        System.out.println(Integer.toBinaryString(-2));
-        System.out.println(Integer.toBinaryString(-5));
+        Solution solution = new Solution();
+        System.out.println(solution.findComplement(Integer.MAX_VALUE));
     }
 }
