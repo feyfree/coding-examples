@@ -17,14 +17,17 @@ public class Solution {
             sum += num;
             maxNum = Math.max(maxNum, num);
         }
+        // 1. 判断和
         if (sum % 2 != 0) {
             return false;
         }
         int target = sum / 2;
+        // 2. 判断最大值
         if (maxNum > target) {
             return false;
         }
         boolean[] dp = new boolean[target + 1];
+        // 3. 构建dp数组, 找到状态方程
         dp[0] = true;
         for (int num : nums) {
             for (int j = target; j >= num; --j) {
