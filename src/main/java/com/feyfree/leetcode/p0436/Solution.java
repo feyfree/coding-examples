@@ -29,11 +29,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        int[][] data = new int[][]{
-                new int[]{1, 1}, new int[]{3, 4}
-        };
-        Solution solution = new Solution();
-        int[] result = solution.findRightInterval(data);
-        System.out.println(Arrays.toString(result));
+        System.out.println(true && false || true && false);
+        System.out.println("2022-08-01 17:16:17.909".substring(0, 19));
     }
 }
