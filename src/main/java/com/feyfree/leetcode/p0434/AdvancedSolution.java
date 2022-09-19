@@ -10,4 +10,5 @@ public class AdvancedSolution {
         }
         return segmentCount;
     }
+
 }
