@@ -38,5 +38,10 @@ public class TestDate {
 
     }
 
+    @Test
+    public void testEqual() {
+        System.out.println("1".equals(null));
+    }
+
 
 }
