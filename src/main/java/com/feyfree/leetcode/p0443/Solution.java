@@ -6,46 +6,37 @@ package com.feyfree.leetcode.p0443;
  * @author leilei
  */
 class Solution {
-    public int compress(char[] chars) {
-        char before = ' ';
-        int count = 0;
-        int result = 0;
-        int modified = -1;
-        for (int i = 0; i < chars.length; i++) {
-            char now = chars[i];
-            if (now == before) {
-                count++;
-            } else {
-                if (count > 0) {
-                    result += getLength(count);
-                    chars[modified + 1] = before;
-                    if (count > 1) {
-                        String s = String.valueOf(count);
-                        for (int j = 0; j < s.length(); j++) {
-                            chars[++modified] = s.charAt(j);
-                        }
-                    }
-                }
-                count = 1;
+    public int compress(char[] cs) {
+        int n = cs.length;
+        int i = 0, j = 0;
+        while (i < n) {
+            int idx = i;
+            while (idx < n && cs[idx] == cs[i]) {
+                idx++;
             }
-            before = now;
-        }
-        if (count > 0) {
-            result += getLength(count);
-            if (count > 1) {
-                String s = String.valueOf(count);
-                for (int j = 0; j < s.length(); j++) {
-                    chars[++modified] = s.charAt(j);
+            int cnt = idx - i;
+            cs[j++] = cs[i];
+            if (cnt > 1) {
+                int start = j, end = start;
+                while (cnt != 0) {
+                    cs[end++] = (char) ((cnt % 10) + '0');
+                    cnt /= 10;
                 }
+                reverse(cs, start, end - 1);
+                j = end;
             }
+            i = idx;
         }
-        return result;
+        return j;
     }
 
-    private int getLength(int a) {
-        if (a == 1) {
-            return 1;
+    private void reverse(char[] cs, int start, int end) {
+        while (start < end) {
+            char t = cs[start];
+            cs[start] = cs[end];
+            cs[end] = t;
+            start++;
+            end--;
         }
-        return a / 10 + 1 + 1;
     }
 }
