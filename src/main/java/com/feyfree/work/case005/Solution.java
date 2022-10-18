@@ -100,15 +100,15 @@ public class Solution {
 
     private List<Text> insertionShuffle(List<Text> origin, List<Text> insertions) {
         Set<String> insertionSet = insertions.stream().map(Text::getTextId).collect(Collectors.toSet());
-        insertions = origin.stream().filter(o -> insertionSet.contains(o.getTextId())).collect(Collectors.toList());
-        insertions = shuffleTextByItem(insertions);
+//        insertions = origin.stream().filter(o -> insertionSet.contains(o.getTextId())).collect(Collectors.toList());
+//        insertions = shuffleTextByItem(insertions);
         List<Text> normals = origin.stream().filter(o -> !insertionSet.contains(o.getTextId())).collect(Collectors.toList());
         List<Text> result = new ArrayList<>(origin.size());
         // 间隔一定大于1 TODO 可以调整到 1
-        int interval = 1;
+        int interval = 5;
         // 分桶
         // calculate relative index
-        Text[] container = new Text[insertions.size() * 2];
+        Text[] container = new Text[50];
         int bucketIndex = 0;
         int prev = -1;
         for (int i = 0; i < origin.size(); i++) {
