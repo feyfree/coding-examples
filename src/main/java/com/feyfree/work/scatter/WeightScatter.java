@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -72,11 +73,12 @@ public class WeightScatter {
                     .build();
             texts.add(text);
         }
-        double itemW = 100;
-        double categoryW = 10;
+        double itemW = 10;
+        double categoryW = 5;
         double brandW = 5;
         // 预先处理score
         texts.sort((o1, o2) -> Double.compare(o2.getScore(), o1.getScore()));
+        Map<Integer, Text> previous = texts.stream().collect(Collectors.toMap(Text::getId, text -> text));
         System.out.println("排序前:" + JSONObject.toJSONString(texts, SerializerFeature.DisableCircularReferenceDetect));
 
         Map<Integer, Integer> itemMap = new HashMap<>();
