@@ -1,13 +1,9 @@
 package com.feyfree.work.case006;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Solution {
 
