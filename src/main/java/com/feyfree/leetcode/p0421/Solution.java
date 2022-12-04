@@ -19,12 +19,12 @@ public class Solution {
             container.add(current);
             map.put(highest, container);
         }
-        Map.Entry<Integer, List<Integer>> firstEntry = map.firstEntry();
-        Map.Entry<Integer, List<Integer>> lastEntry = map.lastEntry();
+        Map.Entry<Integer, List<Integer>> lowestEntry = map.firstEntry();
+        Map.Entry<Integer, List<Integer>> highestEntry = map.lastEntry();
         int result = Integer.MIN_VALUE;
-        if (firstEntry.getKey().equals(lastEntry.getKey())) {
+        if (lowestEntry.getKey().equals(highestEntry.getKey())) {
             // 内部 异或
-            List<Integer> data = firstEntry.getValue();
+            List<Integer> data = lowestEntry.getValue();
             for (int i = 0; i < data.size(); i++) {
                 for (int j = i + 1; j < data.size(); j++) {
                     int cal = data.get(i) ^ data.get(j);
@@ -33,22 +33,17 @@ public class Solution {
 
             }
         } else {
-            List<Integer> data1 = firstEntry.getValue();
-            List<Integer> data2 = lastEntry.getValue();
-            for (Integer value1 : data1) {
-                for (Integer value2 : data2) {
-                    int cal = value1 ^ value2;
-                    result = Math.max(result, cal);
-                }
-            }
+
         }
         return result;
     }
 
     public static void main(String[] args) {
-        Set<Integer> data = new HashSet<>();
-        data.add(1);
-        data.add(2);
-        System.out.println(data.stream().sorted().collect(Collectors.toList()));
+        Solution solution = new Solution();
+        int result = solution.findMaximumXOR(new int[]{3, 10, 5, 25, 2, 8});
+        System.out.println(result);
+        System.out.println(25 ^ 3);
+        System.out.println(25 ^ 5);
     }
+
 }

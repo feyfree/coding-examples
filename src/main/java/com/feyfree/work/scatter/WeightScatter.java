@@ -73,8 +73,11 @@ public class WeightScatter {
                     .build();
             texts.add(text);
         }
+        // 商品
         double itemW = 10;
+        // 分类
         double categoryW = 5;
+        // 品牌
         double brandW = 5;
         // 预先处理score
         texts.sort((o1, o2) -> Double.compare(o2.getScore(), o1.getScore()));
