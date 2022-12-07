@@ -24,10 +24,15 @@ public class LRUCache {
         }
     }
 
+
     private Map<Integer, Node> cache = new HashMap<>();
     private int size;
     private int capacity;
-    private Node head, tail;
+    /**
+     * head 和 tail 维护双向链表
+     */
+    private Node head;
+    private Node tail;
 
     public LRUCache(int capacity) {
         this.size = 0;
