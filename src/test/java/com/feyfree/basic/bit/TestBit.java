@@ -18,6 +18,6 @@ public class TestBit {
         // 算术右移 看符号位的
         System.out.println((j >> 1) + ":" + Integer.toBinaryString(j >> 1));
         // 逻辑右移 不看符号位(默认是0补齐)
-        System.out.println((j >> 1) + ":" + Integer.toBinaryString(j >>> 1));
+        System.out.println((j >>> 1) + ":" + Integer.toBinaryString(j >>> 1));
     }
 }
