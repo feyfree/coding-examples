@@ -9,8 +9,11 @@ import java.util.TreeSet;
  * 给定一个数组 nums ，如果 i < j 且 nums[i] > 2*nums[j] 我们就将 (i, j) 称作一个重要翻转对。
  * <p>
  * 你需要返回给定数组中的重要翻转对的数量。
- *
- * 1. 维护
+ * fenwick tree 只是一个 sum 和, 不需要关心其他逻辑
+ * 1. 维护一个值域
+ * 2. 将值域进行映射 [value : index] 在 map 中用value 定位 index (线段索引)
+ * 3. 迭代 nums 列表, 分别以 i 作为右端点 (相当于题目中的 j) 进行查找, i -> nums[i] 然后定位一下 目前在 2 * nums[i] 和 max_value 的 区间和
+ * 4. 更新 fenwick tree
  *
  * @author leilei
  */
@@ -70,13 +73,15 @@ public class Solution {
         int result = 0;
         FenwickTree tree = new FenwickTree(map.size());
         // 有序访问 实际上可以保证 是 i < j 的语义
+        // 到 fenwick tree 这边就不要考虑 翻转对的 语义了, 只用考虑更新 sum 和 查找区间和
         for (int num : nums) {
             // 相当于 是 2 * nums[j]
             int left = map.get((long) num * 2);
             // 相当于是最大值 maxValue
             int right = map.size() - 1;
-            // 以 left 为右端点的数量
+            // num 为右端点
             result += tree.getSum(left + 1, right);
+            // 更新 num 为右端点的数量
             tree.update(map.get((long) num) + 1, 1);
         }
         return result;
