@@ -2,7 +2,6 @@ package com.feyfree.leetcode.p0493;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -10,6 +9,8 @@ import java.util.TreeSet;
  * 给定一个数组 nums ，如果 i < j 且 nums[i] > 2*nums[j] 我们就将 (i, j) 称作一个重要翻转对。
  * <p>
  * 你需要返回给定数组中的重要翻转对的数量。
+ *
+ * 1. 维护
  *
  * @author leilei
  */
