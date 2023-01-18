@@ -1,8 +1,5 @@
 package com.feyfree.leetcode.p0200;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * 染色问题解决
  *
