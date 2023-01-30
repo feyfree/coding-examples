@@ -66,6 +66,7 @@ public class Solution {
         queue.add(0);
         marked[0] = 1;
         distTo[0] = 0;
+
         while (!queue.isEmpty()) {
             int poll = queue.poll();
             List<Integer> neighbors = adj.get(poll);
