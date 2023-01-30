@@ -17,15 +17,19 @@ public class Solution {
 
     private int[] marked;
 
-    private int[] edgeTo;
-
     private int[] distTo;
 
     public int minMutation(String startGene, String endGene, String[] bank) {
+
+        marked = new int[bank.length + 1];
+        distTo = new int[bank.length + 1];
+        Arrays.fill(distTo, Integer.MAX_VALUE);
+
         indexMap = new HashMap<>(bank.length);
         adj = new HashMap<>(bank.length);
+        indexMap.put(startGene, 0);
         for (int i = 0; i < bank.length; i++) {
-            indexMap.put(bank[i], i);
+            indexMap.put(bank[i], i + 1);
         }
         // 终点不存在
         if (!indexMap.containsKey(endGene)) {
@@ -38,29 +42,43 @@ public class Solution {
                 String b = bank[j];
                 if (canModify(a, b)) {
                     // 加入 临接数组
-                    List<Integer> neighbors = adj.computeIfAbsent(i, k -> new ArrayList<>());
-                    neighbors.add(j);
+                    List<Integer> neighbors = adj.computeIfAbsent(i + 1, k -> new ArrayList<>());
+                    neighbors.add(j + 1);
                 }
             }
         }
-        // 检查起点
-        if (!indexMap.containsKey(startGene)) {
-            indexMap.put(startGene, -1);
-            // 将 startGene 用 -1 index 标记
-            for (int i = 0; i < bank.length; i++) {
-                String end = bank[i];
-                if (canModify(startGene, end)) {
-                    List<Integer> neighbors = adj.computeIfAbsent(-1, k -> new ArrayList<>());
-                    neighbors.add(i);
-                }
+        // startGene 处理
+        for (int i = 0; i < bank.length; i++) {
+            String end = bank[i];
+            if (canModify(startGene, end)) {
+                List<Integer> neighbors = adj.computeIfAbsent(0, k -> new ArrayList<>());
+                neighbors.add(i);
             }
         }
         // 进行bfs
-        return 0;
+        bfs();
+        Integer endIndex = indexMap.get(endGene);
+        return distTo[endIndex + 1];
     }
 
     private void bfs() {
-        LinkedList<Integer> queue = new LinkedList<>();
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        marked[0] = 1;
+        distTo[0] = 0;
+        while (!queue.isEmpty()) {
+            int poll = queue.poll();
+            List<Integer> neighbors = adj.get(poll);
+            if (neighbors != null) {
+                for (Integer neighbor : neighbors) {
+                    if (marked[neighbor] == 0) {
+                        distTo[neighbor] = distTo[poll] + 1;
+                        marked[neighbor] = 1;
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        }
 
     }
 
