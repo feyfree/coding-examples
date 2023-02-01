@@ -10,91 +10,53 @@ import java.util.*;
  *
  * @author leilei
  */
-public class Solution {
+class Solution {
 
-    private Map<String, Integer> indexMap;
-    private Map<Integer, List<Integer>> adj;
+    private static final int GENE_LENGTH = 8;
 
-    private int[] marked;
+    private static final int GENE_ENUM_NUM = 4;
 
-    private int[] distTo;
-
-    public int minMutation(String startGene, String endGene, String[] bank) {
-
-        marked = new int[bank.length + 1];
-        distTo = new int[bank.length + 1];
-        Arrays.fill(distTo, Integer.MAX_VALUE);
-
-        indexMap = new HashMap<>(bank.length);
-        adj = new HashMap<>(bank.length);
-        indexMap.put(startGene, 0);
-        for (int i = 0; i < bank.length; i++) {
-            indexMap.put(bank[i], i + 1);
+    public int minMutation(String start, String end, String[] bank) {
+        Set<String> visited = new HashSet<>();
+        char[] keys = {'A', 'C', 'G', 'T'};
+        Set<String> container = new HashSet<>(Arrays.asList(bank));
+        if (start.equals(end)) {
+            return 0;
         }
-        // 终点不存在
-        if (!indexMap.containsKey(endGene)) {
+        if (!container.contains(end)) {
             return -1;
         }
-        // 构建邻居数组
-        for (int i = 0; i < bank.length; i++) {
-            for (int j = i + 1; j < bank.length; j++) {
-                String a = bank[i];
-                String b = bank[j];
-                if (canModify(a, b)) {
-                    // 加入 临接数组
-                    List<Integer> neighbors = adj.computeIfAbsent(i + 1, k -> new ArrayList<>());
-                    neighbors.add(j + 1);
-                }
-            }
-        }
-        // startGene 处理
-        for (int i = 0; i < bank.length; i++) {
-            String end = bank[i];
-            if (canModify(startGene, end)) {
-                List<Integer> neighbors = adj.computeIfAbsent(0, k -> new ArrayList<>());
-                neighbors.add(i);
-            }
-        }
-        // 进行bfs
-        bfs();
-        Integer endIndex = indexMap.get(endGene);
-        return distTo[endIndex + 1];
-    }
-
-    private void bfs() {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(0);
-        marked[0] = 1;
-        distTo[0] = 0;
-
+        Queue<String> queue = new ArrayDeque<>();
+        queue.offer(start);
+        visited.add(start);
+        int step = 1;
         while (!queue.isEmpty()) {
-            int poll = queue.poll();
-            List<Integer> neighbors = adj.get(poll);
-            if (neighbors != null) {
-                for (Integer neighbor : neighbors) {
-                    if (marked[neighbor] == 0) {
-                        distTo[neighbor] = distTo[poll] + 1;
-                        marked[neighbor] = 1;
-                        queue.add(neighbor);
+            int sz = queue.size();
+            for (int i = 0; i < sz; i++) {
+                // 当前搜索节点
+                String current = queue.poll();
+                if (current != null) {
+                    // 对每一位进行修改, 查找基因库是否存在这个 更改的基因
+                    for (int j = 0; j < GENE_LENGTH; j++) {
+                        for (int k = 0; k < GENE_ENUM_NUM; k++) {
+                            if (keys[k] != current.charAt(j)) {
+                                StringBuilder sb = new StringBuilder(current);
+                                sb.setCharAt(j, keys[k]);
+                                String next = sb.toString();
+                                if (!visited.contains(next) && container.contains(next)) {
+                                    if (next.equals(end)) {
+                                        return step;
+                                    }
+                                    queue.offer(next);
+                                    visited.add(next);
+                                }
+                            }
+                        }
                     }
                 }
             }
+            step++;
         }
-
-    }
-
-    private boolean canModify(String a, String b) {
-        int diff = 0;
-        for (int i = 0; i < a.length(); i++) {
-            char ac = a.charAt(i);
-            char bc = b.charAt(i);
-            if (ac != bc) {
-                diff++;
-            }
-            if (diff > 1) {
-                return false;
-            }
-        }
-        return diff == 1;
+        return -1;
     }
 }
