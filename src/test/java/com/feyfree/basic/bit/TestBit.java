@@ -10,6 +10,8 @@ public class TestBit {
         printResult(3);
         printResult(-3);
         printResult(-2);
+
+        printResult(0);
     }
 
     private void printResult(int j) {
