@@ -18,8 +18,17 @@ public class MergeSortBU {
         }
     }
 
+    /**
+     * @param data 原先的数据
+     * @param aux  辅助数组
+     * @param lo
+     * @param mid
+     * @param hi
+     */
     public void merge(int[] data, int[] aux, int lo, int mid, int hi) {
+        // 闭区间长度 所以需要 +1
         if (hi + 1 - lo >= 0) {
+            // 拷贝到 aux 数组(辅助数组)
             System.arraycopy(data, lo, aux, lo, hi + 1 - lo);
         }
         int i = lo, j = mid + 1;

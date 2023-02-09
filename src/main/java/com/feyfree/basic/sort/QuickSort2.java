@@ -23,7 +23,8 @@ public class QuickSort2 {
         int m = l;
         for (int i = l + 1; i <= u; i++) {
             if (nums[i] < nums[l]) {
-                swap(++m, i);
+                m++;
+                swap(m, i);
             }
         }
         swap(l, m);

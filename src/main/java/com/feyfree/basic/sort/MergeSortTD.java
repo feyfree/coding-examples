@@ -1,5 +1,7 @@
 package com.feyfree.basic.sort;
 
+import java.util.Arrays;
+
 /**
  * 归并排序
  * <p>
@@ -24,21 +26,35 @@ public class MergeSortTD {
     }
 
     public void merge(int[] data, int[] aux, int lo, int mid, int hi) {
-        if (hi + 1 - lo >= 0) {
+        if (hi - lo + 1 >= 0) {
             System.arraycopy(data, lo, aux, lo, hi + 1 - lo);
         }
-        int i = lo, j = mid + 1;
+        int i = lo;
+        int j = mid + 1;
         for (int k = lo; k <= hi; k++) {
-            if (i > mid) {
-                data[k] = aux[j++];
-            } else if (j > hi) {
-                data[k] = aux[i++];
-            } else if (aux[j] < aux[i]) {
-                // j++ 没有return 值 所以 data[k] = aux[j++] -> data[k] = aux[j] , j +=1
-                data[k] = aux[j++];
+            // i, j 的越界问题
+            if (i <= mid && j <= hi) {
+                if (aux[i] > aux[j]) {
+                    data[k] = aux[j];
+                    j++;
+                } else {
+                    data[k] = aux[i];
+                    i++;
+                }
+            } else if (i > mid) {
+                data[k] = aux[j];
+                j++;
             } else {
-                data[k] = aux[i++];
+                data[k] = aux[i];
+                i++;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        MergeSortTD td = new MergeSortTD();
+        int[] data = new int[]{1, 3, 9, 6, 5, 7, 0};
+        td.sort(data);
+        System.out.println(Arrays.toString(data));
     }
 }

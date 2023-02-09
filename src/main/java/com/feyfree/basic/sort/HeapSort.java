@@ -18,15 +18,21 @@ public class HeapSort {
     public void sort(int[] data) {
         System.out.println(Arrays.toString(data));
         int n = data.length;
+        // 构建有序的堆
         for (int k = n / 2; k >= 1; k--) {
+            // 注意这里的 索引函数 k = index + 1
+            // 下沉操作, 保证 data.k >= data.2k且 data.k >= data.(2k + 1)
             sink(data, k, n);
         }
         System.out.println("---after-sink-phase---");
         System.out.println(Arrays.toString(data));
-        int k = n;
-        while (k > 1) {
-            swap(data, 1, k--);
-            sink(data, 1, k);
+        int scope = n;
+        while (scope > 1) {
+            // 第一位永远是 sink 范围内 (scope)的最大的数
+            // 替换到后面
+            swap(data, 1, scope--);
+            // 继续维护有序堆
+            sink(data, 1, scope);
         }
         System.out.println("---final-data---");
         System.out.println(Arrays.toString(data));
