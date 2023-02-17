@@ -1,4 +1,4 @@
-package com.feyfree.basic.enclosure;
+package com.feyfree.basic.closure;
 
 /**
  * 类似于闭包的感觉
